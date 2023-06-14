@@ -66,5 +66,7 @@ IntelliJ IDE
 VScode
 
 ## Documentacion y Recursos
-
-
+ 
+[Trello](https://trello.com/invite/b/gfW0tnFo/ATTI4d9586263ed3f81dacf34ec99eb5beaa99881028/proyecto-final-egg)
+[Class Diagram](https://gitmind.com/app/docs/fg97jf2r)
+[Use Case Diagram](https://gitmind.com/app/docs/f5dpc97k)
