@@ -2,6 +2,8 @@
 
 Web en donde proveedores ofrecen sus servicios y los potenciales clientes pueden consultar contactar y calificar los mismos.
 
+---
+
 ## Diseño de la Api
 
 - ### Estructura de la API:
@@ -21,6 +23,9 @@ Web en donde proveedores ofrecen sus servicios y los potenciales clientes pueden
 
 - #### Seguridad:
 Se considera la implementación de mecanismos de autenticación y autorización para proteger la API y restringir el acceso no autorizado.
+Mediante Spring security y el acceso por usuario y contraseña, con control de sesion.
+
+#
 
 ## Estructura del proyecto
 
@@ -40,6 +45,8 @@ Se considera la implementación de mecanismos de autenticación y autorización 
     - security
     - **main class**
 
+#
+
 ## Formato de Codigo
 
 #### Lenguaje:
@@ -54,8 +61,16 @@ Se considera la implementación de mecanismos de autenticación y autorización 
     Las clases que implementen las interfaces llevan el sufijo Impl y utilizan CamelCase.
     Las variables deben ser autoDescriptivas, sustantivas, utilizan CamelCase. Las variables temporales utilizan el prefijo temp. Las variables para bucles deben ser i,j,k,l. Las variables para denotar tamaños son n,m
 
+#
 
-## Tecnologias y Herramientas:
+## Colaboradores
+[Turletti, Lucas](https://github.com/lucast086/)
+[Martinez, Neuen](https://github.com/NeuenMartinez)
+[Grey Vivas, Ingrid]()
+[Ibarra, Esteban]()
+[Quaglia, Tomas]()
+
+### Tecnologias y Herramientas:
 
 Java 8 / 17
 Spring boot 2.7.12
@@ -65,7 +80,7 @@ WorkBench
 IntelliJ IDE
 VScode
 
-## Documentacion y Recursos
+### Documentacion y Recursos
  
 [Trello](https://trello.com/invite/b/gfW0tnFo/ATTI4d9586263ed3f81dacf34ec99eb5beaa99881028/proyecto-final-egg)
 [Class Diagram](https://gitmind.com/app/docs/fg97jf2r)
