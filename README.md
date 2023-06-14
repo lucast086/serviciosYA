@@ -50,7 +50,7 @@ Mediante Spring security y el acceso por usuario y contraseña, con control de s
 ## Formato de Codigo
 
 #### Lenguaje:
-    el lenguaje a utilizar es el Ingles
+    el lenguaje a utilizar es el Español
 
 #### Nomeclatura:
     Las clases en singular, comienzan por mayuscula y se usa CamelCase.
