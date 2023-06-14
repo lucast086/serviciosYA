@@ -86,3 +86,4 @@ Mediante Spring security y el acceso por usuario y contraseña, con control de s
 - [Trello](https://trello.com/invite/b/gfW0tnFo/ATTI4d9586263ed3f81dacf34ec99eb5beaa99881028/proyecto-final-egg)
 - [Class Diagram](https://gitmind.com/app/docs/fg97jf2r)
 - [Use Case Diagram](https://gitmind.com/app/docs/f5dpc97k)
+- [Claves SSH](https://docs.github.com/es/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
