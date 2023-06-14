@@ -64,24 +64,25 @@ Mediante Spring security y el acceso por usuario y contraseña, con control de s
 #
 
 ## Colaboradores
-[Turletti, Lucas](https://github.com/lucast086/)
-[Martinez, Neuen](https://github.com/NeuenMartinez)
-[Grey Vivas, Ingrid]()
-[Ibarra, Esteban]()
-[Quaglia, Tomas]()
+- [Turletti, Lucas](https://github.com/lucast086/)
+- [Martinez, Neuen](https://github.com/NeuenMartinez)
+- [Grey Vivas, Ingrid](https://github.com/IssaGrey)
+- [Ibarra, Esteban]()
+- [Quaglia, Tomas]()
+
 
 ### Tecnologias y Herramientas:
 
-Java 8 / 17
-Spring boot 2.7.12
-Maven
-MySQL
-WorkBench
-IntelliJ IDE
-VScode
+- Java 8 / 17
+- Spring boot 2.7.12
+- Maven
+- MySQL
+- WorkBench
+- IntelliJ IDE
+- VScode
 
 ### Documentacion y Recursos
  
-[Trello](https://trello.com/invite/b/gfW0tnFo/ATTI4d9586263ed3f81dacf34ec99eb5beaa99881028/proyecto-final-egg)
-[Class Diagram](https://gitmind.com/app/docs/fg97jf2r)
-[Use Case Diagram](https://gitmind.com/app/docs/f5dpc97k)
+- [Trello](https://trello.com/invite/b/gfW0tnFo/ATTI4d9586263ed3f81dacf34ec99eb5beaa99881028/proyecto-final-egg)
+- [Class Diagram](https://gitmind.com/app/docs/fg97jf2r)
+- [Use Case Diagram](https://gitmind.com/app/docs/f5dpc97k)
