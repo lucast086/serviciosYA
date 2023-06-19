@@ -50,6 +50,7 @@ public class UsuarioServicio implements IUsuarioServicio {
 
     }
 
+    @Transactional
     public void eliminarById (String id) throws Exepcion {
 
         Usuario usuario = buscarByID(id);
@@ -78,12 +79,6 @@ public class UsuarioServicio implements IUsuarioServicio {
     public Usuario buscarByNombreAndApedillo(String nombre, String apellido )throws Exepcion{
 
         Optional<Usuario> repuesta = usuarioRepositorio.findByNombreAndApellido(nombre,apellido);
-
-        Usuario usuario = new Usuario();
-
-        if (repuesta.isPresent()){
-            usuario = repuesta.get();
-        }
 
         return repuesta.orElseThrow(()-> new Exepcion("Usuario no existe"));
     }
