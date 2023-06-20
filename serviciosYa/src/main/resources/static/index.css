@@ -1,0 +1,447 @@
+@charset "UTF-8";
+
+/* Aquí definimos las Custom properties */
+:root {
+  --negro: #393939;
+  --blanco: #f0f0f0;
+  /* Tipografía */
+  --tipo-titular: "Playfair Display", serif;
+  --tipo-principal: "Inter", sans-serif;
+}
+
+/* Desactivamos los animations en el caso de que el usuario haya configurado el modo sin animation */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    -webkit-animation: none !important;
+    animation: none !important;
+    -webkit-transition: none !important;
+    transition: none !important;
+  }
+}
+/* Reseteamos los margin y paddings de todas las etiquetas */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: baseline;
+}
+
+/* Evitamos problemas con las imagenes */
+img,
+picture,
+video,
+iframe,
+figure {
+  max-width: 100%;
+  width: 100%;
+  display: block;
+  /* opcional */
+  -o-object-fit: cover;
+  object-fit: cover;
+  /* opcional */
+  -o-object-position: center center;
+  object-position: center center;
+}
+
+/* Reseteamos los enlaces para funcionar como cajas... */
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* ... excepto los que se encuentran en párrafos */
+p a {
+  display: inline;
+}
+
+/* Quitamos los puntos de los <li> */
+li {
+  list-style-type: none;
+}
+
+/* Configuramos anclas suaves */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Desactivamos estilos por defecto de las principales etiquetas de texto */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+strong,
+blockquote,
+i,
+b,
+u,
+em {
+  font-size: 1em;
+  font-weight: inherit;
+  font-style: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Evitamos problemas con los pseudoelementos de quotes */
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+/* Configuramos el texto que seleccionamos */
+::-moz-selection {
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+::selection {
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+
+/* Nivelamos problemas de tipografías y colocación de formularios */
+form,
+input,
+textarea,
+select,
+button,
+label {
+  font-family: inherit;
+  font-size: inherit;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  background-color: transparent;
+  color: inherit;
+  display: block;
+}
+
+/* Reseteamos las tablas */
+table,
+tr,
+td {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Evitamos problemas con los SVG */
+svg {
+  width: 100%;
+  display: block;
+  fill: currentColor;
+}
+
+/* Configuramos la tipografía para toda la web */
+body {
+  min-height: 100vh;
+  font-size: 100%;
+  font-family: var(--tipo-principal);
+  color: var(--negro);
+  background-color: #2a9d8f;
+  /* opcional */
+  line-height: 1.4em;
+  /* opcional */
+  font-smooth: always;
+  /* opcional */
+  -webkit-font-smoothing: antialiased;
+  /* opcional */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*HEADER*/
+
+.header {
+  width: 100%;
+  min-height: 5em;
+  padding: 1em 2em;
+  background-color: #264653;
+  color: var(--blanco);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.header .h1 {
+  font-size: 2em;
+  font-family: var(--tipo-titular);
+  font-style: italic;
+  font-weight: 600;
+  color: #e76f51;
+}
+.header .h1:hover {
+  color: #f4a261;
+}
+.header .ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.header .li {
+  margin: 0 1.5em;
+  font-size: 1em;
+}
+.header .li:hover {
+  color: #f4a261;
+}
+
+/*MAIN*/
+.main {
+  background: rgba(0, 0, 0, 0.7);
+  margin: 0 0 1em;
+  text-align: center;
+  position: relative;
+}
+.seccion {
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+.seccion .info {
+  font-size: 1.2em;
+  animation: aparecer1 2s ease 1 both;
+}
+.seccion .ul {
+  list-style-type: none;
+  margin: 2em 0 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+.seccion .ul .li {
+  margin: 0 1em;
+}
+.seccion .ul .a {
+  border-top: 2px solid rgba(0, 0, 0, 0.7);
+  padding: 1em 1em 1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 2em;
+  transition: all 0.8s ease;
+  animation: aparecer1 2s ease 1 backwards;
+}
+.seccion .ul .a:hover {
+  border-top: 2px solid #f4a261;
+  color: #f4a261;
+  transition: 0.5s;
+}
+.seccion .h2 {
+  margin-top: 1.7em;
+  font-family: var(--tipo-titular);
+  font-weight: 600;
+  font-size: 5em;
+  padding: 0.5em;
+  text-align: center;
+  color: #e9c46a;
+}
+.seccion .h3 {
+  font-family: var(--tipo-titular);
+  font-weight: 600;
+  font-size: 3.5em;
+  font-style: italic;
+  padding: 1em;
+  text-align: center;
+  color: #e76f51;
+}
+.seccion .p {
+  font-family: var(--tipo-titular);
+  font-weight: 600;
+  max-width: 70rem;
+  font-size: 1.5em;
+  text-align: center;
+  padding-top: 5em;
+  line-height: 1.4;
+  padding-bottom: 5em;
+}
+.destacado {
+  font-family: var(--tipo-titular);
+  font-weight: 600;
+  font-size: 1.2em;
+  font-style: italic;
+  color: #e76f51;
+}
+.seccion .p .a {
+  font-family: var(--tipo-titular);
+  font-weight: 600;
+  font-size: 1.2em;
+  font-style: italic;
+  color: #f4a261;
+}
+.seccion .p .a:hover {
+  color: #e9c46a;
+  font-size: 1.4em;
+  transition: 0.5s;
+}
+
+.about {
+  background-color: #264653;
+}
+.about .h2 {
+  padding-bottom: 1em;
+}
+.about .p {
+  font-family: var(--tipo-principal);
+  font-weight: 600;
+  max-width: 70rem;
+  font-size: 1.5em;
+  color: var(--blanco);
+  text-align: justify;
+  padding: 1em;
+  line-height: 1.2;
+  margin-bottom: 1em;
+}
+
+.seccion.servicios .cajas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10em;
+  margin-bottom: 10em;
+
+}
+
+.seccion.servicios .caja {
+  width: 13em;
+  height: 13em;
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  line-height: 5;
+  font-family: var(--tipo-principal);
+  font-weight: 600;
+  max-width: 70rem;
+  font-size: 1.5em;
+  border-radius: 20%;
+  transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+    height 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+    border-radius 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.seccion.servicios .caja:hover{
+  width: 15em;
+  height: 15em;
+  border-radius: 50%;
+  transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+    height 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+    border-radius 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+#caja1{
+  background-color: #264653;
+  color: var(--blanco);
+}
+#caja2{
+  background-color: #f4a261;
+  color: var(--negro);
+}
+#caja3{
+  background-color: #264653;
+  color: var(--blanco);
+}
+#caja4{
+  background-color: #f4a261;
+  color: var(--negro);
+}
+#caja5{
+  background-color: #264653;
+  color: var(--blanco);
+}
+
+.seccion.servicios .a{
+  border-top: 2px solid rgba(0, 0, 0, 0.7);
+  padding: 1em 1em 3em;
+  text-transform: uppercase;
+  font-family: var(--tipo-principal);
+  font-weight: 600;
+  font-size: 3em;
+  transition: 0.5s;
+}
+.seccion.servicios .a:hover{
+  border-top: 2px solid #f4a261;
+  color: #f4a261;
+  transition: 0.5s;
+}
+
+/* Estilos generales del footer */
+.footer {
+  width: 100%;
+  min-height: 5em;
+  padding: 1em 2em;
+  background-color: #264653;
+  color: var(--blanco);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer .h1 {
+  font-size: 2em;
+  font-family: var(--tipo-titular);
+  font-style: italic;
+  font-weight: 600;
+  color: #e76f51;
+}
+.footer .h1:hover {
+  color: #f4a261;
+}
+.footer .ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer .li {
+  margin: 0 1.5em;
+  font-size: 1em;
+}
+.footer .li:hover {
+  color: #f4a261;
+}
+.footer-bottom {
+  background-color: #264653;
+  border-top: 1px solid #ddd;
+  padding-top: 1em;
+  font-size: 0.9em;
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: #777;
+  text-align: center;
+}
+
+.footer-bottom p a {
+  color: #777;
+  text-decoration: none;
+}
+
+.footer-bottom p a:hover {
+  text-decoration: underline;
+}
+
+@keyframes aparecer1 {
+  from {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
