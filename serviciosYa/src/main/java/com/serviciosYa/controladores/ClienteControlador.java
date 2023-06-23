@@ -3,8 +3,8 @@ package com.serviciosYa.controladores;
 import com.serviciosYa.entidades.Usuario;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
-import com.serviciosYa.servicios.UsuarioServicio;
-import com.serviciosYa.servicios.interfaces.IUsuarioServicio;
+import com.serviciosYa.servicios.ClienteServicio;
+import com.serviciosYa.servicios.interfaces.IClienteServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,25 +13,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping ("/usuario")
-public class UsuarioControlador {
+@RequestMapping ("/clientes")
+public class ClienteControlador {
 
     @Autowired
-    IUsuarioServicio usuarioServicio = new UsuarioServicio();
+    IClienteServicio usuarioServicio = new ClienteServicio();
 
     @GetMapping("/registrar")
     public String registrarForm(){
-        return "usuario_register.html";
+        return "cliente_registro.html";
     }
 
     @PostMapping("/registro")
     public String registrar(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam Rol rol , ModelMap model) {
         try {
             usuarioServicio.crear(nombre,apellido,email,telefono,password,password2,rol);
-            model.put("existo","Usuario registrado");
+            model.put("exito","Cliente registrado");
         } catch (Exepcion ex ) {
          model.put("error", ex.getMessage());
-         return "usuario_register.html";
+         return "cliente_registro.html";
         }
         return "index.html";
     }
@@ -40,9 +40,9 @@ public class UsuarioControlador {
     @GetMapping ("/modificar/{id}")
     public String modificarForm (@PathVariable String id, ModelMap model){
 
-        model.put("usuario",usuarioServicio.getOne(id));
+        model.put("cliente",usuarioServicio.getOne(id));
 
-        return "usuario_modificar.html";
+        return "cliente_modificar.html";
     }
 
     @PostMapping("/modificar/{id}")

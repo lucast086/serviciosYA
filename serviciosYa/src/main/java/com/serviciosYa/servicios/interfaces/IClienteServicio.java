@@ -6,7 +6,7 @@ import com.serviciosYa.exepcion.Exepcion;
 
 import java.util.List;
 
-public interface IUsuarioServicio {
+public interface IClienteServicio {
 
     public void crear(String nombre, String apellido, String email, String telefono, String password, String password2,Rol rol) throws Exepcion;
     public void modificarById (String id,String nombre, String apellido, String email, String telefono, String password, Rol rol) throws Exepcion;

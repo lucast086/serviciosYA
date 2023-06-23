@@ -3,8 +3,8 @@ package com.serviciosYa.servicios;
 import com.serviciosYa.entidades.Usuario;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
-import com.serviciosYa.repositorios.UsuarioRepositorio;
-import com.serviciosYa.servicios.interfaces.IUsuarioServicio;
+import com.serviciosYa.repositorios.ClienteRepositorio;
+import com.serviciosYa.servicios.interfaces.IClienteServicio;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioServicio implements IUsuarioServicio {
+public class ClienteServicio implements IClienteServicio {
 
-    private UsuarioRepositorio usuarioRepositorio;
+    private ClienteRepositorio clienteRepositorio;
     @Transactional
     public void crear(String nombre, String apellido, String email, String telefono, String password,String password2,Rol rol) throws Exepcion {
 
@@ -30,7 +30,7 @@ public class UsuarioServicio implements IUsuarioServicio {
         usuario.setPassword(password);
         usuario.setRol(rol);
         usuario.setActivo(true);
-        usuarioRepositorio.save(usuario);
+        clienteRepositorio.save(usuario);
 
     }
 
@@ -46,7 +46,7 @@ public class UsuarioServicio implements IUsuarioServicio {
         usuario.setEmail(email);
         usuario.setTelefono(telefono);
         usuario.setRol(rol);
-        usuarioRepositorio.save(usuario);
+        clienteRepositorio.save(usuario);
 
     }
 
@@ -55,13 +55,13 @@ public class UsuarioServicio implements IUsuarioServicio {
 
         Usuario usuario = buscarByID(id);
         usuario.setActivo(false);
-        usuarioRepositorio.save(usuario);
+        clienteRepositorio.save(usuario);
 
     }
 
     public Usuario buscarByID(String id)throws Exepcion{
 
-        Optional<Usuario> repuesta = usuarioRepositorio.findById(id);
+        Optional<Usuario> repuesta = clienteRepositorio.findById(id);
 
         return repuesta.orElseThrow(()-> new Exepcion("Usuario no existe"));
     }
@@ -69,7 +69,7 @@ public class UsuarioServicio implements IUsuarioServicio {
 
     public Usuario buscarByEmail(String email) throws Exepcion{
 
-        Optional<Usuario> repuesta = usuarioRepositorio.findByEmail(email);
+        Optional<Usuario> repuesta = clienteRepositorio.findByEmail(email);
 
 
         return repuesta.orElseThrow(()-> new Exepcion("Usuario no existe"));
@@ -78,17 +78,17 @@ public class UsuarioServicio implements IUsuarioServicio {
 
     public Usuario buscarByNombreAndApedillo(String nombre, String apellido )throws Exepcion{
 
-        Optional<Usuario> repuesta = usuarioRepositorio.findByNombreAndApellido(nombre,apellido);
+        Optional<Usuario> repuesta = clienteRepositorio.findByNombreAndApellido(nombre,apellido);
 
         return repuesta.orElseThrow(()-> new Exepcion("Usuario no existe"));
     }
 
     public Usuario getOne (String id){
-        return usuarioRepositorio.getOne(id);
+        return clienteRepositorio.getOne(id);
     }
 
     public List<Usuario> listarUsuario (){
-        List<Usuario> usuario = new ArrayList(usuarioRepositorio.findAll());
+        List<Usuario> usuario = new ArrayList(clienteRepositorio.findAll());
         return usuario;
     }
 
