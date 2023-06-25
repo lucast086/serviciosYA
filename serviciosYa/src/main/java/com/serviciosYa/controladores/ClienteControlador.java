@@ -1,94 +1,37 @@
 package com.serviciosYa.controladores;
 
-import com.serviciosYa.entidades.Usuario;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
-import com.serviciosYa.servicios.ClienteServicio;
 import com.serviciosYa.servicios.interfaces.IClienteServicio;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping ("/clientes")
+@AllArgsConstructor
+@RequestMapping("/registrar/cliente")
 public class ClienteControlador {
 
-    @Autowired
-    IClienteServicio usuarioServicio = new ClienteServicio();
+    IClienteServicio clienteServicio;
 
-    @GetMapping("/registrar")
-    public String registrarForm(){
+    @GetMapping("/")
+    public String registrarCliente(){
         return "cliente_registro.html";
     }
 
     @PostMapping("/registro")
-    public String registrar(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam Rol rol , ModelMap model) {
+    public String registro(@RequestParam String nombre,@RequestParam String apellido,@RequestParam String direccion,@RequestParam String email,@RequestParam String telefono,@RequestParam String password,@RequestParam String password2, ModelMap modelo) {
         try {
-            usuarioServicio.crear(nombre,apellido,email,telefono,password,password2,rol);
-            model.put("exito","Cliente registrado");
-        } catch (Exepcion ex ) {
-         model.put("error", ex.getMessage());
-         return "cliente_registro.html";
-        }
-        return "index.html";
-    }
-
-
-    @GetMapping ("/modificar/{id}")
-    public String modificarForm (@PathVariable String id, ModelMap model){
-
-        model.put("cliente",usuarioServicio.getOne(id));
-
-        return "cliente_modificar.html";
-    }
-
-    @PostMapping("/modificar/{id}")
-    public String modificar (@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido , @RequestParam String email, @RequestParam String telefono,@RequestParam String password, @RequestParam Rol rol, ModelMap model ){
-        try {
-            usuarioServicio.modificarById(id,nombre,apellido,email,telefono,password,rol );
-
-            return "redirect:../listar";
-        }catch (Exepcion ex){
-            model.put("error", ex.getMessage());
-            return "usuario_modificar.html";
-        }
-    }
-
-    @GetMapping ("/listar")
-    public String listar (ModelMap model){
-
-        List<Usuario> usuarioList = usuarioServicio.listarUsuario();
-        model.addAttribute("usuario",usuarioList);
-
-        return "usuario_lista.html";
-    }
-
-    @GetMapping("/eliminar/{id}")
-    public String eliminarForm (@PathVariable String id,ModelMap model){
-
-        model.put("usuario",usuarioServicio.getOne(id));
-
-        return "usuario_eliminar.html";
-    }
-
-
-    @PostMapping("/eliminar/{id}")
-    public String eliminar (@PathVariable String id, ModelMap model){
-
-        try {
-            usuarioServicio.eliminarById(id);
+            clienteServicio.crear(nombre,apellido,direccion,email,telefono,password,password2,Rol.USER);
+            modelo.put("exito", "Cliente registrado correctamente!");
+            return "login.html";
         } catch (Exepcion ex) {
-            model.put("error", ex.getMessage());
-            return "usuario_eliminar.html";
+            modelo.put("error",ex.getMessage());
+            return "cliente_registro.html";
         }
-
-        return "index.html";
     }
-
-
-
 }
-

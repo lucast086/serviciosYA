@@ -1,14 +1,15 @@
 package com.serviciosYa.repositorios;
 
-import com.serviciosYa.entidades.Usuario;
+import com.serviciosYa.entidades.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface ClienteRepositorio extends JpaRepository <Usuario,String> {
+public interface ClienteRepositorio extends JpaRepository <Cliente,String> {
 
-    Optional<Usuario> findByEmail(String email);
-    Optional<Usuario> findByNombreAndApellido(String nombre, String apellido);
+    Optional<Cliente> findByEmail(String email);
+    Optional<Cliente> findByNombreAndApellido(String nombre, String apellido);
+
 }
