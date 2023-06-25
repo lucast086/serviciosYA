@@ -31,7 +31,7 @@ public class UsuarioControlador {
             model.put("existo","Usuario registrado");
         } catch (Exepcion ex ) {
          model.put("error", ex.getMessage());
-         return "usuario_register.html";
+         return "usuario_registro.html";
         }
         return "index.html";
     }
