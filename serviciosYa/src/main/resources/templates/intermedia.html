@@ -27,8 +27,8 @@
     <h1 class="h1"><a href="#destino3" title="ServiciosYa" class="a">ServiciosYa</a></h1>
     <nav class="nav">
       <ul class="ul">
-        <li class="li"><a href="#destino3" title="inicio" class="a">Inicio</a></li>
-        <li class="li"><a href="#ingreso" title="ingreso" class="a">Ingreso</a></li>
+        <li class="li"><a href="/" title="inicio" class="a">Inicio</a></li>
+        <li class="li"><a href="/login" title="ingreso" class="a">Ingreso</a></li>
       </ul>
     </nav>
   </header>
@@ -36,12 +36,17 @@
   <section class="seccion servicios" id="servicios">
     <h2 class="h2">¿Cómo desea Registrarse?</h2>
     <div class="cajas">
-      <button class="caja" id="caja1">
-        <div class="contenido"></div><i class="fa-solid fa-user" style="color: #ffffff;"></i>Usuario
-      </button>
-      <button class="caja" id="caja2">
-        <div class="contenido"></div><i class="fa-solid fa-wrench"></i>Proveedor
-      </button>
+      <form action="/registrar/cliente" method="get">
+        <button class="caja" id="caja1">
+          <div class="contenido"></div><i class="fa-solid fa-user" style="color: #ffffff;"></i>Cliente
+        </button>
+      </form>
+      <form action="/registrar/proveedor" method="get">
+        <button class="caja" id="caja2">
+          <div class="contenido"></div><i class="fa-solid fa-wrench"></i>Proveedor
+        </button>
+      </form>
+
 
     </div>
   </section>
