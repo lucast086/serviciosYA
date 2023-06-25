@@ -5,11 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login y Register</title>
     <script src="https://kit.fontawesome.com/be3d3214ac.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="estilos.css"
+    <link rel="stylesheet" href="/static/estilos.css"
 
 </head>
 
 <body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <img src="/static/Extras/apple-touch-icon.png" alt="logo de la compañia" class="logo-img">
+        </a>
+    </header>
+
+    
     <form class="formulario">
 
         <h1>Regístrate</h1>
@@ -17,12 +25,27 @@
 
         <div class="input contenedor">
         <i class="fa-solid fa-user icon"></i>
-        <input type="text" placeholder="Nombre Completo">
+        <input type="text" placeholder="Nombre">
+        </div>
+
+        <div class="input contenedor">
+        <i class="fa-solid fa-user icon"></i>
+        <input type="text" placeholder="Apellido">
         </div>
 
         <div class="input contenedor">
         <i class="fa-solid fa-envelope icon"></i>
         <input type="text" placeholder="Correo Electrónico">
+        </div>
+
+        <div class="input contenedor">
+        <i class="fa-solid fa-phone icon"></i>
+        <input type="text" placeholder="Teléfono">
+        </div>
+
+        <div class="input contenedor">
+        <i class="fa-solid fa-house icon"></i>
+        <input type="text" placeholder="Dirección">
         </div>
 
         <div class="input contenedor">
@@ -34,6 +57,5 @@
         <p>Ya tienes una cuenta?<a class="link" href="Login.html">Iniciar Sesión</a></p>
 
     </form>
-
 </body>
 </html>
