@@ -5,6 +5,7 @@ import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.UsuarioRepositorio;
 import com.serviciosYa.servicios.interfaces.IUsuarioServicio;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,11 +14,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class UsuarioServicio implements IUsuarioServicio {
-
     private UsuarioRepositorio usuarioRepositorio;
     @Transactional
-    public void crear(String nombre, String apellido, String email, String telefono, String password,String password2,Rol rol) throws Exepcion {
+    public void crear(String nombre, String apellido, String email, String telefono, String password, String password2, Rol rol) throws Exepcion {
 
         validar(nombre,apellido,email,telefono,password,rol);
 
@@ -84,19 +85,18 @@ public class UsuarioServicio implements IUsuarioServicio {
     }
 
     public Usuario getOne (String id){
-        return usuarioRepositorio.getOne(id);
+        return usuarioRepositorio.getReferenceById(id);
     }
 
-    public List<Usuario> listarUsuario (){
-        List<Usuario> usuario = new ArrayList(usuarioRepositorio.findAll());
-        return usuario;
+    public List<Usuario> listarUsuarios (){
+        return new ArrayList<>(usuarioRepositorio.findAll());
     }
 
     private void validar (String nombre, String apellido, String email, String telefono, String password,Rol rol) throws Exepcion{
 
 
         if (nombre.isEmpty()){
-         throw new Exepcion("La celda nombre esta vacia");
+            throw new Exepcion("La celda nombre esta vacia");
         }
 
         if (apellido.isEmpty()){
@@ -111,8 +111,8 @@ public class UsuarioServicio implements IUsuarioServicio {
             throw new Exepcion("La celda telofono esta vacia");
         }
 
-        if (password.isEmpty() || password.length()<=6){
-            throw new Exepcion("La celda contraseña esta vacia");
+        if (password.length()<=6){
+            throw new Exepcion("La celda contraseña no tiene la longitud correcta");
         }
 
         if(rol != Rol.ADMIN && rol!=Rol.USER && rol != Rol.PROVEEDOR){
@@ -120,6 +120,5 @@ public class UsuarioServicio implements IUsuarioServicio {
         }
 
     }
-
 
 }
