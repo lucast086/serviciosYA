@@ -25,14 +25,14 @@ body {
 }
 .contenedor{
     width: 100%;
-    padding: 6px;
+    padding: 7px;
 }
  
 .formulario{
     background: rgba(255, 255, 255, 60%);
     margin-top: 150px;
     padding: 15px;
-    width: 400px;
+    width: 100px;
 }
 h1{
     text-align:center;
@@ -95,3 +95,5 @@ p{
     font-weight: 600;
     color: #d86143;
   }
+  
+  
