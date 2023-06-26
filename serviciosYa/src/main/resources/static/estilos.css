@@ -25,14 +25,14 @@ body {
 }
 .contenedor{
     width: 100%;
-    padding: 6px;
+    padding: 7px;
 }
  
 .formulario{
     background: rgba(255, 255, 255, 60%);
     margin-top: 150px;
     padding: 15px;
-    width: 400px;
+    width: 100px;
 }
 h1{
     text-align:center;
@@ -94,4 +94,24 @@ p{
     font-style: italic;
     font-weight: 600;
     color: #d86143;
+  }
+  
+  .checkbox-container {
+    margin-top: 10px;
+  }
+  
+  .checkbox-container div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .checkbox-container input[type="checkbox"] {
+    margin-right: 5px;
+    margin-left: 53px;
+  }
+  
+  .checkbox-container label {
+    font-size: 18px;
+    color: #1a2537;
   }
