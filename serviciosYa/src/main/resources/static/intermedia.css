@@ -242,7 +242,12 @@ body {
     margin-bottom: 10em;
 
   }
-
+  @media (max-width: 1200px) {
+        .seccion.servicios .cajas {
+          margin-top: 5em;
+          margin-bottom: 5em; /* Ajusta el tamaño de fuente para pantallas pequeñas */
+        }
+      }
   .seccion.servicios .caja {
     width: 13em;
     height: 13em;
@@ -294,21 +299,6 @@ body {
   #caja2{
     background-color: #f4a261;
     color: var(--negro);
-  }
-
-  .seccion.servicios .a{
-    border-top: 2px solid rgba(0, 0, 0, 0.7);
-    padding: 1em 1em 3em;
-    text-transform: uppercase;
-    font-family: var(--tipo-principal);
-    font-weight: 600;
-    font-size: 3em;
-    transition: 0.5s;
-  }
-  .seccion.servicios .a:hover{
-    border-top: 2px solid #f4a261;
-    color: #f4a261;
-    transition: 0.5s;
   }
 
   @keyframes aparecer1 {
