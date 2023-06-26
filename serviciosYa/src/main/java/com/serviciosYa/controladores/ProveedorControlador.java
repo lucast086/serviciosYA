@@ -23,7 +23,7 @@ public class ProveedorControlador {
 
     @GetMapping("")
     public String registrarProveedor(){
-        return "cliente_registro.html";
+        return "proveedor_registro.html";
     }
 
     @PostMapping("/registroproveedor")
