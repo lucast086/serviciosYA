@@ -16,17 +16,17 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/registrar/proveedor")
+@RequestMapping("/proveedor")
 public class ProveedorControlador {
 
     IProveedorServicio proveedorServicio;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String registrarProveedor(){
-        return "proveedor_registro.html";
+        return "cliente_registro.html";
     }
 
-    @PostMapping("/registro")
+    @PostMapping("/registroproveedor")
     public String registro(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam String imagen, @RequestParam List<Oficio> oficios, ModelMap modelo) {
         try {
             proveedorServicio.crear(nombre,apellido,email,telefono,password,password2,imagen,oficios, Rol.PROVEEDOR);

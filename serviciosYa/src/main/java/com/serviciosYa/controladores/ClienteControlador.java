@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/registrar/cliente")
+@RequestMapping("/cliente")
 public class ClienteControlador {
 
     IClienteServicio clienteServicio;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String registrarCliente(){
         return "cliente_registro.html";
     }
 
-    @PostMapping("/registro")
+    @PostMapping("/registrocliente")
     public String registro(@RequestParam String nombre,@RequestParam String apellido,@RequestParam String direccion,@RequestParam String email,@RequestParam String telefono,@RequestParam String password,@RequestParam String password2, ModelMap modelo) {
         try {
             clienteServicio.crear(nombre,apellido,direccion,email,telefono,password,password2,Rol.USER);
