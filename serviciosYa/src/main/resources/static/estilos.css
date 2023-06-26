@@ -96,4 +96,22 @@ p{
     color: #d86143;
   }
   
+  .checkbox-container {
+    margin-top: 10px;
+  }
   
+  .checkbox-container div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .checkbox-container input[type="checkbox"] {
+    margin-right: 5px;
+    margin-left: 53px;
+  }
+  
+  .checkbox-container label {
+    font-size: 18px;
+    color: #1a2537;
+  }
