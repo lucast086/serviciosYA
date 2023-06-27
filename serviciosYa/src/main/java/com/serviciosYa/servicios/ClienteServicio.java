@@ -29,6 +29,7 @@ public class ClienteServicio implements IClienteServicio {
         cliente.setNombre(nombre);
         cliente.setApellido(apellido);
         cliente.setEmail(email);
+        cliente.setDireccion(direccion);
         cliente.setTelefono(telefono);
         cliente.setPassword(password);
         cliente.setRol(rol);

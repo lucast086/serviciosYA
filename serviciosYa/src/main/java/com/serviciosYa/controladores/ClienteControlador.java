@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @AllArgsConstructor
@@ -24,14 +25,14 @@ public class ClienteControlador {
     }
 
     @PostMapping("/registrocliente")
-    public String registro(@RequestParam String nombre,@RequestParam String apellido,@RequestParam String direccion,@RequestParam String email,@RequestParam String telefono,@RequestParam String password,@RequestParam String password2, ModelMap modelo) {
+    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre,@RequestParam String apellido,@RequestParam String direccion,@RequestParam String email,@RequestParam String telefono,@RequestParam String password,@RequestParam String password2, ModelMap modelo) {
         try {
             clienteServicio.crear(nombre,apellido,direccion,email,telefono,password,password2,Rol.USER);
-            modelo.put("exito", "Cliente registrado correctamente!");
-            return "login.html";
+            redirectAttributes.addFlashAttribute("exito", "Cliente registrado correctamente!");
+            return "redirect:/login";
         } catch (Exepcion ex) {
-            modelo.put("error",ex.getMessage());
-            return "cliente_registro.html";
+            redirectAttributes.addFlashAttribute("error", ex.getMessage());
+            return "redirect:/cliente";
         }
     }
 }
