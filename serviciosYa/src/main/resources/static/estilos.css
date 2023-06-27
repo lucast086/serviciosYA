@@ -1,0 +1,165 @@
+header{
+    display: flex;
+    height: 70px;
+    background-color:#264653 ;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+.logo-img{
+    height: 200px;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin:0;
+    background-color: #2A9D8F;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+* {
+    box-sizing:border-box;
+}
+.contenedor{
+    width: 100%;
+    padding: 7px;
+}
+ 
+.formulario{
+    background: rgba(255, 255, 255, 60%);
+    margin-top: 150px;
+    padding: 15px;
+    width: 100px;
+}
+h1{
+    text-align:center;
+    color:#1a2537;
+    font-size: 40px;
+}
+input[type="text"],
+input[type="password"]{
+    font-size: 20px;
+    width:82%;
+    padding: 10px;
+    border-color: #E9C46A;
+}
+.input-contenedor{
+    margin-bottom: 15px;
+    border: 1px solid #aaa;
+}
+.icon{
+    min-width: 50px;
+    text-align: center;
+    color:#131212;
+}
+.button{
+    border: none;
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    background: #1a2537;
+    padding: 15px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button:hover{
+    background: #264653;
+}
+p{
+    text-align: center;
+}
+.link{
+    text-decoration: none;
+    color: #1a2537;
+    font-weight: 600;
+}
+.link:hover{
+    color:#264653;
+}
+@media(min-width:768px)
+{
+  .formulario{
+    margin: auto;
+    width: 500px;
+    margin-top: 150px;
+    border-radius: 2%;
+  }  
+}
+.footer .h1 {
+    font-size: 2em;
+    font-family: var(--tipo-titular);
+    font-style: italic;
+    font-weight: 600;
+    color: #d86143;
+  }
+  
+  .checkbox-container {
+    margin-top: 10px;
+  }
+  
+  .checkbox-container div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .checkbox-container input[type="checkbox"] {
+    margin-right: 5px;
+    margin-left: 53px;
+  }
+  
+  .checkbox-container label {
+    font-size: 18px;
+    color: #1a2537;
+  }
+
+  .msgexito {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .card_body1 {
+      width: 650px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      outline: none;
+      border-radius: 30px;
+      color: #fff;
+      padding: 0 0 0 45px;
+      background-color: #264653;
+      padding: 1rem;
+      font-size: 1rem;
+      margin-top: 2.5rem;
+      margin-left: 15%;
+      margin-right: 15%;
+      border: 1px solid orange;
+  }
+  .msgerror {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .card_body {
+    width: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    outline: none;
+    border-radius: 30px;
+    color: #fff;
+    padding: 0 0 0 45px;
+    background-color: #E76F51;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-top: 2.5rem;
+    margin-left: 15%;
+    margin-right: 15%;
+    border: 1px solid orange;
+  }

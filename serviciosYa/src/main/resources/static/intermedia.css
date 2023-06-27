@@ -1,0 +1,312 @@
+@charset "UTF-8";
+
+/* Aquí definimos las Custom properties */
+:root {
+  --negro: #393939;
+  --blanco: #f0f0f0;
+  /* Tipografía */
+  --tipo-titular: "Playfair Display", serif;
+  --tipo-principal: "Inter", sans-serif;
+}
+
+/* Desactivamos los animations en el caso de que el usuario haya configurado el modo sin animation */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    -webkit-animation: none !important;
+    animation: none !important;
+    -webkit-transition: none !important;
+    transition: none !important;
+  }
+}
+/* Reseteamos los margin y paddings de todas las etiquetas */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  vertical-align: baseline;
+}
+
+/* Evitamos problemas con las imagenes */
+img,
+picture,
+video,
+iframe,
+figure {
+  max-width: 100%;
+  width: 100%;
+  display: block;
+  /* opcional */
+  -o-object-fit: cover;
+  object-fit: cover;
+  /* opcional */
+  -o-object-position: center center;
+  object-position: center center;
+}
+
+/* Reseteamos los enlaces para funcionar como cajas... */
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* ... excepto los que se encuentran en párrafos */
+p a {
+  display: inline;
+}
+
+/* Quitamos los puntos de los <li> */
+li {
+  list-style-type: none;
+}
+
+/* Configuramos anclas suaves */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Desactivamos estilos por defecto de las principales etiquetas de texto */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+strong,
+blockquote,
+i,
+b,
+u,
+em {
+  font-size: 1em;
+  font-weight: inherit;
+  font-style: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Evitamos problemas con los pseudoelementos de quotes */
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+/* Configuramos el texto que seleccionamos */
+::-moz-selection {
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+::selection {
+  background-color: var(--negro);
+  color: var(--blanco);
+}
+
+/* Nivelamos problemas de tipografías y colocación de formularios */
+form,
+input,
+textarea,
+select,
+button,
+label {
+  font-family: inherit;
+  font-size: inherit;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  background-color: transparent;
+  color: inherit;
+  display: block;
+}
+
+/* Reseteamos las tablas */
+table,
+tr,
+td {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Evitamos problemas con los SVG */
+svg {
+  width: 100%;
+  display: block;
+  fill: currentColor;
+}
+
+/* Configuramos la tipografía para toda la web */
+body {
+  min-height: 100vh;
+  font-size: 100%;
+  font-family: var(--tipo-principal);
+  color: var(--negro);
+  background-color: #2a9d8f;
+  /* opcional */
+  line-height: 1.4em;
+  /* opcional */
+  font-smooth: always;
+  /* opcional */
+  -webkit-font-smoothing: antialiased;
+  /* opcional */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*HEADER*/
+
+.header {
+    width: 100%;
+    min-height: 5em;
+    padding: 1em 2em;
+    background-color: #264653;
+    color: var(--blanco);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header .h1 {
+    font-size: 2em;
+    font-family: var(--tipo-titular);
+    font-style: italic;
+    font-weight: 600;
+    color: #e76f51;
+  }
+  .header .h1:hover {
+    color: #f4a261;
+  }
+  .header .ul {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header .li {
+    margin: 0 2em;
+    font-size: 1.2em;
+  }
+  .header .li:hover {
+    color: #f4a261;
+  }
+
+  /*MAIN*/
+.main {
+    background: rgba(0, 0, 0, 0.7);
+    margin: 0 0 1em;
+    text-align: center;
+    position: relative;
+  }
+  .seccion {
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .seccion .h2 {
+    margin-top: 1.5em;
+    font-family: var(--tipo-titular);
+    font-weight: 600;
+    font-size: 5em;
+    padding: 0.5em;
+    text-align: center;
+    color: #e9c46a;
+  }
+  @media (max-width: 1060px) {
+    .seccion .h2 {
+      font-size: 3em; /* Ajusta el tamaño de fuente para pantallas pequeñas */
+    }
+  }
+  @media (max-width: 640px) {
+    .seccion .h2 {
+      font-size: 2em; /* Ajusta el tamaño de fuente para pantallas pequeñas */
+    }
+  }
+  .seccion.servicios{
+    animation: aparecer1 2s ease 1 both;
+  }
+  .seccion.servicios .cajas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10em;
+    margin-bottom: 10em;
+
+  }
+  @media (max-width: 1200px) {
+        .seccion.servicios .cajas {
+          margin-top: 5em;
+          margin-bottom: 5em; /* Ajusta el tamaño de fuente para pantallas pequeñas */
+        }
+      }
+  .seccion.servicios .caja {
+    width: 13em;
+    height: 13em;
+    margin: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    cursor: pointer;
+    line-height: 5;
+    font-family: var(--tipo-principal);
+    font-weight: 600;
+    max-width: 70rem;
+    font-size: 1.5em;
+    border-radius: 20%;
+    transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+      height 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+      border-radius 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  }
+  @media (max-width: 900px) {
+    .seccion.servicios .caja {
+        width: 10em;
+        height: 10em;
+        transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+      height 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+      border-radius 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+  }
+  @media (max-width: 820px) {
+    .seccion.servicios .caja {
+        width: 10em;
+        height: 10em;
+        margin: 3.5em;
+    }
+  }
+  .seccion.servicios .caja:hover{
+    width: 15em;
+    height: 15em;
+    border-radius: 50%;
+    transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+      height 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+      border-radius 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  }
+  #caja1{
+    background-color: #264653;
+    color: var(--blanco);
+  }
+  #caja2{
+    background-color: #f4a261;
+    color: var(--negro);
+  }
+
+  @keyframes aparecer1 {
+    from {
+      opacity: 0;
+      transform: translateY(50%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0%);
+    }

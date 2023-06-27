@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login y Register</title>
+    <script
+      src="https://kit.fontawesome.com/be3d3214ac.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="estilos.css"/>
+  </head>
+
+  <body>
+    <header>
+      <a href="/" class="logo">
+        <img
+          src="Extras/apple-touch-icon.png"
+          alt="logo de la compañia"
+          class="logo-img"
+        />
+      </a>
+    </header>
+
+    <div th:if="${error != null}" class="msgerror">
+      <div class="card_body">
+        <h2 class="card_title">ERROR!</h2>
+        <p class="card_text" th:text="${error}"></p>
+      </div>
+    </div>
+    <div th:if="${exito != null}" class="msgexito">
+      <div class="card_body1">
+        <h2 class="card_title">EXITO!</h2>
+        <p class="card_text" th:text="${exito}"></p>
+      </div>
+    </div>
+
+    <form action="/proveedor/registroproveedor" method="post" class="formulario">
+      <h1>Regístrate</h1>
+      <div class="contenedor">
+        <div class="input contenedor">
+          <i class="fa-solid fa-user icon"></i>
+          <input type="text" name="nombre" placeholder="Nombre" />
+        </div>
+
+        <div class="input contenedor">
+          <i class="fa-solid fa-user icon"></i>
+          <input type="text" name="apellido" placeholder="Apellido" />
+        </div>
+
+        <div class="input contenedor">
+          <i class="fa-solid fa-envelope icon"></i>
+          <input type="text" name="email" placeholder="Correo Electrónico" />
+        </div>
+
+        <div class="input contenedor">
+          <i class="fa-solid fa-phone icon"></i>
+          <input type="text" name="telefono" placeholder="Teléfono" />
+        </div>
+
+        <div class="input contenedor">
+          <i class="fa-solid fa-house icon"></i>
+          <input type="text" name="direccion" placeholder="Dirección" />
+        </div>
+
+        <div class="input contenedor">
+          <i class="fa-solid fa-screwdriver-wrench icon"></i>
+          <label for="servicio">Qué servicios va a ofrecer:</label>
+          <div id="servicio" class="checkbox-container">
+            <div>
+              <input
+                id="electricista"
+                type="checkbox"
+                name="oficios"
+                value="electricista"
+              />
+              <label for="electricista">Electricista</label>
+            </div>
+            <div>
+              <input
+                id="plomero"
+                type="checkbox"
+                name="oficios"
+                value="plomero"
+              />
+              <label for="plomero">Plomero</label>
+            </div>
+            <div>
+              <input
+                id="gasista"
+                type="checkbox"
+                name="oficios"
+                value="gasista"
+              />
+              <label for="gasista">Gasista</label>
+            </div>
+            <div>
+              <input
+                id="albañil"
+                type="checkbox"
+                name="oficios"
+                value="albañil"
+              />
+              <label for="albañil">Albañil</label>
+            </div>
+            <div>
+              <input
+                id="pintor"
+                type="checkbox"
+                name="oficios"
+                value="pintor"
+              />
+              <label for="pintor">Pintor</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="input contenedor">
+          <i class="fa-solid fa-image icon"></i>
+          <input
+            type="file"
+            accept="image/*"
+            id="imagen"
+            name="imagen"
+            placeholder="Imagen de perfil"
+          />
+        </div>
+
+        <div class="input contenedor">
+          <i class="fa-solid fa-key icon"></i>
+          <input type="password" name="password" placeholder="Contraseña" />
+        </div>
+
+        <div class="input contenedor">
+          <i class="fa-solid fa-key icon"></i>
+          <input type="password" name="password2" placeholder="Confirmar Contraseña" />
+        </div>
+        <input type="submit" value="Regístrate" class="button" />
+        <p>
+          Al registrarte aceptas nuestras Condiciones de uso y nuestra Política
+          de privacidad.
+        </p>
+        <p>
+          Ya tienes una cuenta?<a class="link" href="/login"
+            >Iniciar Sesión</a>
+        </p>
+      </div>
+    </form>
+
+    </div>
+
+  </body>
+</html>
