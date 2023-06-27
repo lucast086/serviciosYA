@@ -5,6 +5,7 @@ import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.interfaces.IUsuarioServicio;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,11 @@ public class UsuarioControlador {
             modelo.put("error","Usuario o Contraseña Invalidos");
         }
         return "login.html";
+    }
+
+    @GetMapping("/usuarios")
+    public String usuariosLogueados(){
+        return "usuarios.html";
     }
 
     @GetMapping("/registrar")
