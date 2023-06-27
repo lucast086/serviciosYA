@@ -8,6 +8,7 @@ import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.ProveedorRepositorio;
 import com.serviciosYa.servicios.interfaces.IProveedorServicio;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +31,9 @@ public class ProveedorServicio implements IProveedorServicio {
         proveedor.setApellido(apellido);
         proveedor.setEmail(email);
         proveedor.setTelefono(telefono);
-        proveedor.setPassword(password);
+        proveedor.setPassword(
+                new BCryptPasswordEncoder().encode(password)
+        );
         proveedor.setOficios(oficios);
         proveedor.setImagen(imagen);
         proveedor.setRol(rol);

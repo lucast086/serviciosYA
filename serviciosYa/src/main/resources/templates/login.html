@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +9,27 @@
     <link rel="stylesheet" type="text/css" href="estilos.css"/>
 </head>
 <body>
-    
+
     <header>
         <a href="/" class="logo">
             <img src="Extras/apple-touch-icon.png" alt="logo de la compañia" class="logo-img">
         </a>
     </header>
 
-    <form class="formulario" method="POST" th:action="@{/logincheck}">
+    <div th:if="${error != null}" class="msgerror">
+        <div class="card_body">
+            <h2 class="card_title">ERROR!</h2>
+            <p class="card_text" th:text="${error}"></p>
+        </div>
+    </div>
+    <div th:if="${exito != null}" class="msgexito">
+        <div class="card_body1">
+            <h2 class="card_title">EXITO!</h2>
+            <p class="card_text" th:text="${exito}"></p>
+        </div>
+    </div>
 
+    <form class="formulario" method="POST" th:action="@{/logincheck}">
         <h1>Iniciar Sesión</h1>
         <div class="contenedor">
 
@@ -32,9 +45,8 @@
         <input type="submit" value="Iniciar Sesión" class="button"/>
         <p>Al registrarte aceptas nuestras Condiciones de uso y nuestra Política de privacidad.</p>
         <p>No tienes cuenta? Unete a nosotros.<a class="link" href="/registrar">Regístrate</a></p>
-
         </div>
     </form>
-    
+
 </body>
 </html>
