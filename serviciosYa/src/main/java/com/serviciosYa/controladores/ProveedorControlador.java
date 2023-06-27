@@ -27,7 +27,7 @@ public class ProveedorControlador {
     }
 
     @PostMapping("/registroproveedor")
-    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam String imagen, @RequestParam List<Oficio> oficios, ModelMap modelo) {
+    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam String imagen, @RequestParam(value ="oficios", required = false) List<Oficio> oficios, ModelMap modelo) {
         try {
             proveedorServicio.crear(nombre,apellido,email,telefono,password,password2,imagen,oficios, Rol.PROVEEDOR);
             redirectAttributes.addFlashAttribute("exito", "Proveedor registrado correctamente!");

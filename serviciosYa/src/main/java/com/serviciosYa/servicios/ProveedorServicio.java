@@ -52,7 +52,7 @@ public class ProveedorServicio implements IProveedorServicio {
 
     private void validar (String nombre, String apellido, String email,List<Oficio> oficios, String telefono, String password) throws Exepcion{
 
-        if(oficios.size()<1){
+        if(oficios == null){
             throw new Exepcion("No tiene oficios");
         }
 
