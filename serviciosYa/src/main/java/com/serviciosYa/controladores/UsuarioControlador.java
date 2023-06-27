@@ -25,6 +25,11 @@ public class UsuarioControlador {
         return "login.html";
     }
 
+    @GetMapping("/usuarios")
+    public String usuariosLogueados(){
+        return "usuarios.html";
+    }
+
     @GetMapping("/registrar")
     public String registrarForm(){
         return "intermedia.html";

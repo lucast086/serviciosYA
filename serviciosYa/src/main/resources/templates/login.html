@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,19 +15,19 @@
         </a>
     </header>
 
-    <form class="formulario">
+    <form class="formulario" method="POST" th:action="@{/logincheck}">
 
         <h1>Iniciar Sesión</h1>
         <div class="contenedor">
 
         <div class="input contenedor">
         <i class="fa-solid fa-envelope icon"></i>
-        <input type="text" placeholder="Correo Electrónico"/>
+        <input type="text" name="emailUsuario" placeholder="Correo Electrónico"/>
         </div>
 
         <div class="input contenedor">
         <i class="fa-solid fa-key icon"></i>
-        <input type="password" placeholder="Contraseña"/>
+        <input type="password" name="passwordUsuario" placeholder="Contraseña"/>
         </div>
         <input type="submit" value="Iniciar Sesión" class="button"/>
         <p>Al registrarte aceptas nuestras Condiciones de uso y nuestra Política de privacidad.</p>
