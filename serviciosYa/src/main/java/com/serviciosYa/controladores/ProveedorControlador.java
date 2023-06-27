@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
@@ -27,14 +27,14 @@ public class ProveedorControlador {
     }
 
     @PostMapping("/registroproveedor")
-    public String registro(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam String imagen, @RequestParam List<Oficio> oficios, ModelMap modelo) {
+    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam String imagen, @RequestParam List<Oficio> oficios, ModelMap modelo) {
         try {
             proveedorServicio.crear(nombre,apellido,email,telefono,password,password2,imagen,oficios, Rol.PROVEEDOR);
-            modelo.put("exito", "Proveedor registrado correctamente!");
-            return "login.html";
+            redirectAttributes.addFlashAttribute("exito", "Proveedor registrado correctamente!");
+            return "redirect:/login";
         } catch (Exepcion ex) {
-            modelo.put("error",ex.getMessage());
-            return "proveedor_registro.html";
+            redirectAttributes.addFlashAttribute("error",ex.getMessage());
+            return "redirect:/proveedor";
         }
     }
 
