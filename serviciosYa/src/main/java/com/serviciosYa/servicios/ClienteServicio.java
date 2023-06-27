@@ -6,6 +6,7 @@ import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.ClienteRepositorio;
 import com.serviciosYa.servicios.interfaces.IClienteServicio;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +32,9 @@ public class ClienteServicio implements IClienteServicio {
         cliente.setEmail(email);
         cliente.setDireccion(direccion);
         cliente.setTelefono(telefono);
-        cliente.setPassword(password);
+        cliente.setPassword(
+                new BCryptPasswordEncoder().encode(password)
+        );
         cliente.setRol(rol);
         cliente.setActivo(true);
         clienteRepositorio.save(cliente);
