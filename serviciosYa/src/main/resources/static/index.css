@@ -172,16 +172,6 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-.header .h1 {
-  font-size: 2em;
-  font-family: var(--tipo-titular);
-  font-style: italic;
-  font-weight: 600;
-  color: #e76f51;
-}
-.header .h1:hover {
-  color: #f4a261;
-}
 .header .ul {
   display: flex;
   flex-flow: row wrap;
