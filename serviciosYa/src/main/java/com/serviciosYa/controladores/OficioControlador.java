@@ -23,7 +23,4 @@ public class OficioControlador {
 
         return "index.html";
     }
-
-    
-
 }

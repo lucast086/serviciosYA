@@ -1,5 +1,6 @@
 package com.serviciosYa.servicios;
 
+import com.serviciosYa.entidades.Cliente;
 import com.serviciosYa.entidades.Oficio;
 import com.serviciosYa.entidades.Proveedor;
 import com.serviciosYa.enums.Rol;
@@ -7,9 +8,11 @@ import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.ProveedorRepositorio;
 import com.serviciosYa.servicios.interfaces.IProveedorServicio;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -28,7 +31,9 @@ public class ProveedorServicio implements IProveedorServicio {
         proveedor.setApellido(apellido);
         proveedor.setEmail(email);
         proveedor.setTelefono(telefono);
-        proveedor.setPassword(password);
+        proveedor.setPassword(
+                new BCryptPasswordEncoder().encode(password)
+        );
         proveedor.setOficios(oficios);
         proveedor.setImagen(imagen);
         proveedor.setRol(rol);
@@ -36,9 +41,18 @@ public class ProveedorServicio implements IProveedorServicio {
         proveedorRepositorio.save(proveedor);
     }
 
+    public Proveedor buscarByEmail(String email) throws Exepcion{
+
+        Optional<Proveedor> repuesta = proveedorRepositorio.findByEmail(email);
+        return repuesta.orElseThrow(()-> new Exepcion("Proveedor no existe"));
+
+    }
+
+
+
     private void validar (String nombre, String apellido, String email,List<Oficio> oficios, String telefono, String password) throws Exepcion{
 
-        if(oficios.size()<1){
+        if(oficios == null){
             throw new Exepcion("No tiene oficios");
         }
 
