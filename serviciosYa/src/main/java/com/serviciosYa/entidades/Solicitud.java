@@ -19,14 +19,14 @@ public class Solicitud {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-   /* @ManyToOne
+    @ManyToOne
     private  Cliente cliente;
 
     @ManyToOne
     private  Proveedor proveedor;
 
     @ManyToOne
-    private  Oficio oficio;*/
+    private  Oficio oficio;
 
     private String descripcion;
 
