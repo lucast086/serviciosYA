@@ -9,6 +9,7 @@
         </a>
         <nav class="nav">
             <ul class="ul">
+                <li sec:authorize="hasRole('PROVEEDOR')" class="li"><a href="/" title="perfil" class="a">Perfil</a></li>
                 <li class="li"><a href="/" title="logout" class="a">Logout</a></li>
             </ul>
         </nav>
