@@ -19,12 +19,12 @@ public class ClienteControlador {
 
     IClienteServicio clienteServicio;
 
-    @GetMapping("/registrar")
+    @GetMapping("")
     public String registrarCliente(){
         return "cliente_registro.html";
     }
 
-    @PostMapping("/registro")
+    @PostMapping("/registrocliente")
     public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre,@RequestParam String apellido,@RequestParam String direccion,@RequestParam String email,@RequestParam String telefono,@RequestParam String password,@RequestParam String password2, ModelMap modelo) {
         try {
             clienteServicio.crear(nombre,apellido,direccion,email,telefono,password,password2,Rol.USER);

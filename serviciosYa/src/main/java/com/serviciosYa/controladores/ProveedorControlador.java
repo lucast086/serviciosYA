@@ -23,12 +23,12 @@ public class ProveedorControlador {
 
     IProveedorServicio proveedorServicio;
 
-    @GetMapping("/registrar")
+    @GetMapping("")
     public String registrarProveedor(){
         return "proveedor_registro.html";
     }
 
-    @PostMapping("/registro")
+    @PostMapping("/registroproveedor")
     public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, @RequestParam(value ="oficios", required = false) List<Oficio> oficios, ModelMap modelo) {
         try {
             proveedorServicio.crear(nombre,apellido,email,telefono,password,password2,imagen,oficios, Rol.PROVEEDOR);
