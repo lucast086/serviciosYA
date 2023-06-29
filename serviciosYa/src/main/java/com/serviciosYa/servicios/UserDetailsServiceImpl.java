@@ -2,8 +2,10 @@ package com.serviciosYa.servicios;
 
 import com.serviciosYa.entidades.Usuario;
 import com.serviciosYa.exepcion.Exepcion;
+import com.serviciosYa.servicios.interfaces.IAdministradorServicio;
 import com.serviciosYa.servicios.interfaces.IClienteServicio;
 import com.serviciosYa.servicios.interfaces.IProveedorServicio;
+import com.serviciosYa.servicios.interfaces.IUsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,6 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     IClienteServicio clienteServicio;
     IProveedorServicio proveedorServicio;
+    IAdministradorServicio administradorServicio;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -36,7 +39,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             try {
                 usuario = proveedorServicio.buscarByEmail(email);
             } catch (Exepcion ex) {
-                throw new UsernameNotFoundException("Usuario no registrado");
+                try {
+                    usuario = administradorServicio.buscarByEmail(email);
+                } catch (Exepcion exce) {
+                    throw new UsernameNotFoundException("Usuario no registrado");
+                }
             }
         }
 
