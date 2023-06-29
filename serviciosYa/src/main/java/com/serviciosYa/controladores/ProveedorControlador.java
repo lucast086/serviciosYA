@@ -23,7 +23,7 @@ public class ProveedorControlador {
 
     IProveedorServicio proveedorServicio;
 
-    @GetMapping("/registro")
+    @GetMapping("/registrar")
     public String registrarProveedor(){
         return "proveedor_registro.html";
     }

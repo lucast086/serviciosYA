@@ -19,7 +19,7 @@ public class ClienteControlador {
 
     IClienteServicio clienteServicio;
 
-    @GetMapping("/registro")
+    @GetMapping("/registrar")
     public String registrarCliente(){
         return "cliente_registro.html";
     }
