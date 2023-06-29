@@ -172,16 +172,6 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-.header .h1 {
-  font-size: 2em;
-  font-family: var(--tipo-titular);
-  font-style: italic;
-  font-weight: 600;
-  color: #e76f51;
-}
-.header .h1:hover {
-  color: #f4a261;
-}
 .header .ul {
   display: flex;
   flex-flow: row wrap;
@@ -376,6 +366,16 @@ body {
   border-top: 2px solid #f4a261;
   color: #f4a261;
   transition: 0.5s;
+}
+
+.seccion.bienvenida .h2{
+  margin-top: 1.7em;
+  font-family: var(--tipo-titular);
+  font-weight: 600;
+  font-size: 5em;
+  padding: 0.5em;
+  text-align: center;
+  color: #e9c46a;
 }
 
 /* Estilos generales del footer */

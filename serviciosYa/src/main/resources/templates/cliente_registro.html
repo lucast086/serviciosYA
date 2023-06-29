@@ -1,39 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login y Register</title>
-    <script
-      src="https://kit.fontawesome.com/be3d3214ac.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="estilos.css"/>
-  </head>
-
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head th:replace="/templates.fragments/head :: head"></head>
+  <link rel="stylesheet" href="estilos.css"/>
   <body>
     <header>
-      <a href="/" class="logo">
-        <img
-          src="Extras/apple-touch-icon.png"
-          alt="logo de la compañia"
-          class="logo-img"
-        />
-      </a>
+      <header class="header">
+        <a href="/" class="logo">
+          <img
+                  src="Extras/apple-touch-icon.png"
+                  alt="logo de la compañia"
+                  class="logo-img"
+          />
+        </a>
+        <nav class="nav">
+          <ul class="ul">
+            <li class="li"><a href="/" title="inicio" class="a">Inicio</a></li>
+            <li class="li"><a href="/registrar" title="registro" class="a">Registro</a></li>
+          </ul>
+        </nav>
+
+      </header>
     </header>
 
-    <div th:if="${error != null}" class="msgerror">
-      <div class="card_body">
-        <h2 class="card_title">ERROR!</h2>
-        <p class="card_text" th:text="${error}"></p>
-      </div>
-    </div>
-    <div th:if="${exito != null}" class="msgexito">
-      <div class="card_body1">
-        <h2 class="card_title">EXITO!</h2>
-        <p class="card_text" th:text="${exito}"></p>
-      </div>
-    </div>
+    <div th:replace="/templates.fragments/msgExitoError :: div"></div>
 
     <form action="/cliente/registrocliente" method="post" class="formulario">
       <h1>Regístrate</h1>
