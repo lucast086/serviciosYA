@@ -38,7 +38,6 @@ public class ClienteServicio implements IClienteServicio {
         cliente.setRol(rol);
         cliente.setActivo(true);
         clienteRepositorio.save(cliente);
-
     }
 
     @Transactional
@@ -77,8 +76,6 @@ public class ClienteServicio implements IClienteServicio {
     public Cliente buscarByEmail(String email) throws Exepcion{
 
         Optional<Cliente> repuesta = clienteRepositorio.findByEmail(email);
-
-
         return repuesta.orElseThrow(()-> new Exepcion("Cliente no existe"));
 
     }

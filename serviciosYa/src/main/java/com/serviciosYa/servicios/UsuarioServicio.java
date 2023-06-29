@@ -16,6 +16,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class UsuarioServicio implements IUsuarioServicio {
+
     private UsuarioRepositorio usuarioRepositorio;
     @Transactional
     public void crear(String nombre, String apellido, String email, String telefono, String password, String password2, Rol rol) throws Exepcion {
@@ -77,7 +78,7 @@ public class UsuarioServicio implements IUsuarioServicio {
 
     }
 
-    public Usuario buscarByNombreAndApedillo(String nombre, String apellido )throws Exepcion{
+    public Usuario buscarByNombreAndApellido(String nombre, String apellido )throws Exepcion{
 
         Optional<Usuario> repuesta = usuarioRepositorio.findByNombreAndApellido(nombre,apellido);
 
