@@ -12,7 +12,7 @@ public interface IUsuarioServicio {
      void eliminarById (String id) throws Exepcion;
      Usuario buscarByID(String id) throws Exepcion;
      Usuario buscarByEmail(String email)throws Exepcion;
-     Usuario buscarByNombreAndApedillo(String nombre, String apedillo )throws Exepcion;
+     Usuario buscarByNombreAndApellido(String nombre, String apellido )throws Exepcion;
      Usuario getOne (String id);
      List<Usuario> listarUsuarios ();
 }
