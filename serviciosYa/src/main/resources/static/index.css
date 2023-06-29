@@ -368,6 +368,16 @@ body {
   transition: 0.5s;
 }
 
+.seccion.bienvenida .h2{
+  margin-top: 1.7em;
+  font-family: var(--tipo-titular);
+  font-weight: 600;
+  font-size: 5em;
+  padding: 0.5em;
+  text-align: center;
+  color: #e9c46a;
+}
+
 /* Estilos generales del footer */
 .footer {
   width: 100%;

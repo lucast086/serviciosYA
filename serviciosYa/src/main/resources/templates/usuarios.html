@@ -5,19 +5,14 @@
 <link rel="stylesheet" type="text/css" href="index.css" />
 
 <body>
-<header>
-    <header class="header">
-        <h1 class="h1"><a href="#destino3" title="ServiciosYa" class="a">ServiciosYa</a></h1>
-        <nav class="nav">
-            <ul class="ul">
-                <li class="li"><a href="#destino1" title="about" class="a">¿Quienes somos?</a></li>
-                <li class="li"><a href="#destino2" title="servcios" class="a">Servicios</a></li>
-                <li class="li"><a href="/registrar" title="registro" class="a">Registro</a></li>
-                <li class="li"><a href="/login" title="ingreso" class="a">Ingreso</a></li>
-            </ul>
-        </nav>
-    </header>
-</header>
-    <h1>ESTAS LOGUEADO</h1>
+
+<header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
+
+
+<section class="seccion bienvenida">
+    <h2 class="h2" th:if="${session.usuarioSesion != null}" th:text=" 'Hola de nuevo ' + ${session.usuarioSesion.nombre}" ></h2>
+</section>
+
+<footer th:replace="/templates.fragments/footer :: footer" class="footer"></footer>
 </body>
 </html>
