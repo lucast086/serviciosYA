@@ -3,5 +3,6 @@ package com.serviciosYa.enums;
 public enum Rol {
     ADMIN,
     USER,
-    PROVEEDOR
+    PROVEEDOR,
+    SUPERADMIN
 }

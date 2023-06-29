@@ -1,14 +1,89 @@
-header{
+/* Aquí definimos las Custom properties */
+:root {
+  --negro: #393939;
+  --blanco: #f0f0f0;
+  /* Tipografía */
+  --tipo-titular: "Playfair Display", serif;
+  --tipo-principal: "Inter", sans-serif;
+}
+/* Evitamos problemas con las imagenes */
+img,
+picture,
+video,
+iframe,
+figure {
+  max-width: 100%;
+  width: 100%;
+  display: block;
+  /* opcional */
+  -o-object-fit: cover;
+  object-fit: cover;
+  /* opcional */
+  -o-object-position: center center;
+  object-position: center center;
+}
+
+/* Reseteamos los enlaces para funcionar como cajas... */
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* ... excepto los que se encuentran en párrafos */
+p a {
+  display: inline;
+}
+
+/* Quitamos los puntos de los <li> */
+li {
+  list-style-type: none;
+}
+/* Configuramos la tipografía para toda la web */
+body {
+  min-height: 100vh;
+  font-size: 100%;
+  font-family: var(--tipo-principal);
+  color: var(--negro);
+  background-color: #2a9d8f;
+  /* opcional */
+  line-height: 1.4em;
+  /* opcional */
+  font-smooth: always;
+  /* opcional */
+  -webkit-font-smoothing: antialiased;
+  /* opcional */
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.header {
+    width: 100%;
+    min-height: 5em;
+    padding: 1em 2em;
+    background-color: #264653;
+    color: var(--blanco);
     display: flex;
-    height: 70px;
-    background-color:#264653 ;
+    flex-flow: row wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-}
-.logo-img{
-    height: 200px;
-}
+  }
+  .header .h1:hover {
+    color: #f4a261;
+  }
+  .header .ul {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .header .li {
+    margin: 0 2em;
+    font-size: 1.2em;
+  }
+  .header .li:hover {
+    color: #f4a261;
+  }
 
 
 body {
