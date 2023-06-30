@@ -9,8 +9,23 @@
 <header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
 
 
-<section class="seccion bienvenida">
-    <h2 class="h2" th:if="${session.usuarioSesion != null}" th:text=" 'Hola de nuevo ' + ${session.usuarioSesion.nombre}" ></h2>
+<section th:if="${session.usuarioSesion != null}" class="seccion bienvenida">
+    <h2 class="h2"  th:text=" 'Hola de nuevo ' + ${session.usuarioSesion.nombre}" ></h2>
+    <h3 class="h3" sec:authorize="hasRole('PROVEEDOR')" >Perfil de Proveedor</h3>
+    <h3 class="h3" sec:authorize="hasRole('USER')" >Perfil de Cliente</h3>
+    <h3 class="h3" sec:authorize="hasRole('ADMIN')" >Perfil de Administrador</h3>
+    <div sec:authorize="hasRole('PROVEEDOR')" class="cajas">
+        <form action="/cliente/solicitudes" method="get">
+            <button class="caja" id="caja1">
+                <div class="contenido">Nuevas <br> Solicitudes</div>
+            </button>
+        </form>
+        <form action="/proveedor/trabajos" method="get">
+            <button class="caja" id="caja2">
+                <div class="contenido">Trabajos <br> Activos</div>
+            </button>
+        </form>
+    </div>
 </section>
 
 <footer th:replace="/templates.fragments/footer :: footer" class="footer"></footer>
