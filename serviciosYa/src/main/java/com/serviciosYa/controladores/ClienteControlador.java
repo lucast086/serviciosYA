@@ -45,11 +45,11 @@ public class ClienteControlador {
     }
 
     @PostMapping("/modificar/{id}")
-    public String modificarCliente (@PathVariable String id,@RequestParam String nombre,@RequestParam String apedillo, @RequestParam String direccion,@RequestParam String email,@RequestParam String telefono, @RequestParam String password, ModelMap model){
+    public String modificarCliente (@PathVariable String id,@RequestParam String nombre,@RequestParam String apellido, @RequestParam String direccion,@RequestParam String email,@RequestParam String telefono, @RequestParam String password, @RequestParam String password2, ModelMap model){
 
         try {
-
-            clienteServicio.modificarById(id,nombre,apedillo,email,telefono,direccion,password);
+            clienteServicio.modificarById(id,nombre,apellido,email,telefono,direccion,password,password2);
+            model.put("exito","Usuario modificado con exito!");
             return "redirect:../listar";
 
         }catch (Exepcion ex){
@@ -71,10 +71,12 @@ public class ClienteControlador {
     public String eliminarCliente(@PathVariable  String id, ModelMap model){
         try {
             clienteServicio.eliminarById(id);
+            model.put("exito","Se elimino con exito!");
             return "redirect:../listar";
+
         }catch (Exepcion ex){
             model.put("error",ex.getMessage());
-            return "cliente_eleminar.html";
+            return "cliente_eleminar.htmlgit ";
         }
     }
 
@@ -87,7 +89,7 @@ public class ClienteControlador {
     @GetMapping("/listar")
     public String listar (ModelMap model){
         List<Cliente> clienteList = clienteServicio.listarClientes();
-        model.addAttribute("cliente",clienteList);
+        model.addAttribute("clientes",clienteList);
         return "lista_cliente.html";
     }
 

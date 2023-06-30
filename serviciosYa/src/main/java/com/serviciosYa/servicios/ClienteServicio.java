@@ -41,11 +41,12 @@ public class ClienteServicio implements IClienteServicio {
     }
 
     @Transactional
-    public void modificarById (String id,String nombre, String apellido,String direccion, String email, String telefono, String password) throws Exepcion {
+    public void modificarById (String id,String nombre, String apellido,String direccion, String email, String telefono, String password,String password2) throws Exepcion {
 
         Cliente cliente = buscarByID(id);
 
         validar(nombre,apellido,email,direccion,telefono,password);
+        validarPasswords(password,password2);
 
         cliente.setNombre(nombre);
         cliente.setApellido(apellido);
