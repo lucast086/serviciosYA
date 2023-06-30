@@ -19,7 +19,7 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
                 <th scope="col">Email</th>
-                <th scope="col">Rol</th>
+                <th scope="col">Modificar Usuario</th>
                 <th scope="col">Eliminar Usuario</th>
             </tr>
         </thead>
@@ -28,9 +28,11 @@
                 <th  scope="row" th:text="${Cliente.nombre}"></th>
                 <td  th:text="${Cliente.apellido}"></td>
                 <td  th:text="${Cliente.email}"></td>
-                <td  th:text="${Cliente.rol}"></td>
                 <td>
-                <a th:href="@{/cliente/eliminar/__${Cliente.id}__}" class="hola">Eliminar</a>
+                    <a th:href="@{/cliente/modificar/__${Cliente.id}__}">Modificar</a>
+                </td>
+                <td>
+                <a th:href="@{/cliente/eliminar/__${Cliente.id}__}">Eliminar</a>
                 </td>
             </tr>
         </tbody>
