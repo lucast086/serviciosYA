@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface SolicitudRepositorio extends JpaRepository  <Solicitud,String> {
 
-   //  Optional<Solicitud> findByCliente (Cliente cliente);
-    //que se puedan realizar busquedas por cliente-proveedor u oficio
+    Optional<Solicitud> findById (String id);
+    //realizar busquedas por cliente-proveedor,oficio, estado
 
 }
