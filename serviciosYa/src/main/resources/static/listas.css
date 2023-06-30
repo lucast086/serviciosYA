@@ -49,7 +49,7 @@ figure {
 a {
   display: block;
   text-decoration: none;
-  color: inherit;
+  color: white;
   font-size: inherit;
 }
 
@@ -77,7 +77,7 @@ h5,
 h6,
 p,
 span,
-a,
+/*a,*/
 strong,
 blockquote,
 i,
@@ -159,18 +159,94 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-header{
-    display: flex;
-    height: 70px;
-    background-color:#264653 ;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
+.header {
+  width: 100%;
+  min-height: 5em;
+  padding: 1em 2em;
+  background-color: #264653;
+  color: var(--blanco);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
 }
-.logo-img{
-    height: 200px;
+.header .ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
 }
-body{
-    background-color: #E9C46A;
+.header .li {
+  margin: 0 1.5em;
+  font-size: 1em;
+}
+.header .li:hover {
+  color: #f4a261;
+}
 
+.footer {
+  width: 100%;
+  min-height: 5em;
+  padding: 1em 2em;
+  background-color: #264653;
+  color: var(--blanco);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer .h1 {
+  font-size: 2em;
+  font-family: var(--tipo-titular);
+  font-style: italic;
+  font-weight: 600;
+  color: #e76f51;
+}
+.footer .h1:hover {
+  color: #f4a261;
+}
+.footer .ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer .li {
+  margin: 0 1.5em;
+  font-size: 1em;
+}
+.footer .li:hover {
+  color: #f4a261;
+}
+.footer-bottom {
+  background-color: #264653;
+  border-top: 1px solid #ddd;
+  padding-top: 1em;
+  font-size: 0.9em;
+}
+
+.footer-bottom p {
+  margin: 0;
+  color: #777;
+  text-align: center;
+}
+
+.footer-bottom p a {
+  color: #777;
+  text-decoration: none;
+}
+
+.footer-bottom p a:hover {
+  text-decoration: underline;
+}
+
+@keyframes aparecer1 {
+  from {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
 }
