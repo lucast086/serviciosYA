@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="/templates.fragments/head :: head"></head>
+<link rel="stylesheet" type="text/css" href="index.css"/>
+<body>
+<header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
+<div th:replace="/templates.fragments/msgExitoError :: div"></div>
+
+<section class="seccion formulario">
+    <form action="/oficio" method="POST" class="formulario">
+        <h1>Crear Oficio</h1>
+        <div class="contenedor">
+            <div class="input contenedor">
+                <input type="text" name="nombre" placeholder="Nombre del oficio" />
+            </div>
+
+            <div class="input contenedor">
+            <textarea
+                    name="descripcion"
+                    placeholder="Descripcion del oficio"
+            ></textarea>
+            </div>
+
+            <div class="input contenedor">
+                <input type="text" name="email" placeholder="Codigo de icono" />
+            </div>
+
+            <label>Color en la vista principal</label>
+            <div class="checkbox-container">
+                <div>
+                    <input
+                            id="color1"
+                            type="radio"
+                            name="color"
+                            value="#264653"
+                    />
+                    <div class="caja" id="caja1"></div>
+                </div>
+                <div>
+                    <input
+                            id="color2"
+                            type="radio"
+                            name="color"
+                            value="#f4a261"
+                    />
+                    <div class="caja" id="caja2"></div>
+                </div>
+            </div>
+
+            <input type="submit" value="Crear" class="button" />
+        </div>
+    </form>
+</section>
+</body>
+</html>
