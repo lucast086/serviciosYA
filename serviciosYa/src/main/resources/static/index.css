@@ -458,6 +458,93 @@ body {
 .contenido {
         line-height: 2;
     }
+
+/* Estilos generales de formulario */
+.seccion .formulario {
+  width: 25%;
+  margin-top: 150px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 60%);
+  border-radius: 5px;
+}
+
+h1 {
+  text-align: center;
+  color: #1a2537;
+  font-size: 40px;
+  margin-bottom: 0.5em;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.contenedor {
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--blanco);
+  border: solid 1.5px;
+  border-color: #e9c46a;
+}
+
+.input input,
+.input textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.seccion .formulario label {
+  text-align: center;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 2em;
+}
+
+.checkbox-container > div {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-container .caja {
+  width: 3em;
+  height: 3em;
+  margin-bottom: 1em;
+  margin-left: 1em;
+  border-radius: 20%;
+  transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+    height 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+    border-radius 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.checkbox-container .caja:hover {
+  border-radius: 50%;
+  transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+    height 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+    border-radius 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.button {
+  border: none;
+  width: 100%;
+  color: white;
+  font-size: 20px;
+  background: #1a2537;
+  padding: 15px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.button:hover {
+  background: #264653;
+}
+
 /* Estilos generales del footer */
 .footer {
   width: 100%;
