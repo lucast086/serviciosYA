@@ -1,17 +1,16 @@
 package com.serviciosYa.entidades;
-
 import com.serviciosYa.enums.Estado;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "solicitud")
 public class Solicitud {
 
     @Id
@@ -19,23 +18,26 @@ public class Solicitud {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Cliente.class)
     private  Cliente cliente;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Proveedor.class)
     private  Proveedor proveedor;
 
-    @ManyToOne
-    private  Oficio oficio;
-
+    @Column(name = "descripcion")
     private String descripcion;
 
-    private Estado estado; //importe la clase enums.Estado
+    @Column(name = "estado")
+    @Enumerated(EnumType.STRING)
+    private Estado estado;
 
+    @Column(name = "costo")
     private float costo;
 
+    @Column(name = "comentario")
     private String comentario;
 
+    @Column(name = "Fecha_Servicio")
     @Temporal(TemporalType.DATE)
     private Date fechaServicio;
 
