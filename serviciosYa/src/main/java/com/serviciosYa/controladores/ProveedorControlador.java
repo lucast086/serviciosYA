@@ -67,7 +67,7 @@ public class ProveedorControlador {
         return "proveedor_eleminar.html";
     }
 
-
+    @PostMapping("/eliminar/{id}")
     public String eliminraProveedor(@PathVariable String id, ModelMap model){
 
         try {
