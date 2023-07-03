@@ -23,5 +23,5 @@ public interface IProveedorServicio {
     void eliminarById (String id) throws Exepcion;
     Proveedor buscarByNombreAndApellido(String nombre, String apellido )throws Exepcion;
     Proveedor getOne (String id);
-    List<Proveedor> listarUsuarios ();
+    List<Proveedor> listarProveedores ();
 }
