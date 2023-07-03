@@ -50,6 +50,7 @@ public class ProveedorServicio implements IProveedorServicio {
 
     @Override
     public void modificarByID(String id, String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios) throws Exepcion {
+
         validar(nombre,apellido,email,oficios,telefono,password);
         validarPasswords(password,password2);
 
@@ -92,10 +93,8 @@ public class ProveedorServicio implements IProveedorServicio {
         return repuesta.orElseThrow(()-> new Exepcion("Proveedor no existe"));
 
     }
-
     @Override
     public void eliminarById(String id) throws Exepcion {
-
     }
 
     @Override
