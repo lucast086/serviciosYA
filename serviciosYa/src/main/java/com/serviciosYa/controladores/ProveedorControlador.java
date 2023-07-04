@@ -22,12 +22,12 @@ public class ProveedorControlador {
 
     IProveedorServicio proveedorServicio;
 
-    @GetMapping("")
+    @GetMapping("/registro")
     public String registrarProveedor(){
-        return "proveedor_registro.html";
+        return "proveedorRegistro.html";
     }
 
-    @PostMapping("/registroproveedor")
+    @PostMapping("/registro")
     public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, @RequestParam(value ="oficios", required = false) List<Oficio> oficios, ModelMap modelo) {
         try {
             proveedorServicio.crear(nombre,apellido,email,telefono,password,password2,imagen,oficios, Rol.PROVEEDOR);
@@ -45,7 +45,7 @@ public class ProveedorControlador {
         return "modificarProveedor.html";
     }
 
-    @PostMapping("/modificar2/{id}")
+    @PostMapping("/modificar/{id}")
     public String modificarProveedor (@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, @RequestParam (value = "oficios",required = false)List<Oficio> oficios, ModelMap model){
 
         try {
@@ -84,7 +84,7 @@ public class ProveedorControlador {
     public String listarProveedor(ModelMap model){
         List<Proveedor> proveedorList = proveedorServicio.listarProveedores();
         model.addAttribute("proveedores",proveedorList);
-        return "lista_proveedor.html";
+        return "listaProveedor.html";
     }
 
     @GetMapping("/{id}")
