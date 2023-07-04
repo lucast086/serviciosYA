@@ -1,12 +1,16 @@
 package com.serviciosYa.controladores;
 
 import com.serviciosYa.entidades.Oficio;
+import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.OficioServicio;
+import com.serviciosYa.servicios.interfaces.IOficioServicio;
 import lombok.AllArgsConstructor;
+import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -15,7 +19,72 @@ import java.util.List;
 @RequestMapping("/oficio")
 public class OficioControlador {
 
-    private OficioServicio oficioServicio;
+    IOficioServicio oficioServicio;
 
-    // FALTA el de crear y eliminar oficios
+    @GetMapping("/registro")
+    public String registroOficio(){
+        return "oficio_registro.html";
+    }
+
+    @PostMapping("/registro")
+    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String descripcion,ModelMap model){
+        try{
+        oficioServicio.crearOficio(nombre,descripcion);
+        redirectAttributes.addFlashAttribute("exito","Oficio registrado correctamente!");
+        return "redirect:/login";
+        } catch (Exepcion e) {
+            redirectAttributes.addFlashAttribute("error",e.getMessage());
+            return "redirect:/oficio";
+        }
+    }
+
+
+    @GetMapping("/modificar/{id}")
+    public String modificarOficioForm (@PathVariable String id, ModelMap model){
+        model.put("oficio",oficioServicio.getOne(id));
+        return "oficio_modifcar.html" ;
+    }
+
+    @PostMapping("/modificar/{id}")
+    public String modificarOficio (@PathVariable String id, String nombre, String descripcion, ModelMap model){
+        try{
+            oficioServicio.modificarById(id,nombre,descripcion);
+            model.put("exito", "El Oficio se modifico con exito");
+            return "redirect:../listar";
+        } catch (Exepcion e) {
+            model.put("error", e.getMessage()) ;
+            return "oficio_modificar";
+        }
+    }
+
+    @GetMapping("/eliminar/{id}")
+    public String eliminarOficioForm(@PathVariable String id, ModelMap model){
+        model.put("oficio",oficioServicio.getOne(id));
+        return "oficio_eliminar";
+    }
+
+    @PostMapping("/eliminar/{id}")
+    public String eliminarOficio (@PathVariable String id, ModelMap model){
+        try{
+            oficioServicio.eliminarById(id);
+            model.put("exito","El Oficio fue eliminado con exito!");
+            return "redirect:../listar";
+        } catch (Exepcion e) {
+            model.put("error",e.getMessage());
+            return "oficio_eleminar.html";
+        }
+    }
+
+    @GetMapping("/{id}")
+    public String getOne (@PathVariable String id, ModelMap model){
+        model.put("oficio",oficioServicio.getOne(id));
+        return "oficio.html";
 }
+    @GetMapping("/listar")
+    public String listar (ModelMap model){
+        List<Oficio>oficioList=oficioServicio.listarTodos();
+        model.put("oficios",oficioList);
+        return "lista_oficio.html";
+    }
+}
+

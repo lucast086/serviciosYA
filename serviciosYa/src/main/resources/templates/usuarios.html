@@ -8,7 +8,7 @@
 
 <header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
 
-
+<div th:replace="/templates.fragments/msgExitoError :: div"></div>
 <section th:if="${session.usuarioSesion != null}" class="seccion bienvenida">
     <h2 class="h2"  th:text=" 'Hola de nuevo ' + ${session.usuarioSesion.nombre}" ></h2>
     <h3 class="h3" sec:authorize="hasRole('PROVEEDOR')" >Perfil de Proveedor</h3>

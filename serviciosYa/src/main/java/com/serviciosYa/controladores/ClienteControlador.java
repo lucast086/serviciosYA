@@ -21,7 +21,7 @@ public class ClienteControlador {
 
     IClienteServicio clienteServicio;
 
-    @GetMapping("")
+    @GetMapping("/registro")
     public String registrarCliente(){
         return "cliente_registro.html";
     }
