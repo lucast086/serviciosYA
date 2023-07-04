@@ -1,5 +1,6 @@
 package com.serviciosYa.servicios;
 import com.serviciosYa.entidades.Cliente;
+import com.serviciosYa.entidades.Oficio;
 import com.serviciosYa.entidades.Proveedor;
 import com.serviciosYa.entidades.Solicitud;
 import com.serviciosYa.enums.Estado;
@@ -19,17 +20,17 @@ import java.util.Optional;
 @AllArgsConstructor
 public class SolicitudServicio implements ISolicitudServicio {
 
-   private SolicitudRepositorio  solicitudRepositorio;
+    SolicitudRepositorio  solicitudRepositorio;
 
     @Override
-    public void crearSolicitud(Cliente cliente, Proveedor proveedor, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio)throws Exepcion{
+    public void crearSolicitud(Cliente cliente, List<Proveedor> proveedores, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio)throws Exepcion{
 
-        validar (cliente,proveedor,descripcion,estado,costo,fechaServicio);
+        validar (cliente,proveedores,descripcion,estado,costo,fechaServicio);
 
         Solicitud solicitud = new Solicitud();
 
         solicitud.setCliente(cliente);
-        solicitud.setProveedor(proveedor);
+        solicitud.setProveedor((Proveedor) proveedores);
         solicitud.setDescripcion(descripcion);
         solicitud.setEstado(estado);
         solicitud.setCosto(0f);
@@ -39,13 +40,13 @@ public class SolicitudServicio implements ISolicitudServicio {
         solicitudRepositorio.save(solicitud);
     }
     @Transactional
-    public void modificarById (String id, Cliente cliente,Proveedor proveedor, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio) throws Exepcion {
+    public void modificarById (String id, Cliente cliente,List<Proveedor> proveedores, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio) throws Exepcion {
 
         Solicitud solicitud =buscarByID(id);
 
-        validar (cliente,proveedor,descripcion,estado,costo,fechaServicio);
+        validar (cliente,proveedores,descripcion,estado,costo,fechaServicio);
 
-        solicitud.setProveedor(proveedor);
+        solicitud.setProveedor((Proveedor) proveedores);
         solicitud.setDescripcion(descripcion);
         solicitud.setEstado(estado);
         solicitud.setCosto(costo);
@@ -76,13 +77,13 @@ public class SolicitudServicio implements ISolicitudServicio {
     public List<Solicitud> listarSolicitudes (){
         return new ArrayList<>(solicitudRepositorio.findAll());
     }
-    private void validar (Cliente cliente, Proveedor proveedor, String descripcion, Estado estado, float costo, Date fechaServicio) throws Exepcion{
+    private void validar (Cliente cliente, List<Proveedor> proveedores, String descripcion, Estado estado, float costo, Date fechaServicio) throws Exepcion{
 
         if(cliente == null){
             throw new Exepcion("La celda cliente esta vacia");
         }
 
-        if (proveedor == null){
+        if (proveedores == null){
             throw new Exepcion("La celda proveedor esta vacia");
         }
 
