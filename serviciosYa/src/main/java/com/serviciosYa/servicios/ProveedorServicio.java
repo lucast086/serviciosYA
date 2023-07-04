@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,21 +96,28 @@ public class ProveedorServicio implements IProveedorServicio {
     }
     @Override
     public void eliminarById(String id) throws Exepcion {
-    }
 
+        Proveedor proveedor = buscarByID(id);
+        proveedor.setActivo(false);
+        proveedorRepositorio.save(proveedor);
+
+    }
     @Override
     public Proveedor buscarByNombreAndApellido(String nombre, String apellido) throws Exepcion {
-        return null;
+
+        Optional<Proveedor> respuesta = proveedorRepositorio.findByNombreAndApellido(nombre,apellido);
+
+        return respuesta.orElseThrow(()->new Exepcion("El proveedor no existe"));
     }
 
     @Override
     public Proveedor getOne(String id) {
-        return null;
+        return proveedorRepositorio.getReferenceById(id);
     }
 
     @Override
-    public List<Proveedor> listarUsuarios() {
-        return null;
+    public List<Proveedor> listarProveedores() {
+        return new ArrayList<>(proveedorRepositorio.findAll());
     }
 
 

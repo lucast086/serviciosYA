@@ -455,7 +455,24 @@ body {
     background-color: #f4a261;
     color: var(--negro);
   }
-.contenido {
+  #caja3{
+      background-color: #264653;
+      color: var(--blanco);
+    }
+    #caja4{
+      background-color: #f4a261;
+      color: var(--negro);
+    }
+  #caja5{
+      background-color: #264653;
+      color: var(--blanco);
+    }
+    #caja6{
+      background-color: #f4a261;
+      color: var(--negro);
+    }
+
+    .contenido {
         line-height: 2;
     }
 
