@@ -42,20 +42,20 @@ public class ProveedorControlador {
     @GetMapping("/modificar/{id}")
     public String modificarProveedorForm (@PathVariable String id, ModelMap model){
         model.put("proveedor",proveedorServicio.getOne(id));
-        return "proveedor_moficar.html";
+        return "modificarProveedor.html";
     }
 
-    @PostMapping("/modificar/{id}")
+    @PostMapping("/modificar2/{id}")
     public String modificarProveedor (@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, @RequestParam (value = "oficios",required = false)List<Oficio> oficios, ModelMap model){
 
         try {
             proveedorServicio.modificarByID(id, nombre, apellido, email, telefono, password, password2, imagen, oficios);
             model.put("exito","El proveedor se modifico con exito!");
-            return "redirect:../listar";
+            return "usuario.html";
 
         }catch (Exepcion e){
             model.put("error",e.getMessage());
-            return"proveedor_modificar.html";
+            return"modificarProveedor.html";
 
         }
 
