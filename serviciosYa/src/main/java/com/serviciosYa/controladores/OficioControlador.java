@@ -23,7 +23,7 @@ public class OficioControlador {
 
     @GetMapping("/registro")
     public String registroOficio(){
-        return "oficio_registro.html";
+        return "crearOficio.html";
     }
 
     @PostMapping("/registro")
@@ -84,7 +84,7 @@ public class OficioControlador {
     public String listar (ModelMap model){
         List<Oficio>oficioList=oficioServicio.listarTodos();
         model.put("oficios",oficioList);
-        return "lista_oficio.html";
+        return "listaOficio.html";
     }
 }
 

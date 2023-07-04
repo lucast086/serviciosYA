@@ -6,6 +6,7 @@ import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.AdministradorRepositorio;
 import com.serviciosYa.servicios.interfaces.IAdministradorServicio;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +30,9 @@ public class AdministradorServicio implements IAdministradorServicio {
         administrador.setApellido(apellido);
         administrador.setEmail(email);
         administrador.setTelefono(telefono);
-        administrador.setPassword(password);
+        administrador.setPassword(
+                new BCryptPasswordEncoder().encode(password)
+        );
         administrador.setRol(rol);
         administrador.setActivo(true);
         administradorRepositorio.save(administrador);

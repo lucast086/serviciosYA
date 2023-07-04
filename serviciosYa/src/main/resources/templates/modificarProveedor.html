@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="/templates.fragments/head :: head"></head>
-<link rel="stylesheet" type="text/css" href="estilos.css"/>
+<link rel="stylesheet" type="text/css" href="/css/estilos.css"/>
 <body>
 <header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
 
 <div th:replace="/templates.fragments/msgExitoError :: div"></div>
 
-<form th:action="@{/proveedor/modificar2/__${session.usuarioSesion.id}__}" method="post" enctype="multipart/form-data" class="formulario">
+<form th:action="@{/proveedor/modificar/__${session.usuarioSesion.id}__}" method="post" enctype="multipart/form-data" class="formulario">
   <input hidden th:value="${id}" name="id">
   <h1>Modificar Perfil</h1>
   <div class="contenedor">
