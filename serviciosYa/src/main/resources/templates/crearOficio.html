@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="/templates.fragments/head :: head"></head>
-<link rel="stylesheet" type="text/css" href="index.css"/>
+<link rel="stylesheet" type="text/css" href="/css/index.css"/>
 <body>
 <header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
 <div th:replace="/templates.fragments/msgExitoError :: div"></div>
 
 <section class="seccion formulario">
-    <form action="/oficio" method="POST" class="formulario">
+    <form action="/oficio/registro" method="POST" class="formulario">
         <h1>Crear Oficio</h1>
         <div class="contenedor">
             <div class="input contenedor">
