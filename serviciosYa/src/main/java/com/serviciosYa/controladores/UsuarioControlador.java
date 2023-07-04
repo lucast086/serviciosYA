@@ -62,7 +62,7 @@ public class UsuarioControlador {
         return "intermedia.html";
     }
 
-    @PostMapping("/registro")
+    @PostMapping("/registrou")
     public String registrar(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam Rol rol , ModelMap model) {
         try {
             usuarioServicio.crear(nombre,apellido,email,telefono,password,password2,rol);

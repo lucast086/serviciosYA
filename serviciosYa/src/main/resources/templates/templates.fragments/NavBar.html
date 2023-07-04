@@ -2,7 +2,7 @@
     <header  class="header">
         <a href="/" class="logo">
             <img
-                    src="Extras/apple-touch-icon.png"
+                    src="/img/apple-touch-icon.png"
                     alt="logo de la compañia"
                     class="logo-img"
             />
@@ -10,10 +10,10 @@
         <nav href="/usuario" class="nav">
             <ul class="ul">
                 <li sec:authorize="hasRole('PROVEEDOR')" class="li"><a th:href="@{/proveedor/modificar/__${session.usuarioSesion.id}__}" title="perfil" class="a">Perfil</a></li>
-                <li sec:authorize="hasRole('ADMIN')" class="li"><a href="/comentario/lista" title="comentarios" class="a">Comentarios</a></li>
-                <li sec:authorize="hasRole('ADMIN')" class="li"><a href="/cliente/lista" title="clientes" class="a">Clientes</a></li>
-                <li sec:authorize="hasRole('ADMIN')" class="li"><a href="/proveedor/lista" title="proveedores" class="a">Proveedores</a></li>
-                <li sec:authorize="hasRole('ADMIN')" class="li"><a href="/oficio/crear" title="nuevoOficio" class="a">Nuevo Oficio</a></li>
+                <li sec:authorize="hasRole('ADMIN')" class="li"><a href="/comentario/listar" title="comentarios" class="a">Comentarios</a></li>
+                <li sec:authorize="hasRole('ADMIN')" class="li"><a href="/cliente/listar" title="clientes" class="a">Clientes</a></li>
+                <li sec:authorize="hasRole('ADMIN')" class="li"><a href="/proveedor/listar" title="proveedores" class="a">Proveedores</a></li>
+                <li sec:authorize="hasRole('ADMIN')" class="li"><a href="/oficio/registro" title="nuevoOficio" class="a">Nuevo Oficio</a></li>
                 <li class="li"><a href="/usuarios" title="logout" class="a">Inicio</a></li>
                 <li class="li"><a href="/logout" title="logout" class="a">Logout</a></li>
             </ul>

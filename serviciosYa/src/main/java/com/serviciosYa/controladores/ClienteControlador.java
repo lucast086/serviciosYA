@@ -23,10 +23,10 @@ public class ClienteControlador {
 
     @GetMapping("/registro")
     public String registrarCliente(){
-        return "cliente_registro.html";
+        return "clienteRegistro.html";
     }
 
-    @PostMapping("/registrocliente")
+    @PostMapping("/registro")
     public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre,@RequestParam String apellido,@RequestParam String direccion,@RequestParam String email,@RequestParam String telefono,@RequestParam String password,@RequestParam String password2, ModelMap modelo) {
         try {
             clienteServicio.crear(nombre,apellido,direccion,email,telefono,password,password2,Rol.USER);
@@ -90,7 +90,7 @@ public class ClienteControlador {
     public String listar (ModelMap model){
         List<Cliente> clienteList = clienteServicio.listarClientes();
         model.addAttribute("clientes",clienteList);
-        return "lista_cliente.html";
+        return "listaCliente.html";
     }
 
 
