@@ -6,6 +6,7 @@ import com.serviciosYa.entidades.Solicitud;
 import com.serviciosYa.enums.Estado;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.SolicitudRepositorio;
+import com.serviciosYa.servicios.interfaces.IProveedorServicio;
 import com.serviciosYa.servicios.interfaces.ISolicitudServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +22,18 @@ import java.util.Optional;
 public class SolicitudServicio implements ISolicitudServicio {
 
     SolicitudRepositorio  solicitudRepositorio;
+    IProveedorServicio proveedorServicio;
 
     @Override
-    public void crearSolicitud(Cliente cliente, List<Proveedor> proveedores, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio)throws Exepcion{
+    public void crearSolicitud(Cliente cliente, String idProveedor, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio)throws Exepcion{
 
-        validar (cliente,proveedores,descripcion,estado,costo,fechaServicio);
+     //   validar (cliente,idProveedor,descripcion,estado,costo,fechaServicio);
 
         Solicitud solicitud = new Solicitud();
+        Proveedor proveedor = proveedorServicio.getOne(idProveedor);
 
         solicitud.setCliente(cliente);
-        solicitud.setProveedor((Proveedor) proveedores);
+        solicitud.setProveedor(proveedor);
         solicitud.setDescripcion(descripcion);
         solicitud.setEstado(estado);
         solicitud.setCosto(0f);
@@ -40,22 +43,27 @@ public class SolicitudServicio implements ISolicitudServicio {
         solicitudRepositorio.save(solicitud);
     }
     @Transactional
-    public void modificarById (String id, Cliente cliente,List<Proveedor> proveedores, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio) throws Exepcion {
+    public void modificarById (String id, Cliente cliente,String idProveedor, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio) throws Exepcion {
 
         Solicitud solicitud =buscarByID(id);
+        Proveedor proveedor = proveedorServicio.getOne(idProveedor);
 
-        validar (cliente,proveedores,descripcion,estado,costo,fechaServicio);
+        validar (cliente,idProveedor,descripcion,estado,costo,fechaServicio);
 
-        solicitud.setProveedor((Proveedor) proveedores);
+        solicitud.setId(id);
+        solicitud.setCliente(cliente);
+        solicitud.setProveedor(proveedor);
         solicitud.setDescripcion(descripcion);
         solicitud.setEstado(estado);
-        solicitud.setCosto(costo);
+        solicitud.setCosto(0f);
         solicitud.setComentario(comentario);
-        solicitud.setFechaServicio(fechaServicio);
+        solicitud.setFechaServicio(new Date());
 
         solicitudRepositorio.save(solicitud);
     }
-
+    public Solicitud getOne(String id) {
+        return solicitudRepositorio.getReferenceById(id);
+    }
     public Solicitud buscarByID(String id)throws Exepcion{
 
         Optional<Solicitud> repuesta = solicitudRepositorio.findById(id);
@@ -66,24 +74,20 @@ public class SolicitudServicio implements ISolicitudServicio {
     public void eliminarById (String id) throws Exepcion {
 
         Solicitud solicitud = buscarByID(id);
-        solicitud.setEstado(Estado.FINALIZADO);
-        solicitudRepositorio.save(solicitud);
+        solicitudRepositorio.delete(solicitud);
     }
-    @Override
-    public Solicitud getOne(String id) {
-        return null;
-    }
+
     @Override
     public List<Solicitud> listarSolicitudes (){
         return new ArrayList<>(solicitudRepositorio.findAll());
     }
-    private void validar (Cliente cliente, List<Proveedor> proveedores, String descripcion, Estado estado, float costo, Date fechaServicio) throws Exepcion{
+    private void validar (Cliente cliente, String idProveedor, String descripcion, Estado estado, float costo, Date fechaServicio) throws Exepcion{
 
         if(cliente == null){
             throw new Exepcion("La celda cliente esta vacia");
         }
 
-        if (proveedores == null){
+        if (idProveedor == null){
             throw new Exepcion("La celda proveedor esta vacia");
         }
 
@@ -94,7 +98,6 @@ public class SolicitudServicio implements ISolicitudServicio {
         if (estado == null){
             throw new Exepcion(" Se debe asignar un estado a la solicitud"); // pendiente revisarla como se ejecutara desde el formulario
         }
-
         if (costo < 0){
             throw new Exepcion("Se debe asignar un un costo base ");//  pendiente revisarla como se ejecutara desde el formulario
         }
