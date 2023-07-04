@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <head th:replace="/templates.fragments/head :: head"></head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/listas.css"/>
+</head>
+<body>
+
+<header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
+
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Email</th>
+                <th scope="col">Modificar Usuario</th>
+                <th scope="col">Eliminar Usuario</th>
+            </tr>
+        </thead>
+        <tbody th:each="Cliente : ${clientes}">
+            <tr>
+                <th  scope="row" th:text="${Cliente.nombre}"></th>
+                <td  th:text="${Cliente.apellido}"></td>
+                <td  th:text="${Cliente.email}"></td>
+                <td>
+                    <a th:href="@{/cliente/modificar/__${Cliente.id}__}">Modificar</a>
+                </td>
+                <td>
+                <a th:href="@{/cliente/eliminar/__${Cliente.id}__}">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+<footer th:replace="/templates.fragments/footer :: footer" class="footer"></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,8 +1,10 @@
 package com.serviciosYa.controladores;
 
+import com.serviciosYa.entidades.Oficio;
 import com.serviciosYa.entidades.Usuario;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
+import com.serviciosYa.servicios.OficioServicio;
 import com.serviciosYa.servicios.interfaces.IUsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,13 +12,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
 @AllArgsConstructor
 public class UsuarioControlador {
 
-    IUsuarioServicio usuarioServicio;
+    private IUsuarioServicio usuarioServicio;
+    private OficioServicio oficioServicio;
+
+    @GetMapping("/")
+    public String listarTodos(ModelMap modelo) {
+
+        List<Oficio> oficios = oficioServicio.listarTodos();
+        modelo.addAttribute("oficios", oficios);
+
+        return "index.html";
+    }
 
     @GetMapping("/login")
     public String loginForm(@RequestParam(required = false) String error, ModelMap modelo){
@@ -26,8 +39,21 @@ public class UsuarioControlador {
         return "login.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN','ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN')")
     @GetMapping("/usuarios")
-    public String usuariosLogueados(){
+    public String usuariosLogueados(HttpSession session){
+        Usuario logueado = (Usuario) session.getAttribute("usuarioSesion");
+        String rol = logueado.getRol().toString();
+
+        switch (rol) {
+            case "PROVEEDOR" :
+                //  return  "redirect:/proveedor/dashboard";
+            case "ADMIN" :
+                // return  "redirect:/admin/dashboard";
+            case "SUPERADMIN" :
+                //  return  "redirect:/superadmin/dashboard";
+        }
+
         return "usuarios.html";
     }
 
@@ -36,7 +62,7 @@ public class UsuarioControlador {
         return "intermedia.html";
     }
 
-    @PostMapping("/registro")
+    @PostMapping("/registrou")
     public String registrar(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam Rol rol , ModelMap model) {
         try {
             usuarioServicio.crear(nombre,apellido,email,telefono,password,password2,rol);
@@ -47,7 +73,6 @@ public class UsuarioControlador {
         }
         return "index.html";
     }
-
 
     @GetMapping ("/modificar/{id}")
     public String modificarForm (@PathVariable String id, ModelMap model){

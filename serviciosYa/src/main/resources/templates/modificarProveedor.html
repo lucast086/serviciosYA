@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/templates.fragments/head :: head"></head>
+<link rel="stylesheet" type="text/css" href="/css/estilos.css"/>
+<body>
+<header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
+
+<div th:replace="/templates.fragments/msgExitoError :: div"></div>
+
+<form th:action="@{/proveedor/modificar/__${session.usuarioSesion.id}__}" method="post" enctype="multipart/form-data" class="formulario">
+  <input hidden th:value="${id}" name="id">
+  <h1>Modificar Perfil</h1>
+  <div class="contenedor">
+    <div class="input contenedor">
+      <i class="fa-solid fa-user icon"></i>
+      <input type="text" name="nombre" placeholder="nombre"/>
+    </div>
+
+    <div class="input contenedor">
+      <i class="fa-solid fa-user icon"></i>
+      <input type="text" name="apellido" placeholder="apellido" />
+    </div>
+
+
+    <div class="input contenedor">
+      <i class="fa-solid fa-phone icon"></i>
+      <input type="text" name="telefono" placeholder="telefono" />
+    </div>
+
+    <div class="input contenedor">
+      <i class="fa-solid fa-house icon"></i>
+      <input type="text" name="direccion" placeholder="direccion"/>
+    </div>
+
+    <div class="input contenedor">
+      <i class="fa-solid fa-screwdriver-wrench icon"></i>
+      <label for="servicio">Qué servicios va a ofrecer:</label>
+      <div id="servicio" class="checkbox-container">
+        <div>
+          <input
+                  id="electricista"
+                  type="checkbox"
+                  name="oficios"
+                  value="electricista"
+          />
+          <label for="electricista">Electricista</label>
+        </div>
+        <div>
+          <input
+                  id="plomero"
+                  type="checkbox"
+                  name="oficios"
+                  value="plomero"
+          />
+          <label for="plomero">Plomero</label>
+        </div>
+        <div>
+          <input
+                  id="gasista"
+                  type="checkbox"
+                  name="oficios"
+                  value="gasista"
+          />
+          <label for="gasista">Gasista</label>
+        </div>
+        <div>
+          <input
+                  id="albañil"
+                  type="checkbox"
+                  name="oficios"
+                  value="albañil"
+          />
+          <label for="albañil">Albañil</label>
+        </div>
+        <div>
+          <input
+                  id="pintor"
+                  type="checkbox"
+                  name="oficios"
+                  value="pintor"
+          />
+          <label for="pintor">Pintor</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="input contenedor">
+      <i class="fa-solid fa-image icon"></i>
+      <input
+              type="file"
+              accept="image/*"
+              id="imagen"
+              name="imagen"
+              placeholder="Imagen de perfil"
+      />
+    </div>
+
+    <div class="input contenedor">
+      <i class="fa-solid fa-key icon"></i>
+      <input type="password" name="password" placeholder="Contraseña" />
+    </div>
+
+    <div class="input contenedor">
+      <i class="fa-solid fa-key icon"></i>
+      <input type="password" name="password2" placeholder="Confirmar Contraseña" />
+    </div>
+    <input type="submit" value="Modificar" class="button" />
+  </div>
+</form>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<div>
+    <div th:if="${error != null}" class="msgerror">
+        <div class="card_body">
+            <h2 class="card_title">ERROR!</h2>
+            <p class="card_text" th:text="${error}"></p>
+        </div>
+    </div>
+    <div th:if="${exito != null}" class="msgexito">
+        <div class="card_body1">
+            <h2 class="card_title">EXITO!</h2>
+            <p class="card_text" th:text="${exito}"></p>
+        </div>
+    </div>
+</div>
