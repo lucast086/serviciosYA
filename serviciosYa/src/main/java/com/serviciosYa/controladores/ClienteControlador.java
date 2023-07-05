@@ -41,7 +41,7 @@ public class ClienteControlador {
     @GetMapping("/modificar/{id}")
     public String modificarClienteForm(@PathVariable String id,ModelMap model){
         model.put("cliente",clienteServicio.getOne(id));
-        return "cliente_modificar.html";
+        return "modificarCliente.html";
     }
 
     @PostMapping("/modificar/{id}")
@@ -55,7 +55,7 @@ public class ClienteControlador {
         }catch (Exepcion ex){
 
             model.put("error",ex.getMessage());
-            return "cliente_modificar.html";
+            return "modificarCliente.html";
 
         }
 
