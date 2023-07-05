@@ -27,14 +27,14 @@ public class OficioControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String descripcion,ModelMap model){
+    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String descripcion,@RequestParam String codigo, @RequestParam String color, ModelMap model){
         try{
-        oficioServicio.crearOficio(nombre,descripcion);
+        oficioServicio.crearOficio(nombre,descripcion,codigo,color);
         redirectAttributes.addFlashAttribute("exito","Oficio registrado correctamente!");
         return "redirect:/login";
         } catch (Exepcion e) {
             redirectAttributes.addFlashAttribute("error",e.getMessage());
-            return "redirect:/oficio";
+            return "redirect:/oficio/registro";
         }
     }
 
@@ -46,12 +46,13 @@ public class OficioControlador {
     }
 
     @PostMapping("/modificar/{id}")
-    public String modificarOficio (@PathVariable String id, String nombre, String descripcion, ModelMap model){
+    public String modificarOficio (@PathVariable String id,@RequestParam String nombre,@RequestParam String descripcion,@RequestParam String codigo,@RequestParam String color, ModelMap model){
         try{
-            oficioServicio.modificarById(id,nombre,descripcion);
+            oficioServicio.modificarById(id, nombre, descripcion, codigo, color);
             model.put("exito", "El Oficio se modifico con exito");
             return "redirect:../listar";
         } catch (Exepcion e) {
+            model.put("oficio",oficioServicio.getOne(id));
             model.put("error", e.getMessage()) ;
             return "oficio_modificar";
         }

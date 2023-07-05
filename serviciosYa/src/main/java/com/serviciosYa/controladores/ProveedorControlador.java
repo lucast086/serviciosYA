@@ -5,6 +5,7 @@ import com.serviciosYa.entidades.Oficio;
 import com.serviciosYa.entidades.Proveedor;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
+import com.serviciosYa.servicios.interfaces.IOficioServicio;
 import com.serviciosYa.servicios.interfaces.IProveedorServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.expression.spel.ast.OpDivide;
@@ -21,6 +22,7 @@ import java.util.List;
 public class ProveedorControlador {
 
     IProveedorServicio proveedorServicio;
+    IOficioServicio oficioServicio;
 
     @GetMapping("/registro")
     public String registrarProveedor(){
@@ -35,13 +37,14 @@ public class ProveedorControlador {
             return "redirect:/login";
         } catch (Exepcion ex) {
             redirectAttributes.addFlashAttribute("error",ex.getMessage());
-            return "redirect:/proveedor";
+            return "redirect:/proveedor/registro";
         }
     }
 
     @GetMapping("/modificar/{id}")
     public String modificarProveedorForm (@PathVariable String id, ModelMap model){
         model.put("proveedor",proveedorServicio.getOne(id));
+        model.addAttribute("oficiosList",oficioServicio.listarTodos());
         return "modificarProveedor.html";
     }
 
@@ -51,14 +54,13 @@ public class ProveedorControlador {
         try {
             proveedorServicio.modificarByID(id, nombre, apellido, email, telefono, password, password2, imagen, oficios);
             model.put("exito","El proveedor se modifico con exito!");
-            return "usuario.html";
+            return "usuarios.html";
 
         }catch (Exepcion e){
+            model.put("proveedor",proveedorServicio.getOne(id));
             model.put("error",e.getMessage());
             return"modificarProveedor.html";
-
         }
-
     }
 
     @GetMapping("/eliminar/{id}")
