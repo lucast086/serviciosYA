@@ -34,7 +34,7 @@ public class ClienteControlador {
             return "redirect:/login";
         } catch (Exepcion ex) {
             redirectAttributes.addFlashAttribute("error", ex.getMessage());
-            return "redirect:/cliente";
+            return "redirect:/cliente/registro";
         }
     }
 
@@ -50,10 +50,10 @@ public class ClienteControlador {
         try {
             clienteServicio.modificarById(id,nombre,apellido,email,telefono,direccion,password,password2);
             model.put("exito","Usuario modificado con exito!");
-            return "redirect:../listar";
+            return "usuarios.html";
 
         }catch (Exepcion ex){
-
+            model.put("cliente",clienteServicio.getOne(id));
             model.put("error",ex.getMessage());
             return "modificarCliente.html";
 
