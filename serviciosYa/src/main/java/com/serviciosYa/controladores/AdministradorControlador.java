@@ -23,7 +23,6 @@ public class AdministradorControlador {
 
     IAdministradorServicio administradorServicio;
 
-
     @GetMapping("/generar")
     public String generarAdmin(ModelMap model){
         try {
