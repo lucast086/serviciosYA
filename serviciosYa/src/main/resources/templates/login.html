@@ -26,6 +26,7 @@
 
     <div th:replace="/templates.fragments/msgExitoError :: div"></div>
 
+    <section class="seccion form">
     <form class="formulario" method="POST" th:action="@{/logincheck}">
         <h1>Iniciar Sesión</h1>
         <div class="contenedor">
@@ -44,6 +45,6 @@
         <p>No tienes cuenta? Unete a nosotros.<a class="link" href="/registrar">Regístrate</a></p>
         </div>
     </form>
-
+    </section>
 </body>
 </html>

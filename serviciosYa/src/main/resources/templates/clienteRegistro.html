@@ -24,56 +24,61 @@
 
     <div th:replace="/templates.fragments/msgExitoError :: div"></div>
 
-    <form action="/cliente/registro" method="POST" class="formulario">
-      <h1>Regístrate</h1>
-      <div class="contenedor">
-        <div class="input contenedor">
-          <i class="fa-solid fa-user icon"></i>
-          <input type="text" name="nombre" placeholder="Nombre" />
-        </div>
+    <section class="seccion form">
+      <form action="/cliente/registro" method="POST" class="formulario">
+        <h1>Regístrate</h1>
+        <div class="contenedor">
+          <div class="input contenedor">
+            <i class="fa-solid fa-user icon"></i>
+            <input type="text" name="nombre" placeholder="Nombre" />
+          </div>
 
-        <div class="input contenedor">
-          <i class="fa-solid fa-user icon"></i>
-          <input type="text" name="apellido" placeholder="Apellido" />
-        </div>
+          <div class="input contenedor">
+            <i class="fa-solid fa-user icon"></i>
+            <input type="text" name="apellido" placeholder="Apellido" />
+          </div>
 
-        <div class="input contenedor">
-          <i class="fa-solid fa-envelope icon"></i>
-          <input type="text" name="email" placeholder="Correo Electrónico" />
-        </div>
+          <div class="input contenedor">
+            <i class="fa-solid fa-envelope icon"></i>
+            <input type="text" name="email" placeholder="Correo Electrónico" />
+          </div>
 
-        <div class="input contenedor">
-          <i class="fa-solid fa-phone icon"></i>
-          <input type="text" name="telefono" placeholder="Teléfono" />
-        </div>
+          <div class="input contenedor">
+            <i class="fa-solid fa-phone icon"></i>
+            <input type="text" name="telefono" placeholder="Teléfono" />
+          </div>
 
-        <div class="input contenedor">
-          <i class="fa-solid fa-house icon"></i>
-          <input type="text" name="direccion" placeholder="Dirección" />
-        </div>
+          <div class="input contenedor">
+            <i class="fa-solid fa-house icon"></i>
+            <input type="text" name="direccion" placeholder="Dirección" />
+          </div>
 
-        <div class="input contenedor">
-          <i class="fa-solid fa-key icon"></i>
-          <input type="password" name="password"  placeholder="Contraseña" />
-        </div>
+          <div class="input contenedor">
+            <i class="fa-solid fa-key icon"></i>
+            <input type="password" name="password"  placeholder="Contraseña" />
+          </div>
 
-        <div class="input contenedor">
-          <i class="fa-solid fa-key icon"></i>
-          <input type="password" name="password2" placeholder="Confirmar Contraseña" />
-        </div>
-        <input type="submit" value="Regístrate" class="button" />
-        <p>
-          Al registrarte aceptas nuestras Condiciones de uso y nuestra Política
-          de privacidad.
-        </p>
-        <p>
-          Ya tienes una cuenta?<a class="link" href="/login"
-            >Iniciar Sesión</a
+          <p class="p">(La contraseña debe tener minimo 8 caracteres)</p>
+
+          <div class="input contenedor">
+            <i class="fa-solid fa-key icon"></i>
+            <input type="password" name="password2" placeholder="Confirmar Contraseña" />
+          </div>
+          <input type="submit" value="Regístrate" class="button" />
+          <p>
+            Al registrarte aceptas nuestras Condiciones de uso y nuestra Política
+            de privacidad.
+          </p>
+          <p>
+            Ya tienes una cuenta?<a class="link" href="/login"
+          >Iniciar Sesión</a
           >
-        </p>
-      </div>
+          </p>
+        </div>
 
-    </form>
+      </form>
+    </section>
+
 
   </body>
 </html>
