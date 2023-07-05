@@ -27,22 +27,22 @@
         </form>
     </div>
     <div sec:authorize="hasRole('ADMIN')" class="cajas">
-        <form action="/comentario/lista" method="get">
+        <form action="/comentario/listar" method="get">
             <button class="caja" id="caja3">
                 <div class="contenido">Tabla <br> Comentarios</div>
             </button>
         </form>
-        <form action="/cliente/lista" method="get">
+        <form action="/cliente/listar" method="get">
             <button class="caja" id="caja4">
                 <div class="contenido">Tabla <br> Clientes</div>
             </button>
         </form>
-        <form action="/proveedor/lista" method="get">
+        <form action="/proveedor/listar" method="get">
             <button class="caja" id="caja5">
                 <div class="contenido">Tabla <br> Proveedores</div>
             </button>
         </form>
-        <form action="/oficio/crear" method="get">
+        <form action="/oficio/registro" method="get">
             <button class="caja" id="caja6">
                 <div class="contenido">Nuevo <br> Oficio</div>
             </button>

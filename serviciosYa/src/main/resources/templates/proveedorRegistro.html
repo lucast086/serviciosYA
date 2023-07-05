@@ -26,6 +26,7 @@
 
     <div th:replace="/templates.fragments/msgExitoError :: div"></div>
 
+    <section class="seccion form">
     <form action="/proveedor/registro" method="post" enctype="multipart/form-data" class="formulario">
       <h1>Registrate!</h1>
       <div class="contenedor">
@@ -121,7 +122,7 @@
           <i class="fa-solid fa-key icon"></i>
           <input type="password" name="password" placeholder="Contraseña" />
         </div>
-
+        <p class="p">(La contraseña debe tener minimo 8 caracteres)</p>
         <div class="input contenedor">
           <i class="fa-solid fa-key icon"></i>
           <input type="password" name="password2" placeholder="Confirmar Contraseña" />
@@ -137,7 +138,7 @@
         </p>
       </div>
     </form>
-
+    </section>
     </div>
 
   </body>

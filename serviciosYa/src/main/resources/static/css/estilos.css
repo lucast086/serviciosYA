@@ -98,6 +98,15 @@ body {
 * {
     box-sizing:border-box;
 }
+.seccion {
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 5em;
+  }
 .contenedor{
     width: 100%;
     padding: 7px;
@@ -105,7 +114,6 @@ body {
  
 .formulario{
     background: rgba(255, 255, 255, 60%);
-    margin-top: 150px;
     padding: 15px;
     width: 100px;
 }
@@ -146,6 +154,9 @@ input[type="password"]{
 p{
     text-align: center;
 }
+p.p {
+    margin-left: 25px;
+}
 .link{
     text-decoration: none;
     color: #1a2537;
@@ -159,7 +170,6 @@ p{
   .formulario{
     margin: auto;
     width: 500px;
-    margin-top: 150px;
     border-radius: 2%;
   }  
 }
