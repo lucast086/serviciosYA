@@ -8,6 +8,7 @@
 
 <div th:replace="/templates.fragments/msgExitoError :: div"></div>
 
+<section class="seccion form">
 <form th:action="@{/proveedor/modificar/__${session.usuarioSesion.id}__}" method="post" enctype="multipart/form-data" class="formulario">
   <input hidden th:value="${id}" name="id">
   <h1>Modificar Perfil</h1>
@@ -101,6 +102,8 @@
       <input type="password" name="password" placeholder="Contraseña" />
     </div>
 
+    <p class="p">(La contraseña debe tener minimo 8 caracteres)</p>
+
     <div class="input contenedor">
       <i class="fa-solid fa-key icon"></i>
       <input type="password" name="password2" placeholder="Confirmar Contraseña" />
@@ -108,7 +111,7 @@
     <input type="submit" value="Modificar" class="button" />
   </div>
 </form>
-
+</section>
 </div>
 
 </body>

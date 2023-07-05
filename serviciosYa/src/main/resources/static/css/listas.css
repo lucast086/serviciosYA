@@ -184,6 +184,10 @@ body {
   color: #f4a261;
 }
 
+.tabla{
+min-height: 80vh;
+}
+
 .footer {
   width: 100%;
   min-height: 5em;
