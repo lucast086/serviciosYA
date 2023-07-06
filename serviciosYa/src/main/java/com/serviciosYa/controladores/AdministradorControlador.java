@@ -23,7 +23,6 @@ public class AdministradorControlador {
 
     IAdministradorServicio administradorServicio;
 
-
     @GetMapping("/generar")
     public String generarAdmin(ModelMap model){
         try {
@@ -72,6 +71,7 @@ public class AdministradorControlador {
 
             return "redirect:../listar";
         }catch (Exepcion ex){
+            model.put("admin", administradorServicio.getOne(id));
             model.put("error", ex.getMessage());
             return "admin_modificar.html";
         }
