@@ -39,9 +39,9 @@ public class SolicitudControlador {
     }
 
     @PostMapping("/registrosolicitud")
-    public String registrarSolicitud(RedirectAttributes redirectAttributes, @RequestParam Cliente cliente, @RequestParam String idProveedor, @RequestParam String descripcion, @RequestParam Estado estado, @RequestParam float costo, @RequestParam String comentario, @RequestParam Date fechaServicio, ModelMap modelo) {
+    public String registrarSolicitud(RedirectAttributes redirectAttributes, @RequestParam Cliente cliente, @RequestParam Proveedor proveedor, @RequestParam String descripcion, @RequestParam Estado estado, @RequestParam float costo, @RequestParam String comentario, @RequestParam Date fechaServicio, ModelMap modelo) {
         try {
-            solicitudServicio.crearSolicitud(cliente, idProveedor, descripcion, estado, costo, comentario, fechaServicio);
+            solicitudServicio.crearSolicitud(cliente, proveedor, descripcion, estado, costo, comentario, fechaServicio);
             redirectAttributes.addFlashAttribute("exito", "Solicitud registrada correctamente!");
             return "cliente.html";
         } catch (Exepcion ex) {
@@ -74,13 +74,13 @@ public class SolicitudControlador {
     }
 
     @PostMapping("/modificar/{id}")
-    public String modificarSolicitud(@PathVariable String id, @RequestParam Cliente cliente, @RequestParam String idProveedor, @RequestParam String descripcion, @RequestParam Estado estado, @RequestParam float costo, @RequestParam String comentario, @RequestParam Date fechaServicio, ModelMap modelo) {
+    public String modificarSolicitud(@PathVariable String id, @RequestParam Cliente cliente, @RequestParam Proveedor proveedor, @RequestParam String descripcion, @RequestParam Estado estado, @RequestParam float costo, @RequestParam String comentario, @RequestParam Date fechaServicio, ModelMap modelo) {
 
         try {
             List<Proveedor> proveedores = proveedorServicio.listarProveedores();
             modelo.addAttribute("proveedores", proveedores);
 
-            solicitudServicio.modificarById(id, cliente, idProveedor, descripcion, estado, costo, comentario, fechaServicio);
+            solicitudServicio.modificarById(id, cliente, proveedor, descripcion, estado, costo, comentario, fechaServicio);
             modelo.put("exito", "La solicitud se modifico con exito!");
 
             return "redirect:../listar";

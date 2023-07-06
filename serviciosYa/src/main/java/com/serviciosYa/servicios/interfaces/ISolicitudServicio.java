@@ -12,8 +12,8 @@ import java.util.List;
 
 public interface ISolicitudServicio {
 
-    void crearSolicitud ( Cliente cliente, String idProveedor, String descripcion, Estado estado, float costo, String Comentario, Date fechaServicio) throws Exepcion;
-    void modificarById (String id,Cliente cliente,String idProveedor, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio ) throws Exepcion;
+    void crearSolicitud ( Cliente cliente, Proveedor proveedor, String descripcion, Estado estado, float costo, String Comentario, Date fechaServicio) throws Exepcion;
+    void modificarById (String id,Cliente cliente,Proveedor proveedor, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio ) throws Exepcion;
 
     Solicitud buscarByID(String id)throws Exepcion;
     void eliminarById (String id) throws Exepcion;

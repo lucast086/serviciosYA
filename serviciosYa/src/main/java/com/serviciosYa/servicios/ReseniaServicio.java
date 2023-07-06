@@ -41,7 +41,6 @@ public class ReseniaServicio implements IReseniaServicio {
         reseniaRepositorio.save(resenia);
 
         return resenia;
-
     }
     @Transactional
     public void eliminarById (String id) throws Exepcion {

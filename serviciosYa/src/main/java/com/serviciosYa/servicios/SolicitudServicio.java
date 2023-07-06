@@ -25,12 +25,12 @@ public class SolicitudServicio implements ISolicitudServicio {
     IProveedorServicio proveedorServicio;
 
     @Override
-    public void crearSolicitud(Cliente cliente, String idProveedor, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio)throws Exepcion{
+    public void crearSolicitud(Cliente cliente, Proveedor proveedor, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio)throws Exepcion{
 
-     //   validar (cliente,idProveedor,descripcion,estado,costo,fechaServicio);
+       validar (cliente,proveedor,descripcion,estado,costo,fechaServicio);
 
         Solicitud solicitud = new Solicitud();
-        Proveedor proveedor = proveedorServicio.getOne(idProveedor);
+      //  Proveedor proveedor = proveedorServicio.getOne(idProveedor);
 
         solicitud.setCliente(cliente);
         solicitud.setProveedor(proveedor);
@@ -43,12 +43,12 @@ public class SolicitudServicio implements ISolicitudServicio {
         solicitudRepositorio.save(solicitud);
     }
     @Transactional
-    public void modificarById (String id, Cliente cliente,String idProveedor, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio) throws Exepcion {
+    public void modificarById (String id, Cliente cliente,Proveedor proveedor, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio) throws Exepcion {
 
         Solicitud solicitud =buscarByID(id);
-        Proveedor proveedor = proveedorServicio.getOne(idProveedor);
+    //  Proveedor proveedor = proveedorServicio.getOne(idProveedor);
 
-        validar (cliente,idProveedor,descripcion,estado,costo,fechaServicio);
+       validar (cliente,proveedor,descripcion,estado,costo,fechaServicio);
 
         solicitud.setId(id);
         solicitud.setCliente(cliente);
@@ -81,15 +81,18 @@ public class SolicitudServicio implements ISolicitudServicio {
     public List<Solicitud> listarSolicitudes (){
         return new ArrayList<>(solicitudRepositorio.findAll());
     }
-    private void validar (Cliente cliente, String idProveedor, String descripcion, Estado estado, float costo, Date fechaServicio) throws Exepcion{
+    private void validar (Cliente cliente,Proveedor proveedor, String descripcion, Estado estado, float costo, Date fechaServicio) throws Exepcion{
 
         if(cliente == null){
             throw new Exepcion("La celda cliente esta vacia");
         }
-
-        if (idProveedor == null){
+        if(proveedor == null){
             throw new Exepcion("La celda proveedor esta vacia");
         }
+
+      /*  if (idProveedor == null){
+            throw new Exepcion("La celda proveedor esta vacia");
+        }*/
 
         if (descripcion.isEmpty()){
             throw new Exepcion("La descripcion esta vacia ");
