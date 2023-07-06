@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"></html>
+<html>
+<head>
+  <title>Perfil de Usuario-Cliente</title>
+  <link rel="stylesheet" type="text/css" href="perfiles.css">
+</head>
+<body>
+    <header>
+        <header class="header">
+          <a href="/" class="logo">
+            <img
+                    src="apple-touch-icon.png"
+                    alt="logo de la compañia"
+                    class="logo-img"
+                    />
+          </a>
+          <nav class="nav">
+            <ul class="ul">
+              <li class="li"><a href="/" title="inicio" class="a">Inicio</a></li>
+            </ul>
+          </nav>
+        </header>
+    </header>
+  <div class="profile">
+    <div class="profile-header">
+      <img src="equipo-trabajadores-construccion_102811-22.jpg" alt="Foto de Perfil" class="foto">
+      <h1>Nombre Apellido</h1>
+    </div>
+    <div class="profile-detalles">
+      <p><span class="label">Correo Electrónico:</span> correo@example.com</p>
+      <p><span class="label">Teléfono:</span> 1234567890.</p>
+      <p><span class="label">Dirección:</span> Ciudad, País.</p>
+      <p><span class="label">Oficios:</span> Gasista, Electricista.</p>
+    </div>
+    <a href="modificarProveedor.html" class="boton">Modificar Perfil</a>
+  </div>
+</body>
+</html>
