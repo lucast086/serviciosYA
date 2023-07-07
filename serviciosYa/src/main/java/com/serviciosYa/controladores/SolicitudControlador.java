@@ -39,9 +39,9 @@ public class SolicitudControlador {
     }
 
     @PostMapping("/registrosolicitud")
-    public String registrarSolicitud(RedirectAttributes redirectAttributes, @RequestParam Cliente cliente, @RequestParam Proveedor proveedor, @RequestParam String descripcion, @RequestParam Estado estado, @RequestParam float costo, @RequestParam String comentario, @RequestParam Date fechaServicio, ModelMap modelo) {
+    public String registrarSolicitud(RedirectAttributes redirectAttributes, @RequestParam String idCliente, @RequestParam String idProveedor, @RequestParam String descripcion, @RequestParam Estado estado, @RequestParam float costo, @RequestParam String comentario, @RequestParam Date fechaServicio, ModelMap modelo) {
         try {
-            solicitudServicio.crearSolicitud(cliente, proveedor, descripcion, estado, costo, comentario, fechaServicio);
+            solicitudServicio.crearSolicitud(idCliente, idProveedor, descripcion, estado, costo, comentario, fechaServicio);
             redirectAttributes.addFlashAttribute("exito", "Solicitud registrada correctamente!");
             return "cliente.html";
         } catch (Exepcion ex) {

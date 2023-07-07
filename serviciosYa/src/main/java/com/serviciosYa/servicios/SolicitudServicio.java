@@ -6,6 +6,7 @@ import com.serviciosYa.entidades.Solicitud;
 import com.serviciosYa.enums.Estado;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.SolicitudRepositorio;
+import com.serviciosYa.servicios.interfaces.IClienteServicio;
 import com.serviciosYa.servicios.interfaces.IProveedorServicio;
 import com.serviciosYa.servicios.interfaces.ISolicitudServicio;
 import lombok.AllArgsConstructor;
@@ -23,14 +24,17 @@ public class SolicitudServicio implements ISolicitudServicio {
 
     SolicitudRepositorio  solicitudRepositorio;
     IProveedorServicio proveedorServicio;
+    IClienteServicio clienteServicio;
 
     @Override
-    public void crearSolicitud(Cliente cliente, Proveedor proveedor, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio)throws Exepcion{
+    public void crearSolicitud(String idCliente, String idProveedor, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio)throws Exepcion{
 
-       validar (cliente,proveedor,descripcion,estado,costo,fechaServicio);
 
         Solicitud solicitud = new Solicitud();
-      //  Proveedor proveedor = proveedorServicio.getOne(idProveedor);
+        Proveedor proveedor = proveedorServicio.getOne(idProveedor);
+        Cliente cliente = clienteServicio.getOne(idCliente);
+
+        validar (cliente,proveedor,descripcion,estado,costo,fechaServicio);
 
         solicitud.setCliente(cliente);
         solicitud.setProveedor(proveedor);
@@ -46,7 +50,6 @@ public class SolicitudServicio implements ISolicitudServicio {
     public void modificarById (String id, Cliente cliente,Proveedor proveedor, String descripcion, Estado estado, float costo, String comentario, Date fechaServicio) throws Exepcion {
 
         Solicitud solicitud =buscarByID(id);
-    //  Proveedor proveedor = proveedorServicio.getOne(idProveedor);
 
        validar (cliente,proveedor,descripcion,estado,costo,fechaServicio);
 
@@ -89,10 +92,6 @@ public class SolicitudServicio implements ISolicitudServicio {
         if(proveedor == null){
             throw new Exepcion("La celda proveedor esta vacia");
         }
-
-      /*  if (idProveedor == null){
-            throw new Exepcion("La celda proveedor esta vacia");
-        }*/
 
         if (descripcion.isEmpty()){
             throw new Exepcion("La descripcion esta vacia ");

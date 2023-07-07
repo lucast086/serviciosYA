@@ -1,6 +1,7 @@
 package com.serviciosYa.controladores;
 
 import com.serviciosYa.entidades.Cliente;
+import com.serviciosYa.entidades.Solicitud;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.interfaces.IClienteServicio;
@@ -27,14 +28,14 @@ public class ClienteControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre,@RequestParam String apellido,@RequestParam String direccion,@RequestParam String email,@RequestParam String telefono,@RequestParam String password,@RequestParam String password2, ModelMap modelo) {
+    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre,@RequestParam String apellido,@RequestParam String direccion,@RequestParam String email,@RequestParam String telefono,@RequestParam String password,@RequestParam String password2, @RequestParam List<Solicitud> solicitudes, ModelMap modelo) {
         try {
-            clienteServicio.crear(nombre,apellido,direccion,email,telefono,password,password2,Rol.USER);
+            clienteServicio.crear(nombre,apellido,direccion,email,telefono,password,password2,Rol.USER, solicitudes);
             redirectAttributes.addFlashAttribute("exito", "Cliente registrado correctamente!");
             return "redirect:/login";
         } catch (Exepcion ex) {
             redirectAttributes.addFlashAttribute("error", ex.getMessage());
-            return "redirect:/cliente";
+            return "redirect:/cliente/registro";
         }
     }
 
@@ -45,15 +46,15 @@ public class ClienteControlador {
     }
 
     @PostMapping("/modificar/{id}")
-    public String modificarCliente (@PathVariable String id,@RequestParam String nombre,@RequestParam String apellido, @RequestParam String direccion,@RequestParam String email,@RequestParam String telefono, @RequestParam String password, @RequestParam String password2, ModelMap model){
+    public String modificarCliente (@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String direccion, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam List<Solicitud> solicitudes, ModelMap model){
 
         try {
-            clienteServicio.modificarById(id,nombre,apellido,email,telefono,direccion,password,password2);
+            clienteServicio.modificarById(id,nombre,apellido,email,telefono,direccion,password,password2,solicitudes);
             model.put("exito","Usuario modificado con exito!");
-            return "redirect:../listar";
+            return "usuarios.html";
 
         }catch (Exepcion ex){
-
+            model.put("cliente",clienteServicio.getOne(id));
             model.put("error",ex.getMessage());
             return "cliente_modificar.html";
 

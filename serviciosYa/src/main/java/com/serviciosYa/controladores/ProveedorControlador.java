@@ -3,8 +3,10 @@ package com.serviciosYa.controladores;
 import com.serviciosYa.entidades.Imagen;
 import com.serviciosYa.entidades.Oficio;
 import com.serviciosYa.entidades.Proveedor;
+import com.serviciosYa.entidades.Solicitud;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
+import com.serviciosYa.servicios.interfaces.IOficioServicio;
 import com.serviciosYa.servicios.interfaces.IProveedorServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.expression.spel.ast.OpDivide;
@@ -21,6 +23,7 @@ import java.util.List;
 public class ProveedorControlador {
 
     IProveedorServicio proveedorServicio;
+    IOficioServicio oficioServicio;
 
     @GetMapping("/registro")
     public String registrarProveedor(){
@@ -28,41 +31,41 @@ public class ProveedorControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, @RequestParam(value ="oficios", required = false) List<Oficio> oficios, ModelMap modelo) {
+    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, @RequestParam(value ="oficios", required = false) List<Oficio> oficios,List<Solicitud> solicitudes, ModelMap modelo) {
         try {
-            proveedorServicio.crear(nombre,apellido,email,telefono,password,password2,imagen,oficios, Rol.PROVEEDOR);
+            proveedorServicio.crear(nombre,apellido,email,telefono,password,password2,imagen,oficios, Rol.PROVEEDOR, solicitudes);
             redirectAttributes.addFlashAttribute("exito", "Proveedor registrado correctamente!");
             return "redirect:/login";
         } catch (Exepcion ex) {
             redirectAttributes.addFlashAttribute("error",ex.getMessage());
-            return "redirect:/proveedor";
+            return "redirect:/proveedor/registro";
         }
     }
 
     @GetMapping("/modificar/{id}")
     public String modificarProveedorForm (@PathVariable String id, ModelMap model){
         model.put("proveedor",proveedorServicio.getOne(id));
+        model.addAttribute("oficiosList",oficioServicio.listarTodos());
         return "modificarProveedor.html";
     }
 
     @PostMapping("/modificar/{id}")
-    public String modificarProveedor (@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, @RequestParam (value = "oficios",required = false)List<Oficio> oficios, ModelMap model){
+    public String modificarProveedor (@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, @RequestParam (value = "oficios",required = false)List<Oficio> oficios, List<Solicitud> solicitudes, ModelMap model){
 
         try {
-            proveedorServicio.modificarByID(id, nombre, apellido, email, telefono, password, password2, imagen, oficios);
+            proveedorServicio.modificarByID(id, nombre, apellido, email, telefono, password, password2, imagen, oficios, solicitudes);
             model.put("exito","El proveedor se modifico con exito!");
-            return "usuario.html";
+            return "usuarios.html";
 
         }catch (Exepcion e){
+            model.put("proveedor",proveedorServicio.getOne(id));
             model.put("error",e.getMessage());
             return"modificarProveedor.html";
-
         }
-
     }
 
     @GetMapping("/eliminar/{id}")
-    public String eliminrProveedorForm(@PathVariable String id, ModelMap model){
+    public String eliminarProveedorForm(@PathVariable String id, ModelMap model){
         model.put("proveedor",proveedorServicio.getOne(id));
         return "proveedor_eleminar.html";
     }

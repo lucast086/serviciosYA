@@ -1,6 +1,7 @@
 package com.serviciosYa.servicios;
 
 import com.serviciosYa.entidades.Cliente;
+import com.serviciosYa.entidades.Solicitud;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.ClienteRepositorio;
@@ -20,7 +21,7 @@ public class ClienteServicio implements IClienteServicio {
 
     private ClienteRepositorio clienteRepositorio;
     @Transactional
-    public void crear(String nombre, String apellido,String direccion, String email, String telefono, String password,String password2,Rol rol) throws Exepcion {
+    public void crear(String nombre, String apellido,String direccion, String email, String telefono, String password,String password2,Rol rol, List<Solicitud> solicitudes) throws Exepcion {
 
         validar(nombre,apellido,email,direccion,telefono,password);
         validarPasswords(password,password2);
@@ -37,11 +38,12 @@ public class ClienteServicio implements IClienteServicio {
         );
         cliente.setRol(rol);
         cliente.setActivo(true);
+        cliente.setSolicitudes(solicitudes);
         clienteRepositorio.save(cliente);
     }
 
     @Transactional
-    public void modificarById (String id,String nombre, String apellido,String direccion, String email, String telefono, String password,String password2) throws Exepcion {
+    public void modificarById (String id,String nombre, String apellido,String direccion, String email, String telefono, String password,String password2, List<Solicitud> solicitudes) throws Exepcion {
 
         Cliente cliente = buscarByID(id);
 
@@ -53,6 +55,7 @@ public class ClienteServicio implements IClienteServicio {
         cliente.setEmail(email);
         cliente.setTelefono(telefono);
         cliente.setDireccion(direccion);
+        cliente.setSolicitudes(solicitudes);
         clienteRepositorio.save(cliente);
 
     }

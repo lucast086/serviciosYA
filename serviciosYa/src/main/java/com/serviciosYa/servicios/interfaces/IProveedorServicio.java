@@ -1,9 +1,6 @@
 package com.serviciosYa.servicios.interfaces;
 
-import com.serviciosYa.entidades.Cliente;
-import com.serviciosYa.entidades.Oficio;
-import com.serviciosYa.entidades.Proveedor;
-import com.serviciosYa.entidades.Usuario;
+import com.serviciosYa.entidades.*;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,9 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IProveedorServicio {
-    void crear(String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios, Rol rol) throws Exepcion;
+    void crear(String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios, Rol rol,List<Solicitud> solicitudes) throws Exepcion;
 
-    void modificarByID(String id,String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios) throws Exepcion;
+    void modificarByID(String id,String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios, List<Solicitud> solicitudes) throws Exepcion;
 
     Proveedor buscarByID(String id) throws Exepcion;
 

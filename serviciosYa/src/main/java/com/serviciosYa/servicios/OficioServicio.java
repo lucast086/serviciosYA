@@ -18,14 +18,16 @@ public class OficioServicio implements IOficioServicio {
     private OficioRepositorio oficioRepositorio;
 
     @Transactional
-    public void crearOficio(String nombre, String descrpcion) throws Exepcion {
+    public void crearOficio(String nombre, String descrpcion, String codigo, String color) throws Exepcion {
 
-        validar(nombre,descrpcion);
+        validar(nombre, descrpcion, codigo, color);
 
         Oficio oficio = new Oficio();
 
         oficio.setNombre(nombre);
         oficio.setDescripcion(descrpcion);
+        oficio.setCodigoIcono(codigo);
+        oficio.setColorTarjeta(color);
 
         oficioRepositorio.save(oficio);
 
@@ -38,13 +40,15 @@ public class OficioServicio implements IOficioServicio {
     }
 
     @Transactional
-    public void modificarById(String id, String nombre, String descripcion) throws Exepcion {
+    public void modificarById(String id, String nombre, String descripcion, String codigo, String color) throws Exepcion {
         Oficio oficio = buscarById(id);
 
-        validar(nombre,descripcion);
+        validar(nombre,descripcion,codigo,color);
 
         oficio.setNombre(nombre);
         oficio.setDescripcion(descripcion);
+        oficio.setCodigoIcono(codigo);
+        oficio.setColorTarjeta(color);
 
         oficioRepositorio.save(oficio);
 
@@ -69,13 +73,19 @@ public class OficioServicio implements IOficioServicio {
         return oficioRepositorio.getReferenceById(id);
     }
 
-    private void validar (String nombre, String descripcion) throws Exepcion {
-    if (nombre.isEmpty()){
-        throw new Exepcion("La celda del nombre esta vacia");
-    }
-    if (descripcion.isEmpty()){
-        throw new Exepcion("La celda del descripcion esta vacia");
-    }
+    private void validar (String nombre, String descripcion, String codigo, String color) throws Exepcion {
+
+        if (codigo.isEmpty()){
+            throw new Exepcion("La celda del codigo esta vacia");
+        }    if (color.isEmpty()){
+            throw new Exepcion("La celda del color esta vacia");
+        }
+        if (nombre.isEmpty()){
+            throw new Exepcion("La celda del nombre esta vacia");
+        }
+        if (descripcion.isEmpty()){
+            throw new Exepcion("La celda del descripcion esta vacia");
+        }
     }
 }
 

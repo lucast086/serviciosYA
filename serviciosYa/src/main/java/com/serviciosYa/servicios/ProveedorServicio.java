@@ -3,6 +3,7 @@ package com.serviciosYa.servicios;
 import com.serviciosYa.entidades.Imagen;
 import com.serviciosYa.entidades.Oficio;
 import com.serviciosYa.entidades.Proveedor;
+import com.serviciosYa.entidades.Solicitud;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.ProveedorRepositorio;
@@ -25,7 +26,7 @@ public class ProveedorServicio implements IProveedorServicio {
     ImagenServicio imagenServicio;
 
     @Override
-    public void crear(String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios, Rol rol) throws Exepcion {
+    public void crear(String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios, Rol rol,List<Solicitud> solicitudes) throws Exepcion {
 
         validar(nombre,apellido,email,oficios,telefono,password);
         validarPasswords(password,password2);
@@ -46,11 +47,13 @@ public class ProveedorServicio implements IProveedorServicio {
         proveedor.setImagen(imagen1);
         proveedor.setRol(rol);
         proveedor.setActivo(true);
+        proveedor.setSolicitudes(solicitudes);
+
         proveedorRepositorio.save(proveedor);
     }
 
     @Override
-    public void modificarByID(String id, String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios) throws Exepcion {
+    public void modificarByID(String id, String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios,List<Solicitud> solicitudes) throws Exepcion {
 
         validar(nombre,apellido,email,oficios,telefono,password);
         validarPasswords(password,password2);
@@ -80,6 +83,7 @@ public class ProveedorServicio implements IProveedorServicio {
 
         proveedor.setImagen(imagen1);
         proveedor.setActivo(true);
+        proveedor.setSolicitudes(solicitudes);
         proveedorRepositorio.save(proveedor);
     }
 
