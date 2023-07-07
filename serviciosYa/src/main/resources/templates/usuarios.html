@@ -49,11 +49,17 @@
         </form>
     </div>
 
-    <form action="/oficio/registro" method="get">
-        <div class="cajas">
+    <div sec:authorize="hasRole('USER')" class="cajas">
+        <form action="/comentario/listar" method="get">
             <button th:each="oficio : ${oficiosList}" th:text="${oficio.nombre}" style="background-color: #264653" class="caja"></button>
-        </div>
-    </form>
+        </form>
+    </div>
+
+<!--    <form action="/oficio/registro" method="get">-->
+<!--        <div class="cajas">-->
+<!--            <button th:each="oficio : ${oficiosList}" th:text="${oficio.nombre}" style="background-color: #264653" class="caja"></button>-->
+<!--        </div>-->
+<!--    </form>-->
 
     <section sec:authorize="hasRole('USER')" class="seccion tarjetas">
     <div class="card">
