@@ -90,6 +90,13 @@ public class ProveedorControlador {
         return "listaProveedor.html";
     }
 
+    @GetMapping("/listar/{id}")
+    public String listarProveedorPorOficio(@PathVariable String id, ModelMap model){
+        List<Proveedor> proveedorList = proveedorServicio.listarProveedoresPorOficio(id);
+        model.addAttribute("proveedores",proveedorList);
+        return "listaOficioProveedor.html";
+    }
+
     @GetMapping("/{id}")
     public String getOne (@PathVariable String id, ModelMap model){
         model.put("proveedor",proveedorServicio.getOne(id));
