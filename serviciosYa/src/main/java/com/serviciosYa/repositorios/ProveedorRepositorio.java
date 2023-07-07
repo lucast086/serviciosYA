@@ -5,6 +5,7 @@ import com.serviciosYa.entidades.Proveedor;
 import com.serviciosYa.entidades.Solicitud;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,4 +22,8 @@ public interface ProveedorRepositorio extends JpaRepository<Proveedor,String> {
     static final String QUERY = "SELECT p FROM Proveedor p WHERE p.activo = TRUE";
     @Query(QUERY)
     List<Proveedor> listarTodosActivos();
+
+    static final String QUERY2 ="SELECT p FROM Proveedor p WHERE (SELECT o FROM Oficio o WHERE :oficioId = o.id) IN p.oficios";
+    @Query(QUERY2)
+    List<Proveedor> findAllByOficio(@Param("oficioId") String oficioId);
 }

@@ -47,13 +47,14 @@ public class UsuarioControlador {
 
         switch (rol) {
             case "PROVEEDOR" :
-                //  return  "redirect:/proveedor/dashboard";
+                  return  "redirect:/proveedor/dashboard";
             case "ADMIN" :
-                // return  "redirect:/admin/dashboard";
+                 return  "redirect:/admin/dashboard";
             case "SUPERADMIN" :
-                //  return  "redirect:/superadmin/dashboard";
+                  return  "redirect:/superadmin/dashboard";
+            case "USER" :
+                return  "redirect:/cliente/dashboard";
         }
-
         return "usuarios.html";
     }
 

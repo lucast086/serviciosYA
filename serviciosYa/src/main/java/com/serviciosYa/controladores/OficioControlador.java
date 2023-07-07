@@ -31,9 +31,9 @@ public class OficioControlador {
         try{
         oficioServicio.crearOficio(nombre,descripcion,codigo,color);
         redirectAttributes.addFlashAttribute("exito","Oficio registrado correctamente!");
-        return "redirect:/login";
+        return "redirect:/";
         } catch (Exepcion e) {
-            redirectAttributes.addFlashAttribute("error",e.getMessage());
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/oficio/registro";
         }
     }
