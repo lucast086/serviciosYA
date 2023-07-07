@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/templates.fragments/head :: head"></head>
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+
+<body>
+
+<header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
+
+<div th:replace="/templates.fragments/msgExitoError :: div"></div>
+<section class="seccion tarjetas">
+    <div class="card">
+        <img src="assets/fotuki 2.jpg" alt="Foto de perfil">
+        <div class="card-title">
+            <h2>Nombre del Prestador</h2>
+            <div class="card-text">
+                <p>Profesión</p>
+                <p>Calificacion</p>
+            </div>
+
+        </div>
+        <div class="button-container">
+            <button class="button">Perfil</button>
+            <button class="button">Solicitar</button>
+        </div>
+    </div>
+</section>
+</body>
+
+<footer th:replace="/templates.fragments/footer :: footer" class="footer"></footer>
+</body>
+</html>
