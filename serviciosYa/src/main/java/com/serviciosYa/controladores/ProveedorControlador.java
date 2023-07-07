@@ -25,7 +25,8 @@ public class ProveedorControlador {
     IOficioServicio oficioServicio;
 
     @GetMapping("/registro")
-    public String registrarProveedor(){
+    public String registrarProveedor(ModelMap model){
+        model.addAttribute("oficiosList",oficioServicio.listarTodos());
         return "proveedorRegistro.html";
     }
 
@@ -89,10 +90,17 @@ public class ProveedorControlador {
         return "listaProveedor.html";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/listar/{id}")
+    public String listarProveedorPorOficio(@PathVariable String id, ModelMap model){
+        List<Proveedor> proveedorList = proveedorServicio.listarProveedoresPorOficio(id);
+        model.addAttribute("proveedores",proveedorList);
+        return "tarjetas.html";
+    }
+
+    @GetMapping("/perfil/{id}")
     public String getOne (@PathVariable String id, ModelMap model){
         model.put("proveedor",proveedorServicio.getOne(id));
-        return "proveedor.html";
+        return "vista_perfil_proveedor.html";
     }
 }
 
