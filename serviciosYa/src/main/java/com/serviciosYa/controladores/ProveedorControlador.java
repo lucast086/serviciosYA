@@ -97,10 +97,10 @@ public class ProveedorControlador {
         return "listaOficioProveedor.html";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/perfil/{id}")
     public String getOne (@PathVariable String id, ModelMap model){
         model.put("proveedor",proveedorServicio.getOne(id));
-        return "proveedor.html";
+        return "vista_perfil_proveedor.html";
     }
 }
 

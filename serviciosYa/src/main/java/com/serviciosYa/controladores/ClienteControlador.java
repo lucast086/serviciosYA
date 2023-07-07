@@ -80,10 +80,10 @@ public class ClienteControlador {
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/perfil/{id}")
     public String getOne(@PathVariable String id, ModelMap model){
         model.put("cliente",clienteServicio.getOne(id));
-        return "cliente.html";
+        return "vista_perfil_cliente.html";
     }
 
     @GetMapping("/listar")
