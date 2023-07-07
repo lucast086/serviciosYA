@@ -25,7 +25,8 @@ public class ProveedorControlador {
     IOficioServicio oficioServicio;
 
     @GetMapping("/registro")
-    public String registrarProveedor(){
+    public String registrarProveedor(ModelMap model){
+        model.addAttribute("oficiosList",oficioServicio.listarTodos());
         return "proveedorRegistro.html";
     }
 
