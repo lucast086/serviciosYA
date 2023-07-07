@@ -1,17 +1,16 @@
 package com.serviciosYa.controladores;
 
 import com.serviciosYa.entidades.Cliente;
+import com.serviciosYa.entidades.Oficio;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.interfaces.IClienteServicio;
+import com.serviciosYa.servicios.interfaces.IOficioServicio;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.util.List;
 
 @Controller
@@ -20,6 +19,13 @@ import java.util.List;
 public class ClienteControlador {
 
     IClienteServicio clienteServicio;
+    IOficioServicio oficioServicio;
+    @GetMapping("/dashboard")
+    public String dashboard(ModelMap model) {
+        List<Oficio>oficioList=oficioServicio.listarTodos();
+        model.put("oficiosList",oficioList);
+        return "usuario.html";
+    }
 
     @GetMapping("/registro")
     public String registrarCliente(){
