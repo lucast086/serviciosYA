@@ -94,7 +94,7 @@ public class ProveedorControlador {
     public String listarProveedorPorOficio(@PathVariable String id, ModelMap model){
         List<Proveedor> proveedorList = proveedorServicio.listarProveedoresPorOficio(id);
         model.addAttribute("proveedores",proveedorList);
-        return "listaOficioProveedor.html";
+        return "tarjetas.html";
     }
 
     @GetMapping("/perfil/{id}")
