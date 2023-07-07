@@ -51,7 +51,7 @@
 
     <div sec:authorize="hasRole('USER')" class="cajas">
         <form action="/comentario/listar" method="get">
-            <button th:each="oficio : ${oficiosList}" th:text="${oficio.nombre}" style="background-color: #264653" class="caja"></button>
+            <button th:each="oficio : ${oficiosList}" th:text="${oficio.nombre}" th:style="background-color: ${oficio.colorTarjeta}" class="caja"></button><i class="${oficio.codigoIcono}" style="color: #ffffff;"></i>
         </form>
     </div>
 
