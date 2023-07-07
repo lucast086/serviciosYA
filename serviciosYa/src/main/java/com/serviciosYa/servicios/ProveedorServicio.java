@@ -121,6 +121,11 @@ public class ProveedorServicio implements IProveedorServicio {
         return new ArrayList<>(proveedorRepositorio.findAll());
     }
 
+    @Override
+    public List<Proveedor> listarProveedoresPorOficio(String oficioId) {
+        return new ArrayList<>(proveedorRepositorio.findAllByOficio(oficioId));
+    }
+
 
     private void validar (String nombre, String apellido, String email,List<Oficio> oficios, String telefono, String password) throws Exepcion{
 
