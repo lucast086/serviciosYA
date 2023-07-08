@@ -69,6 +69,11 @@ public class OficioServicio implements IOficioServicio {
         return oficioRepositorio.findAll();
     }
 
+    @Override
+    public List<Oficio> listarTodos(List<String> oficiosSeleccionados) {
+        return oficioRepositorio.listarTodos(oficiosSeleccionados);
+    }
+
     public Oficio getOne(String id){
         return oficioRepositorio.getReferenceById(id);
     }

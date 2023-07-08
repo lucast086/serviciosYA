@@ -8,6 +8,7 @@ import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.interfaces.IOficioServicio;
 import com.serviciosYa.servicios.interfaces.IProveedorServicio;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.expression.spel.ast.OpDivide;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
+@Slf4j
 @AllArgsConstructor
 @RequestMapping("/proveedor")
 public class ProveedorControlador {
@@ -31,8 +33,10 @@ public class ProveedorControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, @RequestParam(value ="oficios", required = false) List<Oficio> oficios, ModelMap modelo) {
+    public String registro(RedirectAttributes redirectAttributes,@RequestParam List<String> oficiosSeleccionados, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, ModelMap modelo) {
         try {
+
+            List<Oficio> oficios = oficioServicio.listarTodos(oficiosSeleccionados);
             proveedorServicio.crear(nombre,apellido,email,telefono,password,password2,imagen,oficios, Rol.PROVEEDOR);
             redirectAttributes.addFlashAttribute("exito", "Proveedor registrado correctamente!");
             return "redirect:/login";
@@ -93,6 +97,7 @@ public class ProveedorControlador {
     @GetMapping("/listar/{id}")
     public String listarProveedorPorOficio(@PathVariable String id, ModelMap model){
         List<Proveedor> proveedorList = proveedorServicio.listarProveedoresPorOficio(id);
+        //log.info(proveedorList.toString());
         model.addAttribute("proveedores",proveedorList);
         return "tarjetas.html";
     }

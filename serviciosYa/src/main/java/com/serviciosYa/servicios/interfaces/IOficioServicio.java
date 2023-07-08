@@ -13,6 +13,7 @@ public interface IOficioServicio {
     Oficio buscarById (String id) throws Exepcion;
     Oficio buscarByNombre (String nombre) throws Exepcion;
     List<Oficio> listarTodos();
+    List<Oficio> listarTodos(List<String> oficiosSeleccionados);
     Oficio getOne(String id);
 
 }

@@ -2,12 +2,9 @@ package com.serviciosYa.controladores;
 
 import com.serviciosYa.entidades.Oficio;
 import com.serviciosYa.exepcion.Exepcion;
-import com.serviciosYa.servicios.OficioServicio;
 import com.serviciosYa.servicios.interfaces.IOficioServicio;
 import lombok.AllArgsConstructor;
-import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -27,7 +24,8 @@ public class OficioControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String descripcion,@RequestParam String codigo, @RequestParam Boolean color, ModelMap model){
+
+    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String descripcion, @RequestParam String codigo, @RequestParam Boolean color, ModelMap model){
         try{
         oficioServicio.crearOficio(nombre,descripcion,codigo,color);
         redirectAttributes.addFlashAttribute("exito","Oficio registrado correctamente!");
