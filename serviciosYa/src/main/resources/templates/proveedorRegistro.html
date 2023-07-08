@@ -55,7 +55,7 @@
           <label for="servicio">Qué servicios va a ofrecer:</label>
           <div id="servicio" class="checkbox-container">
             <div th:each="oficio : ${oficiosList}">
-              <input th:id="${oficio.id}" type="checkbox" name="oficios" th:value="${oficio.id}" />
+              <input th:id="${oficio.id}" type="checkbox" name="oficiosSeleccionados" th:value="${oficio.id}" />
               <label th:for="${oficio.id}" th:text="${oficio.nombre}"></label>
             </div>
           </div>

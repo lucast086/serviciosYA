@@ -23,8 +23,8 @@ public class ClienteControlador {
     @GetMapping("/dashboard")
     public String dashboard(ModelMap model) {
         List<Oficio>oficioList=oficioServicio.listarTodos();
-        model.put("oficiosList",oficioList);
-        return "usuario.html";
+        model.addAttribute("oficiosList",oficioList);
+        return "usuarios.html";
     }
 
     @GetMapping("/registro")
