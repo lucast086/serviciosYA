@@ -27,7 +27,7 @@ public class OficioControlador {
     }
 
     @PostMapping("/registro")
-    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String descripcion,@RequestParam String codigo, @RequestParam String color, ModelMap model){
+    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String descripcion,@RequestParam String codigo, @RequestParam Boolean color, ModelMap model){
         try{
         oficioServicio.crearOficio(nombre,descripcion,codigo,color);
         redirectAttributes.addFlashAttribute("exito","Oficio registrado correctamente!");
@@ -46,7 +46,7 @@ public class OficioControlador {
     }
 
     @PostMapping("/modificar/{id}")
-    public String modificarOficio (@PathVariable String id,@RequestParam String nombre,@RequestParam String descripcion,@RequestParam String codigo,@RequestParam String color, ModelMap model){
+    public String modificarOficio (@PathVariable String id,@RequestParam String nombre,@RequestParam String descripcion,@RequestParam String codigo,@RequestParam Boolean color, ModelMap model){
         try{
             oficioServicio.modificarById(id, nombre, descripcion, codigo, color);
             model.put("exito", "El Oficio se modifico con exito");

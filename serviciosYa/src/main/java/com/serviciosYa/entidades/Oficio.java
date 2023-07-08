@@ -33,6 +33,6 @@ public class Oficio {
     private String codigoIcono;
 
     @Column(name = "color")
-    private String colorTarjeta;
+    private Boolean colorTarjeta;
 
 }
