@@ -406,8 +406,8 @@ body {
         }
       }
 .seccion.bienvenida .caja {
-    width: 13em;
-    height: 13em;
+    width: 11em;
+    height: 11em;
     margin: 2em;
     display: flex;
     flex-direction: column;
@@ -442,8 +442,8 @@ body {
     }
   }
   .seccion.bienvenida .caja:hover{
-    width: 15em;
-    height: 15em;
+    width: 13em;
+    height: 13em;
     border-radius: 50%;
     transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
       height 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55),
@@ -477,6 +477,15 @@ body {
     .contenido {
         line-height: 2;
     }
+
+  .caja1{
+    background-color: #264653;
+    color: var(--blanco);
+  }
+  .caja2{
+    background-color: #f4a261;
+    color: var(--negro);
+  }
 
 /* Estilos generales de formulario */
 .seccion .formulario {

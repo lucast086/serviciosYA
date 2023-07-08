@@ -18,7 +18,7 @@ public class OficioServicio implements IOficioServicio {
     private OficioRepositorio oficioRepositorio;
 
     @Transactional
-    public void crearOficio(String nombre, String descrpcion, String codigo, String color) throws Exepcion {
+    public void crearOficio(String nombre, String descrpcion, String codigo, Boolean color) throws Exepcion {
 
         validar(nombre, descrpcion, codigo, color);
 
@@ -40,7 +40,7 @@ public class OficioServicio implements IOficioServicio {
     }
 
     @Transactional
-    public void modificarById(String id, String nombre, String descripcion, String codigo, String color) throws Exepcion {
+    public void modificarById(String id, String nombre, String descripcion, String codigo, Boolean color) throws Exepcion {
         Oficio oficio = buscarById(id);
 
         validar(nombre,descripcion,codigo,color);
@@ -73,11 +73,11 @@ public class OficioServicio implements IOficioServicio {
         return oficioRepositorio.getReferenceById(id);
     }
 
-    private void validar (String nombre, String descripcion, String codigo, String color) throws Exepcion {
+    private void validar (String nombre, String descripcion, String codigo, Boolean color) throws Exepcion {
 
         if (codigo.isEmpty()){
             throw new Exepcion("La celda del codigo esta vacia");
-        }    if (color.isEmpty()){
+        }    if (color == null){
             throw new Exepcion("La celda del color esta vacia");
         }
         if (nombre.isEmpty()){

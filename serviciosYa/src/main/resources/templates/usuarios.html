@@ -50,36 +50,13 @@
     </div>
 
     <div sec:authorize="hasRole('USER')" class="cajas">
-        <form action="/comentario/listar" method="get">
-            <button th:each="oficio : ${oficiosList}" th:text="${oficio.nombre}" th:style="background-color: ${oficio.colorTarjeta}" class="caja"></button><i class="${oficio.codigoIcono}" style="color: #ffffff;"></i>
-        </form>
-    </div>
-
-<!--    <form action="/oficio/registro" method="get">-->
-<!--        <div class="cajas">-->
-<!--            <button th:each="oficio : ${oficiosList}" th:text="${oficio.nombre}" style="background-color: #264653" class="caja"></button>-->
-<!--        </div>-->
-<!--    </form>-->
-
-    <section sec:authorize="hasRole('USER')" class="seccion tarjetas">
-    <div class="card">
-        <img src="assets/fotuki2 .jpg" alt="Foto de perfil">
-        <div class="card-title">
-            <h2>Nombre del Prestador</h2>
-            <div class="card-text">
-                <p>Profesión</p>
-                <p>Calificacion</p>
-            </div>
-
+        <div th:each="oficio : ${oficiosList}">
+            <form th:action="@{/proveedor/listar/__${oficio.id}__}" method="get">
+                <button  th:text="${oficio.nombre}" th:classappend=" (${oficio.colorTarjeta}) ? 'caja1' : 'caja2'" th:value="${oficio.id}" th:onclick="" class="caja"></button>
+            </form>
         </div>
-        <div class="button-container">
-            <button class="button">Perfil</button>
-            <button class="button">Solicitar</button>
-        </div>
+
     </div>
-</section>
-
-
 
 </section>
 
