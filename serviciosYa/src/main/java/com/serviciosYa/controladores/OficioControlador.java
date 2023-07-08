@@ -24,6 +24,7 @@ public class OficioControlador {
     }
 
     @PostMapping("/registro")
+
     public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String descripcion, @RequestParam String codigo, @RequestParam Boolean color, ModelMap model){
         try{
         oficioServicio.crearOficio(nombre,descripcion,codigo,color);

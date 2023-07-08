@@ -2,6 +2,7 @@ package com.serviciosYa.controladores;
 
 import com.serviciosYa.entidades.Cliente;
 import com.serviciosYa.entidades.Oficio;
+import com.serviciosYa.entidades.Usuario;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.interfaces.IClienteServicio;
@@ -11,8 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import java.util.List;
 
+import javax.servlet.http.HttpSession;
+import java.util.List;
 @Controller
 @AllArgsConstructor
 @RequestMapping("/cliente")
