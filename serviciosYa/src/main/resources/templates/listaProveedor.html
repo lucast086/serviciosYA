@@ -30,10 +30,10 @@
                 <td  th:text="${Proveedor.apellido}"></td>
                 <td  th:text="${Proveedor.email}"></td>
                 <td>
-                    <a th:href="@{/proveedor/modificar/__${Proveedor.id}__}">Modificar</a>
+                    <a th:href="@{/proveedor/modificar/__${Proveedor.id}__}" class="modificara">Modificar</a>
                 </td>
                 <td>
-                    <a th:href="@{/proveedor/eliminar/__${Proveedor.id}__}">Eliminar</a>
+                    <a th:href="@{/proveedor/eliminar/__${Proveedor.id}__}" class="eliminara">Eliminar</a>
                 </td>
             </tr>
         </tbody>

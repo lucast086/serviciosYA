@@ -254,3 +254,9 @@ min-height: 80vh;
     transform: translateY(0%);
   }
 }
+.modificicara:hover {
+  color: blue
+}
+.eliminara:hover {
+  color: red
+}
