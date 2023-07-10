@@ -22,7 +22,6 @@ public interface ProveedorRepositorio extends JpaRepository<Proveedor,String> {
     @Query(QUERY)
     List<Proveedor> listarTodosActivos();
 
-    static final String QUERY2 ="SELECT p FROM Proveedor p WHERE (SELECT o FROM Oficio o WHERE :oficioId = o.id) IN p.oficios";
-    @Query(QUERY2)
+    @Query(nativeQuery = true, name = "Proveedor.findByOficio")
     List<Proveedor> findAllByOficio(@Param("oficioId") String oficioId);
 }

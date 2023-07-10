@@ -48,6 +48,16 @@
             </button>
         </form>
     </div>
+
+    <div sec:authorize="hasRole('USER')" class="cajas">
+        <div th:each="oficio : ${oficiosList}">
+            <form th:action="@{/proveedor/listar/__${oficio.id}__}" method="get">
+                <button  th:text="${oficio.nombre}" th:classappend=" (${oficio.colorTarjeta}) ? 'caja1' : 'caja2'" th:value="${oficio.id}" th:onclick="" class="caja"></button>
+            </form>
+        </div>
+
+    </div>
+
 </section>
 
 <footer th:replace="/templates.fragments/footer :: footer" class="footer"></footer>
