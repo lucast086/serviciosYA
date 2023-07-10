@@ -90,23 +90,13 @@
 
     <section class="seccion servicios" id="servicios">
         <h2 class="h2" id="destino2">Nuestros Servicios</h2>
-        <div class="cajas">
-            <div class="caja" id="caja1">
-                <div class="contenido"></div><i class="fa-regular fa-lightbulb" style="color: #ffffff;"></i>Electricista
-            </div>
-            <div class="caja" id="caja2">
-                <div class="contenido"></div><i class="fa-solid fa-wrench"></i>Plomero
-            </div>
-            <div class="caja" id="caja3">
-                <div class="contenido"></div><i class="fa-solid fa-fire-burner" style="color: #ffffff;"></i>Gasista
-            </div>
-            <div class="caja" id="caja4">
-                <div class="contenido"></div><i class="fa-sharp fa-solid fa-trowel-bricks"></i>Albañil
-            </div>
-            <div class="caja" id="caja5">
-                <div class="contenido"></div><i class="fa-solid fa-paint-roller" style="color: #ffffff;"></i>Pintor
+
+        <div class="cajas" th:each="oficio : ${oficiosList}">
+            <div class="caja" th:text="${oficio.nombre}" th:classappend=" (${oficio.colorTarjeta}) ? 'caja1' : 'caja2'">
+                <div class="contenido"><i th:class="${oficio.codigoIcono}" style="color: #ffffff;"></i></div>
             </div>
         </div>
+
         <a
                 th:if="${session.usuarioSesion == null}"
                 href="/registrar"

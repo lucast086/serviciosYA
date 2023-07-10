@@ -26,6 +26,11 @@ public class ProveedorControlador {
     IProveedorServicio proveedorServicio;
     IOficioServicio oficioServicio;
 
+    @GetMapping("/dashboard")
+    public String dashboard(ModelMap model) {
+        return "usuarios.html";
+    }
+
     @GetMapping("/registro")
     public String registrarProveedor(ModelMap model){
         model.addAttribute("oficiosList",oficioServicio.listarTodos());
@@ -97,14 +102,15 @@ public class ProveedorControlador {
     @GetMapping("/listar/{id}")
     public String listarProveedorPorOficio(@PathVariable String id, ModelMap model){
         List<Proveedor> proveedorList = proveedorServicio.listarProveedoresPorOficio(id);
-        //log.info(proveedorList.toString());
         model.addAttribute("proveedores",proveedorList);
         return "tarjetas.html";
     }
 
     @GetMapping("/perfil/{id}")
     public String getOne (@PathVariable String id, ModelMap model){
-        model.put("proveedor",proveedorServicio.getOne(id));
+        Proveedor proveedor = proveedorServicio.getOne(id);
+        model.put("proveedor",proveedor);
+        model.addAttribute("oficios", proveedor.getOficios());
         return "vista_perfil_proveedor.html";
     }
 }

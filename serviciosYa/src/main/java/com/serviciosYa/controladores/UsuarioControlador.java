@@ -7,6 +7,7 @@ import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.OficioServicio;
 import com.serviciosYa.servicios.interfaces.IUsuarioServicio;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
+@Slf4j
 public class UsuarioControlador {
 
     private IUsuarioServicio usuarioServicio;
@@ -26,8 +28,8 @@ public class UsuarioControlador {
     public String listarTodos(ModelMap modelo) {
 
         List<Oficio> oficios = oficioServicio.listarTodos();
-        modelo.addAttribute("oficios", oficios);
-
+        modelo.addAttribute("oficiosList", oficios);
+        log.warn(oficios.toString());
         return "index.html";
     }
 
@@ -63,7 +65,7 @@ public class UsuarioControlador {
         return "intermedia.html";
     }
 
-    @PostMapping("/registrou")
+    @PostMapping("/registro")
     public String registrar(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam Rol rol , ModelMap model) {
         try {
             usuarioServicio.crear(nombre,apellido,email,telefono,password,password2,rol);
