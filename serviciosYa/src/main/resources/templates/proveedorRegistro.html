@@ -51,71 +51,22 @@
         </div>
 
         <div class="input contenedor">
-          <i class="fa-solid fa-house icon"></i>
-          <input type="text" name="direccion" placeholder="Dirección" />
-        </div>
-
-        <div class="input contenedor">
           <i class="fa-solid fa-screwdriver-wrench icon"></i>
           <label for="servicio">Qué servicios va a ofrecer:</label>
           <div id="servicio" class="checkbox-container">
-            <div>
-              <input
-                id="electricista"
-                type="checkbox"
-                name="oficios"
-                value="electricista"
-              />
-              <label for="electricista">Electricista</label>
-            </div>
-            <div>
-              <input
-                id="plomero"
-                type="checkbox"
-                name="oficios"
-                value="plomero"
-              />
-              <label for="plomero">Plomero</label>
-            </div>
-            <div>
-              <input
-                id="gasista"
-                type="checkbox"
-                name="oficios"
-                value="gasista"
-              />
-              <label for="gasista">Gasista</label>
-            </div>
-            <div>
-              <input
-                id="albañil"
-                type="checkbox"
-                name="oficios"
-                value="albañil"
-              />
-              <label for="albañil">Albañil</label>
-            </div>
-            <div>
-              <input
-                id="pintor"
-                type="checkbox"
-                name="oficios"
-                value="pintor"
-              />
-              <label for="pintor">Pintor</label>
+            <div th:each="oficio : ${oficiosList}">
+              <input th:id="${oficio.id}" type="checkbox" name="oficiosSeleccionados" th:value="${oficio.id}" />
+              <label th:for="${oficio.id}" th:text="${oficio.nombre}"></label>
             </div>
           </div>
         </div>
 
         <div class="input contenedor">
           <i class="fa-solid fa-image icon"></i>
-          <input
-            type="file"
-            accept="image/*"
-            id="imagen"
-            name="imagen"
-            placeholder="Imagen de perfil"
-          />
+          <input type="file" name="imagen" placeholder="Imagen de perfil" accept="image/*" onchange="previewImage(event)">
+          <div class="image-container">
+            <img id="preview" alt="Image Preview" style="max-width: 200px; max-height: 200px; display: none;">
+          </div>
         </div>
 
         <div class="input contenedor">
@@ -142,4 +93,21 @@
     </div>
 
   </body>
+<script>
+    function previewImage(event) {
+  var input = event.target;
+  var preview = document.getElementById('preview');
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      preview.src = e.target.result;
+      preview.style.display = 'block';
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+  </script>
 </html>

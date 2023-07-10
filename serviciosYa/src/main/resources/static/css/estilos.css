@@ -138,6 +138,12 @@ input[type="password"]{
     text-align: center;
     color:#131212;
 }
+.image-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
 .button{
     border: none;
     width: 100%;

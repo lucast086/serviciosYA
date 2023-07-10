@@ -8,6 +8,7 @@ import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.interfaces.IOficioServicio;
 import com.serviciosYa.servicios.interfaces.IProveedorServicio;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.expression.spel.ast.OpDivide;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
+@Slf4j
 @AllArgsConstructor
 @RequestMapping("/proveedor")
 public class ProveedorControlador {
@@ -24,14 +26,22 @@ public class ProveedorControlador {
     IProveedorServicio proveedorServicio;
     IOficioServicio oficioServicio;
 
+    @GetMapping("/dashboard")
+    public String dashboard(ModelMap model) {
+        return "usuarios.html";
+    }
+
     @GetMapping("/registro")
-    public String registrarProveedor(){
+    public String registrarProveedor(ModelMap model){
+        model.addAttribute("oficiosList",oficioServicio.listarTodos());
         return "proveedorRegistro.html";
     }
 
     @PostMapping("/registro")
-    public String registro(RedirectAttributes redirectAttributes, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, @RequestParam(value ="oficios", required = false) List<Oficio> oficios, ModelMap modelo) {
+    public String registro(RedirectAttributes redirectAttributes,@RequestParam List<String> oficiosSeleccionados, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, ModelMap modelo) {
         try {
+
+            List<Oficio> oficios = oficioServicio.listarTodos(oficiosSeleccionados);
             proveedorServicio.crear(nombre,apellido,email,telefono,password,password2,imagen,oficios, Rol.PROVEEDOR);
             redirectAttributes.addFlashAttribute("exito", "Proveedor registrado correctamente!");
             return "redirect:/login";
@@ -89,10 +99,19 @@ public class ProveedorControlador {
         return "listaProveedor.html";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/listar/{id}")
+    public String listarProveedorPorOficio(@PathVariable String id, ModelMap model){
+        List<Proveedor> proveedorList = proveedorServicio.listarProveedoresPorOficio(id);
+        model.addAttribute("proveedores",proveedorList);
+        return "tarjetas.html";
+    }
+
+    @GetMapping("/perfil/{id}")
     public String getOne (@PathVariable String id, ModelMap model){
-        model.put("proveedor",proveedorServicio.getOne(id));
-        return "proveedor.html";
+        Proveedor proveedor = proveedorServicio.getOne(id);
+        model.put("proveedor",proveedor);
+        model.addAttribute("oficios", proveedor.getOficios());
+        return "vista_perfil_proveedor.html";
     }
 }
 

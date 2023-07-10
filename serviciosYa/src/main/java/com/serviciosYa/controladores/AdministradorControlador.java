@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
 
 @Controller
@@ -23,16 +22,10 @@ public class AdministradorControlador {
 
     IAdministradorServicio administradorServicio;
 
-    @GetMapping("/generar")
-    public String generarAdmin(ModelMap model){
-        try {
-        administradorServicio.crear("admin","admin","admin@admin.com","888888","7654321","7654321",Rol.ADMIN);
-        model.put("exito","admin registrado");
-        return "index.html";
-        } catch (Exepcion ex ) {
-            model.put("error", ex.getMessage());
-            return "admin_registro.html";
-        }
+
+    @GetMapping("/dashboard")
+    public String dashboard(ModelMap model) {
+        return "usuarios.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN')")
