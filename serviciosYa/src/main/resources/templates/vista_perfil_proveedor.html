@@ -2,15 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"></html>
 <html>
 <head>
-  <title>Perfil de Usuario-Cliente</title>
-  <link rel="stylesheet" type="text/css" href="perfiles.css">
+  <title>Perfil de Proveedor</title>
+  <link rel="stylesheet" type="text/css" href="/css/perfiles.css">
 </head>
 <body>
     <header>
         <header class="header">
           <a href="/" class="logo">
             <img
-                    src="apple-touch-icon.png"
+                    src="/img/apple-touch-icon.png"
                     alt="logo de la compañia"
                     class="logo-img"
                     />
@@ -24,16 +24,31 @@
     </header>
   <div class="profile">
     <div class="profile-header">
-      <img src="equipo-trabajadores-construccion_102811-22.jpg" alt="Foto de Perfil" class="foto">
-      <h1>Nombre Apellido</h1>
+      <div>
+          <img th:src="@{/imagen/proveedor/__${session.usuarioSesion.id}__}" alt="Foto de Perfil" class="foto">
+      </div>
+      <br>
+      <h1 th:text="${proveedor.nombre} +' '+ ${proveedor.apellido}"></h1>
+      <br>
     </div>
     <div class="profile-detalles">
-      <p><span class="label">Correo Electrónico:</span> correo@example.com</p>
-      <p><span class="label">Teléfono:</span> 1234567890.</p>
-      <p><span class="label">Dirección:</span> Ciudad, País.</p>
-      <p><span class="label">Oficios:</span> Gasista, Electricista.</p>
+      <p><span class="label">Correo Electrónico:</span><span th:text="${proveedor.email}"></span></p>
+      <p><span class="label">Teléfono:</span><span th:text="${proveedor.telefono}"></span></p>
+      <ul th:each="oficio : ${oficios}" >
+        <li th:text="${oficio.nombre}"></li>
+      </ul>
+
+<!--
+resenias
+      <ul th:each="resenia : ${resenias}" >
+        <li th:text="${resenia.estrellas}"></li>
+        <li th:text="${resenia.comentario}></li>
+      </ul>
+-->
+      <br>
+
     </div>
-    <a href="modificarProveedor.html" class="boton">Modificar Perfil</a>
+    <a th:href="@{/proveedor/modificar/__${proveedor.id}__}" class="boton">Modificar Perfil</a>
   </div>
 </body>
 </html>

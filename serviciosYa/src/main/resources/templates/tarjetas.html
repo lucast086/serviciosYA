@@ -10,19 +10,19 @@
 
 <div th:replace="/templates.fragments/msgExitoError :: div"></div>
 <section sec:authorize="hasRole('USER')" class="seccion tarjetas">
-    <div class="card">
-        <img src="assets/fotuki 2.jpg" alt="Foto de perfil">
-        <div class="card-title">
-            <h2>Nombre del Prestador</h2>
-            <div class="card-text">
-                <p>Profesión</p>
-                <p>Calificacion</p>
+    <div th:each="proveedor : ${proveedores}">
+        <div class="card">
+            <img th:src="@{/imagen/proveedor/__${proveedor.id}__}" alt="Foto de Perfil" class="foto">
+            <div class="card-title">
+                <h2 th:text="${proveedor.nombre} +' '+ ${proveedor.apellido} "></h2>
+                <div class="card-text">
+                    <p>Calificacion</p>
+                </div>
             </div>
-
-        </div>
-        <div class="button-container">
-            <button class="button">Perfil</button>
-            <button class="button">Solicitar</button>
+            <div class="button-container">
+                <button class="button">Perfil</button>
+                <button class="button">Solicitar</button>
+            </div>
         </div>
     </div>
 </section>
