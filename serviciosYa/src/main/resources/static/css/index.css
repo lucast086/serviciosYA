@@ -301,7 +301,6 @@ body {
   justify-content: center;
   margin-top: 10em;
   margin-bottom: 10em;
-
 }
 
 .seccion.servicios .caja {
@@ -583,7 +582,7 @@ h1 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;
-  margin: 0 auto;
+  margin-bottom: 2em;
   transition: transform 0.3s ease;
 }
 
@@ -614,9 +613,10 @@ h1 {
 }
 
 .card h2 {
-  margin-bottom: 1em;
-  font-size: 20px;
-  text-align: center;
+  font-family: var(--tipo-principal);
+      font-weight: 600;
+      max-width: 70rem;
+      font-size: 1.5em;
 }
 
 .card p {
@@ -629,7 +629,7 @@ h1 {
   margin: 1em;
 }
 
-.button {
+.button-container .button {
   margin: 1em;
   padding: 10px 20px;
   background-color: #264653;
@@ -641,7 +641,7 @@ h1 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
 }
-.button:hover {
+.button-container .button:hover {
   transform: scale(1.05);
 }
 
@@ -712,3 +712,50 @@ h1 {
     transform: translateY(0%);
   }
 }
+ .msgexito {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+
+  .card_body1 {
+      width: 650px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      outline: none;
+      border-radius: 30px;
+      color: #fff;
+      padding: 0 0 0 45px;
+      background-color: #264653;
+      padding: 1rem;
+      font-size: 1rem;
+      margin-top: 2.5rem;
+      margin-left: 15%;
+      margin-right: 15%;
+      border: 1px solid orange;
+  }
+  .msgerror {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .card_body {
+    width: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    outline: none;
+    border-radius: 30px;
+    color: #fff;
+    padding: 0 0 0 45px;
+    background-color: #E76F51;
+    padding: 1rem;
+    font-size: 1rem;
+    margin-top: 2.5rem;
+    margin-left: 15%;
+    margin-right: 15%;
+    border: 1px solid orange;
+  }
