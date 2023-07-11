@@ -3,14 +3,14 @@
 <html>
 <head>
   <title>Perfil de Usuario-Cliente</title>
-  <link rel="stylesheet" type="text/css" href="perfiles.css">
+  <link rel="stylesheet" type="text/css" href="/css/perfiles.css">
 </head>
 <body>
     <header>
         <header class="header">
           <a href="/" class="logo">
             <img
-                    src="apple-touch-icon.png"
+                    src="/img/apple-touch-icon.png"
                     alt="logo de la compañia"
                     class="logo-img"
                     />
@@ -24,14 +24,15 @@
     </header>
   <div class="profile">
     <div class="profile-header">
-      <h1>Nombre Apellido</h1>
+      <h1 th:text="${cliente.nombre} +' '+ ${cliente.apellido}"></h1>
+      <hr>
     </div>
     <div class="profile-details">
-      <p><span class="label">Correo Electrónico:</span> correo@example.com</p>
-      <p><span class="label">Teléfono:</span> 1234567890</p>
-      <p><span class="label">Dirección:</span> Ciudad, País</p>
+      <p><span class="label">Correo Electrónico:</span><span th:text="${cliente.email}"></span></p>
+      <p><span class="label">Teléfono:</span><span th:text="${cliente.telefono}"></span> </p>
+      <p><span class="label">Dirección:</span><span th:text="${cliente.direccion}"></span> </p>
     </div>
-    <a href="modificarCliente.html" class="boton">Modificar Perfil</a>
+    <a th:href="@{/cliente/modificar/__${cliente.id}__}" class="boton">Modificar Perfil</a>
   </div>
 </body>
 </html>

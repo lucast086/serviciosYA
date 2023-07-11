@@ -29,14 +29,11 @@ public class Oficio {
     @Column(name = "descripcion")
     private String descripcion;
 
-<<<<<<< HEAD
-
-=======
     @Column(name = "icono")
     private String codigoIcono;
 
     @Column(name = "color")
-    private String colorTarjeta;
->>>>>>> developer
+    private Boolean colorTarjeta;
+
 
 }

@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IProveedorServicio {
-    void crear(String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios, Rol rol,List<Solicitud> solicitudes) throws Exepcion;
+    void crear(String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios, Rol rol) throws Exepcion;
 
-    void modificarByID(String id,String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios, List<Solicitud> solicitudes) throws Exepcion;
+    void modificarByID(String id,String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios) throws Exepcion;
 
     Proveedor buscarByID(String id) throws Exepcion;
 

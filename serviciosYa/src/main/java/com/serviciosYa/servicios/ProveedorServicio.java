@@ -26,7 +26,7 @@ public class ProveedorServicio implements IProveedorServicio {
     ImagenServicio imagenServicio;
 
     @Override
-    public void crear(String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios, Rol rol,List<Solicitud> solicitudes) throws Exepcion {
+    public void crear(String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios, Rol rol) throws Exepcion {
 
         validar(nombre,apellido,email,oficios,telefono,password);
         validarPasswords(password,password2);
@@ -47,13 +47,14 @@ public class ProveedorServicio implements IProveedorServicio {
         proveedor.setImagen(imagen1);
         proveedor.setRol(rol);
         proveedor.setActivo(true);
-        proveedor.setSolicitudes(solicitudes);
 
+        List<Solicitud> solicitudes = new ArrayList<>();
+        proveedor.setSolicitudes(solicitudes);
         proveedorRepositorio.save(proveedor);
     }
 
     @Override
-    public void modificarByID(String id, String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios,List<Solicitud> solicitudes) throws Exepcion {
+    public void modificarByID(String id, String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios) throws Exepcion {
 
         validar(nombre,apellido,email,oficios,telefono,password);
         validarPasswords(password,password2);
@@ -83,7 +84,7 @@ public class ProveedorServicio implements IProveedorServicio {
 
         proveedor.setImagen(imagen1);
         proveedor.setActivo(true);
-        proveedor.setSolicitudes(solicitudes);
+       // ****SE DEBE CREAR UN ARRAY DE LIST SOLICITUDES BASIO proveedor.setSolicitudes(solicitudes);
         proveedorRepositorio.save(proveedor);
     }
 

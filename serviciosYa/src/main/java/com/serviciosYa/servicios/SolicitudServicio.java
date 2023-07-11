@@ -53,7 +53,6 @@ public class SolicitudServicio implements ISolicitudServicio {
 
        validar (cliente,proveedor,descripcion,estado,costo,fechaServicio);
 
-        solicitud.setId(id);
         solicitud.setCliente(cliente);
         solicitud.setProveedor(proveedor);
         solicitud.setDescripcion(descripcion);

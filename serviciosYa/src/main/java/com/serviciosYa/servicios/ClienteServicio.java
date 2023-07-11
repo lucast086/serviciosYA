@@ -21,7 +21,7 @@ public class ClienteServicio implements IClienteServicio {
 
     private ClienteRepositorio clienteRepositorio;
     @Transactional
-    public void crear(String nombre, String apellido,String direccion, String email, String telefono, String password,String password2,Rol rol, List<Solicitud> solicitudes) throws Exepcion {
+    public void crear(String nombre, String apellido,String direccion, String email, String telefono, String password,String password2,Rol rol) throws Exepcion {
 
         validar(nombre,apellido,email,direccion,telefono,password);
         validarPasswords(password,password2);
@@ -38,12 +38,15 @@ public class ClienteServicio implements IClienteServicio {
         );
         cliente.setRol(rol);
         cliente.setActivo(true);
+
+        List<Solicitud> solicitudes = new ArrayList<>();
         cliente.setSolicitudes(solicitudes);
+
         clienteRepositorio.save(cliente);
     }
 
     @Transactional
-    public void modificarById (String id,String nombre, String apellido,String direccion, String email, String telefono, String password,String password2, List<Solicitud> solicitudes) throws Exepcion {
+    public void modificarById (String id,String nombre, String apellido,String direccion, String email, String telefono, String password,String password2) throws Exepcion {
 
         Cliente cliente = buscarByID(id);
 
@@ -55,7 +58,6 @@ public class ClienteServicio implements IClienteServicio {
         cliente.setEmail(email);
         cliente.setTelefono(telefono);
         cliente.setDireccion(direccion);
-        cliente.setSolicitudes(solicitudes);
         clienteRepositorio.save(cliente);
 
     }
