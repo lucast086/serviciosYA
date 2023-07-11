@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="/templates.fragments/head :: head"></head>
+<link rel="stylesheet" type="text/css" href="/css/index.css"/>
+<body>
+<header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
+
+<div th:replace="/templates.fragments/msgExitoError :: div"></div>
+
+<section class="seccion formulario">
+    <form action="/solicitud/registrosolicitud" method="POST" class="formulario">
+        <h1>SOLICITUD</h1>
+        <div class="contenedor">
+
+            <div sec:authorize="hasRole('USER')" class="input contenedor">
+                    <textarea
+                            type="text"
+                            name="descripcion"
+                            placeholder="Descripcion del trabajo solicitado"
+                            rows="15" cols="50"
+                    ></textarea>
+            </div>
+            <div sec:authorize="hasRole('PROVEEDOR')" class="input contenedor">
+                    <textarea
+                            type="text"
+                            name="descripcion"
+                            rows="15" cols="50"
+                            disabled
+                    ></textarea>
+                            <!--th:text="${solicitud.descripcion}"-->
+
+            </div>
+
+            <div sec:authorize="hasRole('PROVEEDOR')" class="input contenedor">
+                <input type="number" name="costo" placeholder="Costo aproximado del trabajo"/>
+            </div>
+            <div sec:authorize="hasRole('USER')" class="input contenedor">
+                <input type="text" name="costo" placeholder="Costo aproximado del trabajo" disabled/><!--th:value="${solicitud.costo}"-->
+            </div>
+
+            <div class="button-container2">
+                <input type="submit" value="enviar" class="button" />
+                <input type="button" value="cancelar" class="button"/>
+            </div>
+
+        </div>
+    </form>
+</section>
+</body>
+</html>
