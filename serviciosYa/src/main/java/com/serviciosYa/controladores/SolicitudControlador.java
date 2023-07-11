@@ -35,7 +35,7 @@ public class SolicitudControlador {
         List<Proveedor> proveedores = proveedorServicio.listarProveedores();
         modelo.addAttribute("proveedores", proveedores);
 
-        return "solicitud_registro.html";
+        return "solicitud.html";
     }
 
     @PostMapping("/registrosolicitud")
@@ -49,7 +49,7 @@ public class SolicitudControlador {
             modelo.addAttribute("proveedores", proveedores);
 
             redirectAttributes.addFlashAttribute("error", ex.getMessage());
-            return "solicitud_registro.html";
+            return "solicitud.html";
         }
     }
 
