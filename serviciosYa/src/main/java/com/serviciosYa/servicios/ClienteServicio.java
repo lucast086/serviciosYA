@@ -24,7 +24,7 @@ public class ClienteServicio implements IClienteServicio {
     public void crear(String nombre, String apellido,String direccion, String email, String telefono, String password,String password2,Rol rol) throws Exepcion {
 
         Optional<Cliente> respuesta = clienteRepositorio.findByEmail(email);
-        if (!respuesta.isPresent()) {
+        if (respuesta.isPresent()) {
             throw new Exepcion("el email ya esta registrado");
         }
 

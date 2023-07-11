@@ -32,7 +32,7 @@ public class Solicitud {
     private Estado estado;
 
     @Column(name = "costo")
-    private float costo;
+    private Float costo;
 
     @Column(name = "comentario")
     private String comentario;

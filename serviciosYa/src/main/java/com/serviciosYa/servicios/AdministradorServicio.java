@@ -24,7 +24,7 @@ public class AdministradorServicio implements IAdministradorServicio {
     public void crear(String nombre, String apellido, String email, String telefono, String password, String password2, Rol rol) throws Exepcion {
 
         Optional<Administrador> respuesta = administradorRepositorio.findByEmail(email);
-        if (!respuesta.isPresent()) {
+        if (respuesta.isPresent()) {
             throw new Exepcion("el email ya esta registrado");
         }
 

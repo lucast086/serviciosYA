@@ -7,6 +7,8 @@ import com.serviciosYa.enums.Estado;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.ProveedorServicio;
+import com.serviciosYa.servicios.interfaces.IClienteServicio;
+import com.serviciosYa.servicios.interfaces.IProveedorServicio;
 import com.serviciosYa.servicios.interfaces.ISolicitudServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,31 +29,28 @@ public class SolicitudControlador {
 
     ISolicitudServicio solicitudServicio;
 
-    @Autowired
-    private ProveedorServicio proveedorServicio;
+    private IProveedorServicio proveedorServicio;
+    private IClienteServicio clienteServicio;
 
-    @GetMapping("")
-    public String registrarSolicitud(ModelMap modelo) {
+    @GetMapping("/registro/{id}")
+    public String registrarSolicitud(@PathVariable String id, ModelMap modelo) {
 
-        List<Proveedor> proveedores = proveedorServicio.listarProveedores();
-        modelo.addAttribute("proveedores", proveedores);
+        Proveedor proveedor = proveedorServicio.getOne(id);
+        modelo.put("proveedor", proveedor);
 
         return "solicitud.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USER')")
     @PostMapping("/registrosolicitud")
-    public String registrarSolicitud(RedirectAttributes redirectAttributes, @RequestParam String idCliente, @RequestParam String idProveedor, @RequestParam String descripcion, @RequestParam Estado estado, @RequestParam float costo, @RequestParam String comentario, @RequestParam Date fechaServicio, ModelMap modelo) {
+    public String registrarSolicitud(RedirectAttributes redirectAttributes, @RequestParam String idCliente, @RequestParam String idProveedor, @RequestParam String descripcion, @RequestParam(required = false) Float costo, @RequestParam(required = false) String comentario, ModelMap modelo) {
         try {
-            solicitudServicio.crearSolicitud(idCliente, idProveedor, descripcion, estado, costo, comentario, fechaServicio);
+            solicitudServicio.crearSolicitud(idCliente, idProveedor, descripcion, costo, comentario);
             redirectAttributes.addFlashAttribute("exito", "Solicitud registrada correctamente!");
-            return "cliente.html";
+            return "redirect:/solicitud/listar";
         } catch (Exepcion ex) {
-            List<Proveedor> proveedores = proveedorServicio.listarProveedores();
-            modelo.addAttribute("proveedores", proveedores);
-
             redirectAttributes.addFlashAttribute("error", ex.getMessage());
-            return "solicitud.html";
+            return "redirect:/usuarios";
         }
     }
 
@@ -64,10 +63,9 @@ public class SolicitudControlador {
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping("/listar")
     public String listarSolicitud(ModelMap model) {
-
         List<Solicitud> solicitudList = solicitudServicio.listarSolicitudes();
         model.addAttribute("solicitudes", solicitudList);
-        return "lista_solicitudes.html";
+        return "listaSolicitudesCliente.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")
@@ -79,13 +77,13 @@ public class SolicitudControlador {
 
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")
     @PostMapping("/modificar/{id}")
-    public String modificarSolicitud(@PathVariable String id, @RequestParam Cliente cliente, @RequestParam Proveedor proveedor, @RequestParam String descripcion, @RequestParam Estado estado, @RequestParam float costo, @RequestParam String comentario, @RequestParam Date fechaServicio, ModelMap modelo) {
+    public String modificarSolicitud(@PathVariable String id, @RequestParam Cliente cliente, @RequestParam Proveedor proveedor, @RequestParam String descripcion, @RequestParam Estado estado, @RequestParam Float costo, @RequestParam String comentario, ModelMap modelo) {
 
         try {
             List<Proveedor> proveedores = proveedorServicio.listarProveedores();
             modelo.addAttribute("proveedores", proveedores);
 
-            solicitudServicio.modificarById(id, cliente, proveedor, descripcion, estado, costo, comentario, fechaServicio);
+            solicitudServicio.modificarById(id, cliente, proveedor, descripcion, estado, costo, comentario);
             modelo.put("exito", "La solicitud se modifico con exito!");
 
             return "redirect:../listar";

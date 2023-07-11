@@ -26,7 +26,7 @@ public class ProveedorServicio implements IProveedorServicio {
     public void crear(String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios, Rol rol) throws Exepcion {
 
         Optional<Proveedor> respuesta = proveedorRepositorio.findByEmail(email);
-        if (!respuesta.isPresent()) {
+        if (respuesta.isPresent()) {
             throw new Exepcion("el email ya esta registrado");
         }
 

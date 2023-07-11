@@ -20,9 +20,11 @@
                 </div>
             </div>
             <div class="button-container">
-                <button class="button">Perfil</button>
-                <form action="/solicitud">
-                    <button class="button" onclick="/solicitud">Solicitar</button>
+                <form th:action="@{/proveedor/perfil/__${proveedor.id}__}">
+                    <button class="button">Perfil</button>
+                </form>
+                <form th:action="@{/solicitud/registro/__${proveedor.id}__}">
+                    <button class="button">Solicitar</button>
                 </form>
 
             </div>
