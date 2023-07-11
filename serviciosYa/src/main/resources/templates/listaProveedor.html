@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/templates.fragments/head :: head"></head>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,6 +13,7 @@
 <body>
 
 <header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
+<div th:replace="/templates.fragments/msgExitoError :: div"></div>
 
 <section class="seccion tabla">
     <table class="table table-dark">
@@ -22,6 +24,8 @@
                 <th scope="col">Email</th>
                 <th scope="col">Modificar Usuario</th>
                 <th scope="col">Eliminar Usuario</th>
+                <th scope="col">Cambiar Rol</th>
+                <th scope="col">Actividad</th>
             </tr>
         </thead>
         <tbody th:each="Proveedor : ${proveedores}">
@@ -30,11 +34,15 @@
                 <td  th:text="${Proveedor.apellido}"></td>
                 <td  th:text="${Proveedor.email}"></td>
                 <td>
-                    <a th:href="@{/proveedor/modificar/__${Proveedor.id}__}">Modificar</a>
+                    <a th:href="@{/proveedor/modificar/__${Proveedor.id}__}" class="modificara">Modificar</a>
                 </td>
                 <td>
-                    <a th:href="@{/proveedor/eliminar/__${Proveedor.id}__}">Eliminar</a>
+                    <a th:href="@{/proveedor/eliminar/__${Proveedor.id}__}" class="eliminara">Eliminar</a>
                 </td>
+                <td>
+                    <a th:href="@{/proveedor/cambiarRol/__${Proveedor.id}__}" class="rol">Cambiar Rol</a>
+                </td>
+                <td th:classappend=" (${Proveedor.activo}) ? 'color1' : 'color2'">Estado</td>
             </tr>
         </tbody>
     </table>

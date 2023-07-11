@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="/templates.fragments/head :: head"></head>
+<link rel="stylesheet" type="text/css" href="/css/index.css"/>
+<body>
+<header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
+
+<div th:replace="/templates.fragments/msgExitoError :: div"></div>
+
+<section class="seccion formulario">
+    <form th:action="@{/oficio/modificar/__${oficio.id}__}" method="post" class="formulario">
+        <h1>Modificar Oficio</h1>
+        <div class="contenedor">
+            <div class="input contenedor">
+                <input type="text" name="nombre" th:value="${oficio.nombre}"/>
+            </div>
+
+            <div class="input contenedor">
+                    <textarea
+                            type="text"
+                            name="descripcion"
+                            th:text="${oficio.descripcion}"
+                    ></textarea>
+            </div>
+
+            <div class="input contenedor">
+                <input type="text" name="codigo" th:value="${oficio.codigoIcono}"/>
+            </div>
+
+            <label>Color en la vista principal</label>
+            <div class="checkbox-container" th:value="${oficio.colorTarjeta}">
+                <div>
+                    <input
+                            id="color1"
+                            type="radio"
+                            name="color"
+                            value="true"
+                    />
+                    <div class="caja" id="caja1"></div>
+                </div>
+                <div>
+                    <input
+                            id="color2"
+                            type="radio"
+                            name="color"
+                            value="false"
+                    />
+                    <div class="caja" id="caja2"></div>
+                </div>
+            </div>
+
+            <input type="submit" value="Modificar" class="button" />
+        </div>
+    </form>
+</section>
+</body>
+</html>
