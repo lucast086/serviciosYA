@@ -3,6 +3,7 @@ package com.serviciosYa.controladores;
 import com.serviciosYa.entidades.Administrador;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
+import com.serviciosYa.servicios.ClienteServicio;
 import com.serviciosYa.servicios.interfaces.IAdministradorServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,6 +22,7 @@ import java.util.List;
 public class AdministradorControlador {
 
     IAdministradorServicio administradorServicio;
+    ClienteServicio clienteServicio;
 
 
     @GetMapping("/dashboard")
@@ -89,7 +91,6 @@ public class AdministradorControlador {
         return "admin_eliminar.html";
     }
 
-
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN')")
     @PostMapping("/eliminar/{id}")
     public String eliminar (@PathVariable String id, ModelMap model){
@@ -103,4 +104,17 @@ public class AdministradorControlador {
 
         return "index.html";
     }
+    @GetMapping("/cambiarRol/{id}")
+    public String cambiarRol (@PathVariable String id, ModelMap model) {
+
+        try {
+            clienteServicio.cambiarRol(id);
+        } catch (Exepcion ex) {
+            model.put("error", ex.getMessage());
+
+            return "listaCliente.html";
+        }
+        return "listaCliente.html";
+    }
+
 }
