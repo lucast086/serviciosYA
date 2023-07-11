@@ -1,5 +1,4 @@
 package com.serviciosYa.servicios;
-
 import com.serviciosYa.entidades.Proveedor;
 import com.serviciosYa.entidades.Resenia;
 import com.serviciosYa.entidades.Usuario;
@@ -42,7 +41,6 @@ public class ReseniaServicio implements IReseniaServicio {
         reseniaRepositorio.save(resenia);
 
         return resenia;
-
     }
     @Transactional
     public void eliminarById (String id) throws Exepcion {

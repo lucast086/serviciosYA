@@ -3,6 +3,7 @@ package com.serviciosYa.servicios;
 import com.serviciosYa.entidades.Imagen;
 import com.serviciosYa.entidades.Oficio;
 import com.serviciosYa.entidades.Proveedor;
+import com.serviciosYa.entidades.Solicitud;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.ProveedorRepositorio;
@@ -46,11 +47,15 @@ public class ProveedorServicio implements IProveedorServicio {
         proveedor.setImagen(imagen1);
         proveedor.setRol(rol);
         proveedor.setActivo(true);
+
+        List<Solicitud> solicitudes = new ArrayList<>();
+        proveedor.setSolicitudes(solicitudes);
         proveedorRepositorio.save(proveedor);
     }
 
     @Override
     public void modificarByID(String id, String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios) throws Exepcion {
+
         validar(nombre,apellido,email,oficios,telefono,password);
         validarPasswords(password,password2);
 
@@ -79,6 +84,7 @@ public class ProveedorServicio implements IProveedorServicio {
 
         proveedor.setImagen(imagen1);
         proveedor.setActivo(true);
+       // ****SE DEBE CREAR UN ARRAY DE LIST SOLICITUDES BASIO proveedor.setSolicitudes(solicitudes);
         proveedorRepositorio.save(proveedor);
     }
 
@@ -93,7 +99,6 @@ public class ProveedorServicio implements IProveedorServicio {
         return repuesta.orElseThrow(()-> new Exepcion("Proveedor no existe"));
 
     }
-
     @Override
     public void eliminarById(String id) throws Exepcion {
 
@@ -102,7 +107,6 @@ public class ProveedorServicio implements IProveedorServicio {
         proveedorRepositorio.save(proveedor);
 
     }
-
     @Override
     public Proveedor buscarByNombreAndApellido(String nombre, String apellido) throws Exepcion {
 

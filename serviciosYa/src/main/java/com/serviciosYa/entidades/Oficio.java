@@ -1,10 +1,10 @@
 package com.serviciosYa.entidades;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+import javax.persistence.*;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,5 +34,6 @@ public class Oficio {
 
     @Column(name = "color")
     private Boolean colorTarjeta;
+
 
 }

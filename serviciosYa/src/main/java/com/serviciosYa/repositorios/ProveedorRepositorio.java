@@ -2,6 +2,7 @@ package com.serviciosYa.repositorios;
 
 import com.serviciosYa.entidades.Cliente;
 import com.serviciosYa.entidades.Proveedor;
+import com.serviciosYa.entidades.Solicitud;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

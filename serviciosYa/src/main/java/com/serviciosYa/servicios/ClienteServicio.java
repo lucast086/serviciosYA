@@ -1,6 +1,7 @@
 package com.serviciosYa.servicios;
 
 import com.serviciosYa.entidades.Cliente;
+import com.serviciosYa.entidades.Solicitud;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.ClienteRepositorio;
@@ -37,6 +38,10 @@ public class ClienteServicio implements IClienteServicio {
         );
         cliente.setRol(rol);
         cliente.setActivo(true);
+
+        List<Solicitud> solicitudes = new ArrayList<>();
+        cliente.setSolicitudes(solicitudes);
+
         clienteRepositorio.save(cliente);
     }
 
