@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/templates.fragments/head :: head"></head>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,11 +8,12 @@
     <title>Document</title>
     <head th:replace="/templates.fragments/head :: head"></head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/css/listas.css"/>
+    <link rel="stylesheet" type="text/css" href="css/listas.css"/>
 </head>
 <body>
 
 <header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
+<div th:replace="/templates.fragments/msgExitoError :: div"></div>
 
 <section class="seccion tabla">
     <table class="table table-dark">
@@ -22,6 +24,8 @@
             <th scope="col">Email</th>
             <th scope="col">Modificar Usuario</th>
             <th scope="col">Eliminar Usuario</th>
+            <th scope="col">Cambiar Rol</th>
+            <th scope="col">Actividad</th>           
         </tr>
         </thead>
         <tbody th:each="Cliente : ${clientes}">
@@ -30,10 +34,13 @@
             <td  th:text="${Cliente.apellido}"></td>
             <td  th:text="${Cliente.email}"></td>
             <td>
-                <a th:href="@{/cliente/modificar/__${Cliente.id}__}">Modificar</a>
+                <a th:href="@{/cliente/modificar/__${Cliente.id}__}" class="modificara">Modificar</a>
             </td>
             <td>
-                <a th:href="@{/cliente/eliminar/__${Cliente.id}__}">Eliminar</a>
+                <a th:href="@{/cliente/eliminar/__${Cliente.id}__}" class="eliminara">Eliminar</a>
+            </td>
+            <td>
+                <a th:href="@{/cliente/cambiarRol/__${Cliente.id}__}" class="rol">Cambiar Rol</a>
             </td>
         </tr>
         </tbody>

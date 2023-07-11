@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="/templates.fragments/head :: head"></head>
+<link rel="stylesheet" type="text/css" href="/css/estilos.css"/>
+  <body>
+    <header>
+      <header class="header">
+        <a href="/" class="logo">
+          <img
+                  src="/img/apple-touch-icon.png"
+                  alt="logo de la compañia"
+                  class="logo-img"
+          />
+        </a>
+        <nav class="nav">
+          <ul class="ul">
+            <li class="li"><a href="/" title="inicio" class="a">Inicio</a></li>
+          </ul>
+        </nav>
+
+      </header>
+    </header>
+
+    <div th:replace="/templates.fragments/msgExitoError :: div"></div>
+
+    <section class="seccion form">
+      <form action="/cliente/registro" method="POST" class="formulario">
+        <h1>Regístrate</h1>
+        <div class="contenedor">
+          <div class="input contenedor">
+            <i class="fa-solid fa-user icon"></i>
+            <input type="text" name="nombre" placeholder="Nombre" />
+          </div>
+
+          <div class="input contenedor">
+            <i class="fa-solid fa-user icon"></i>
+            <input type="text" name="apellido" placeholder="Apellido" />
+          </div>
+
+          <div class="input contenedor">
+            <i class="fa-solid fa-envelope icon"></i>
+            <input type="text" name="email" placeholder="Correo Electrónico" />
+          </div>
+
+          <div class="input contenedor">
+            <i class="fa-solid fa-phone icon"></i>
+            <input type="text" name="telefono" placeholder="telefono" />
+          </div>
+      
+          <div class="input contenedor">
+            <i class="fa-solid fa-house icon"></i>
+            <input type="text" name="direccion" placeholder="direccion"/>
+          </div>
+
+          <div class="input contenedor">
+            <i class="fa-solid fa-key icon"></i>
+            <input type="password" name="password"  placeholder="Contraseña" />
+          </div>
+
+          <p class="p">(La contraseña debe tener minimo 8 caracteres)</p>
+
+          <div class="input contenedor">
+            <i class="fa-solid fa-key icon"></i>
+            <input type="password" name="password2" placeholder="Confirmar Contraseña" />
+          </div>
+          <input type="submit" value="Regístrate" class="button" />
+          <p>
+            Al registrarte aceptas nuestras Condiciones de uso y nuestra Política
+            de privacidad.
+          </p>
+          <p>
+            Ya tienes una cuenta?<a class="link" href="/login"
+          >Iniciar Sesión</a
+          >
+          </p>
+        </div>
+
+      </form>
+    </section>
+  </body>
+</html>

@@ -254,50 +254,67 @@ min-height: 80vh;
     transform: translateY(0%);
   }
 }
- .msgexito {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  }
+.modificara:hover {
+  color: blue
+}
+.eliminara:hover {
+  color: red
+}
+.rol:hover {
+  color:green
+}
 
-  .card_body1 {
-      width: 650px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      outline: none;
-      border-radius: 30px;
-      color: #fff;
-      padding: 0 0 0 45px;
-      background-color: #264653;
-      padding: 1rem;
-      font-size: 1rem;
-      margin-top: 2.5rem;
-      margin-left: 15%;
-      margin-right: 15%;
-      border: 1px solid orange;
-  }
-  .msgerror {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .card_body {
-    width: 650px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    outline: none;
-    border-radius: 30px;
-    color: #fff;
-    padding: 0 0 0 45px;
-    background-color: #E76F51;
-    padding: 1rem;
-    font-size: 1rem;
-    margin-top: 2.5rem;
-    margin-left: 15%;
-    margin-right: 15%;
-    border: 1px solid orange;
-  }
+.color1 {
+  color:green;
+}
+.color2 {
+  color: red;
+}
+
+.msgexito {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card_body1 {
+  width: 650px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  outline: none;
+  border-radius: 30px;
+  color: #fff;
+  padding: 0 0 0 45px;
+  background-color: #264653;
+  padding: 1rem;
+  font-size: 1rem;
+  margin-top: 2.5rem;
+  margin-left: 15%;
+  margin-right: 15%;
+  border: 1px solid orange;
+}
+.msgerror {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.card_body {
+width: 650px;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+outline: none;
+border-radius: 30px;
+color: #fff;
+padding: 0 0 0 45px;
+background-color: #E76F51;
+padding: 1rem;
+font-size: 1rem;
+margin-top: 2.5rem;
+margin-left: 15%;
+margin-right: 15%;
+border: 1px solid orange;
+}
+
