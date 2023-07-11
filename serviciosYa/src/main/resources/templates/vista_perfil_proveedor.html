@@ -1,54 +1,58 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"></html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <title>Perfil de Proveedor</title>
   <link rel="stylesheet" type="text/css" href="/css/perfiles.css">
 </head>
 <body>
-    <header>
-        <header class="header">
-          <a href="/" class="logo">
-            <img
-                    src="/img/apple-touch-icon.png"
-                    alt="logo de la compañia"
-                    class="logo-img"
-                    />
-          </a>
-          <nav class="nav">
-            <ul class="ul">
-              <li class="li"><a href="/" title="inicio" class="a">Inicio</a></li>
-            </ul>
-          </nav>
-        </header>
-    </header>
-  <div class="profile">
-    <div class="profile-header">
-      <div>
-          <img th:src="@{/imagen/proveedor/__${session.usuarioSesion.id}__}" alt="Foto de Perfil" class="foto">
-      </div>
-      <br>
-      <h1 th:text="${proveedor.nombre} +' '+ ${proveedor.apellido}"></h1>
-      <br>
-    </div>
-    <div class="profile-detalles">
-      <p><span class="label">Correo Electrónico:</span><span th:text="${proveedor.email}"></span></p>
-      <p><span class="label">Teléfono:</span><span th:text="${proveedor.telefono}"></span></p>
-      <ul th:each="oficio : ${oficios}" >
-        <li th:text="${oficio.nombre}"></li>
+<header>
+  <header class="header">
+    <a href="/" class="logo">
+      <img
+              src="/img/apple-touch-icon.png"
+              alt="logo de la compañia"
+              class="logo-img"
+      />
+    </a>
+    <nav class="nav">
+      <ul class="ul">
+        <li class="li"><a href="/" title="inicio" class="a">Inicio</a></li>
       </ul>
-
-<!--
-resenias
-      <ul th:each="resenia : ${resenias}" >
-        <li th:text="${resenia.estrellas}"></li>
-        <li th:text="${resenia.comentario}></li>
-      </ul>
--->
-      <br>
-
+    </nav>
+  </header>
+</header>
+<div class="profile">
+  <div class="profile-header">
+    <div class="imagen">
+      <img th:src="@{/imagen/proveedor/__${session.usuarioSesion.id}__}" alt="Foto de Perfil" class="foto">
     </div>
-    <a th:href="@{/proveedor/modificar/__${proveedor.id}__}" class="boton">Modificar Perfil</a>
+    <br>
+    <h1 th:text="${proveedor.nombre} +' '+ ${proveedor.apellido}"></h1>
+    <br>
   </div>
+  <div class="profile-detalles">
+    <p><span class="label">Correo Electrónico:</span><span th:text="${proveedor.email}"></span></p>
+    <p><span class="label">Teléfono:</span><span th:text="${proveedor.telefono}"></span></p>
+    <p><span class="label">Oficios:</span></p>
+    <ul th:each="oficio : ${oficios}" >
+      <li th:text="${oficio.nombre}"></li>
+    </ul>
+
+    <!--
+    resenias
+          <ul th:each="resenia : ${resenias}" >
+            <li th:text="${resenia.estrellas}"></li>
+            <li th:text="${resenia.comentario}></li>
+          </ul>
+    -->
+    <br>
+
+  </div>
+  <div class="button-container">
+    <form th:action="@{/proveedor/modificar/__${proveedor.id}__}">
+      <button class="button">Modificar Perfil</button>
+    </form>
+  </div>
+</div>
 </body>
 </html>
