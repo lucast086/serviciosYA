@@ -5,22 +5,8 @@
   <link rel="stylesheet" type="text/css" href="/css/perfiles.css">
 </head>
 <body>
-    <header>
-        <header class="header">
-          <a href="/" class="logo">
-            <img
-                    src="/img/apple-touch-icon.png"
-                    alt="logo de la compañia"
-                    class="logo-img"
-                    />
-          </a>
-          <nav class="nav">
-            <ul class="ul">
-              <li class="li"><a href="/" title="inicio" class="a">Inicio</a></li>
-            </ul>
-          </nav>
-        </header>
-    </header>
+<header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
+<section class="seccion">
   <div class="profile">
     <div class="profile-header">
       <h1 th:text="${cliente.nombre} +' '+ ${cliente.apellido}"></h1>
@@ -37,5 +23,6 @@
       </form>
     </div>
   </div>
+</section>
 </body>
 </html>

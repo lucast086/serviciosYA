@@ -162,8 +162,6 @@ body {
 } 
 
 .header {
-  position: fixed;
-  top: 0;
   width: 100%;
   min-height: 5em;
   padding: 1em 2em;
@@ -174,39 +172,33 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-
-.header h1:hover {
-  color: #f4a261;
-}
-
 .header .ul {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
 }
-
 .header .li {
-  margin: 0 2em;
-  font-size: 1.2em;
+  margin: 0 1.5em;
+  font-size: 1em;
 }
-
 .header .li:hover {
   color: #f4a261;
 }
-
-
-body {
+  .seccion {
+    width: 100%;
+    min-height: 80vh;
     display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
     align-items: center;
+    padding: 2em;
   }
   .profile {
-    max-width: 600px;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(#F4A261, #E9C46A);
+    background: rgba(255, 255, 255, 60%);
     border-radius: 20px;
     padding: 70px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -229,7 +221,13 @@ body {
   .profile p {
     margin:1em;
   }
-  
+  .card-text {
+    display: flex;
+    align-items: center;
+  }
+  .card-text .fa-solid fa-star{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
   .profile .label {
     font-weight: bold;
   }

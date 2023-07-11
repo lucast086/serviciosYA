@@ -16,12 +16,15 @@
             <div class="card-title">
                 <h2 th:text="${proveedor.nombre} +' '+ ${proveedor.apellido} "></h2>
                 <div class="card-text">
-                    <p>Calificacion</p>
+                    <p>5</p><i class="fa-solid fa-star" style="color: #ffc700;"></i>
                 </div>
             </div>
             <div class="button-container">
                 <button class="button">Perfil</button>
-                <button class="button">Solicitar</button>
+                <form action="/solicitud">
+                    <button class="button" onclick="/solicitud">Solicitar</button>
+                </form>
+
             </div>
         </div>
     </div>

@@ -36,7 +36,7 @@ public class SolicitudControlador {
         List<Proveedor> proveedores = proveedorServicio.listarProveedores();
         modelo.addAttribute("proveedores", proveedores);
 
-        return "solicitud_registro.html";
+        return "solicitud.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USER')")
@@ -51,7 +51,7 @@ public class SolicitudControlador {
             modelo.addAttribute("proveedores", proveedores);
 
             redirectAttributes.addFlashAttribute("error", ex.getMessage());
-            return "solicitud_registro.html";
+            return "solicitud.html";
         }
     }
 
