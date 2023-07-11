@@ -1,9 +1,6 @@
 package com.serviciosYa.servicios.interfaces;
 
-import com.serviciosYa.entidades.Cliente;
-import com.serviciosYa.entidades.Oficio;
-import com.serviciosYa.entidades.Proveedor;
-import com.serviciosYa.entidades.Usuario;
+import com.serviciosYa.entidades.*;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import org.springframework.web.multipart.MultipartFile;

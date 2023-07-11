@@ -30,4 +30,7 @@ public class Proveedor extends Usuario {
     @OneToMany(targetEntity = Resenia.class, fetch = FetchType.LAZY, mappedBy = "proveedor")
     private List<Resenia> resenias;
 
+    @OneToMany(targetEntity = Solicitud.class, fetch = FetchType.LAZY, mappedBy = "proveedor")
+    private List<Solicitud> Solicitudes;
+
 }
