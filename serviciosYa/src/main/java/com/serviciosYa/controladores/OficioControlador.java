@@ -40,7 +40,7 @@ public class OficioControlador {
     @GetMapping("/modificar/{id}")
     public String modificarOficioForm (@PathVariable String id, ModelMap model){
         model.put("oficio",oficioServicio.getOne(id));
-        return "oficio_modifcar.html" ;
+        return "modificarOficio.html" ;
     }
 
     @PostMapping("/modificar/{id}")
@@ -48,11 +48,11 @@ public class OficioControlador {
         try{
             oficioServicio.modificarById(id, nombre, descripcion, codigo, color);
             model.put("exito", "El Oficio se modifico con exito");
-            return "redirect:../listar";
+            return "usuarios.html";
         } catch (Exepcion e) {
             model.put("oficio",oficioServicio.getOne(id));
             model.put("error", e.getMessage()) ;
-            return "oficio_modificar";
+            return "modificarOficio";
         }
     }
 

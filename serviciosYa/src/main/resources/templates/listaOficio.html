@@ -29,10 +29,10 @@
                 <td  th:text="${Oficio.nombre}"></td>
                 <td  th:text="${Oficio.descripcion}"></td>
                 <td>
-                    <a th:href="@{/oficio/modificar/__${Oficio.id}__}">Modificar</a>
+                    <a th:href="@{/oficio/modificar/__${Oficio.id}__}" class="modificara">Modificar</a>
                 </td>
                 <td>
-                    <a th:href="@{/oficio/eliminar/__${Oficio.id}__}">Eliminar</a>
+                    <a th:href="@{/oficio/eliminar/__${Oficio.id}__}" class="eliminara">Eliminar</a>
                 </td>
             </tr>
         </tbody>
