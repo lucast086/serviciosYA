@@ -23,6 +23,11 @@ public class ClienteServicio implements IClienteServicio {
     @Transactional
     public void crear(String nombre, String apellido,String direccion, String email, String telefono, String password,String password2,Rol rol) throws Exepcion {
 
+        Optional<Cliente> respuesta = clienteRepositorio.findByEmail(email);
+        if (!respuesta.isPresent()) {
+            throw new Exepcion("el email ya esta registrado");
+        }
+
         validar(nombre,apellido,email,direccion,telefono,password);
         validarPasswords(password,password2);
 

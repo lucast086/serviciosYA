@@ -23,6 +23,7 @@ public class AdministradorControlador {
     IAdministradorServicio administradorServicio;
 
 
+    @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN','ROLE_ADMIN')")
     @GetMapping("/dashboard")
     public String dashboard(ModelMap model) {
         return "usuarios.html";

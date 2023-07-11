@@ -53,7 +53,7 @@ public class UsuarioControlador {
             case "ADMIN" :
                  return  "redirect:/admin/dashboard";
             case "SUPERADMIN" :
-                  return  "redirect:/superadmin/dashboard";
+                  return  "redirect:/admin/dashboard";
             case "USER" :
                 return  "redirect:/cliente/dashboard";
         }
@@ -64,7 +64,7 @@ public class UsuarioControlador {
     public String registrarForm(){
         return "intermedia.html";
     }
-
+/*
     @PostMapping("/registro")
     public String registrar(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam Rol rol , ModelMap model) {
         try {
@@ -128,7 +128,7 @@ public class UsuarioControlador {
         return "index.html";
     }
 
-
+*/
 
 }
 

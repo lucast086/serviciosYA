@@ -11,6 +11,7 @@ import com.serviciosYa.servicios.interfaces.IProveedorServicio;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.expression.spel.ast.OpDivide;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ public class ProveedorControlador {
     IProveedorServicio proveedorServicio;
     IOficioServicio oficioServicio;
 
+    @PreAuthorize("hasAnyRole('ROLE_PROVEEDOR')")
     @GetMapping("/dashboard")
     public String dashboard(ModelMap model) {
         return "usuarios.html";
@@ -53,6 +55,7 @@ public class ProveedorControlador {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificarProveedorForm (@PathVariable String id, ModelMap model){
         model.put("proveedor",proveedorServicio.getOne(id));
@@ -60,6 +63,7 @@ public class ProveedorControlador {
         return "modificarProveedor.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificarProveedor (@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, @RequestParam (value = "oficios",required = false)List<Oficio> oficios,  ModelMap model){
 
@@ -75,12 +79,14 @@ public class ProveedorControlador {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping("/eliminar/{id}")
     public String eliminarProveedorForm(@PathVariable String id, ModelMap model){
         model.put("proveedor",proveedorServicio.getOne(id));
         return "proveedor_eleminar.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SUPERADMIN')")
     @PostMapping("/eliminar/{id}")
     public String eliminraProveedor(@PathVariable String id, ModelMap model){
 
@@ -94,6 +100,7 @@ public class ProveedorControlador {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping("/listar")
     public String listarProveedor(ModelMap model){
         List<Proveedor> proveedorList = proveedorServicio.listarProveedores();
@@ -101,6 +108,7 @@ public class ProveedorControlador {
         return "listaProveedor.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
     @GetMapping("/listar/{id}")
     public String listarProveedorPorOficio(@PathVariable String id, ModelMap model){
         List<Proveedor> proveedorList = proveedorServicio.listarProveedoresPorOficio(id);
@@ -108,6 +116,7 @@ public class ProveedorControlador {
         return "tarjetas.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping("/perfil/{id}")
     public String getOne (@PathVariable String id, ModelMap model){
         Proveedor proveedor = proveedorServicio.getOne(id);

@@ -1,6 +1,7 @@
 package com.serviciosYa.servicios;
 
 import com.serviciosYa.entidades.Administrador;
+import com.serviciosYa.entidades.Cliente;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.AdministradorRepositorio;
@@ -21,6 +22,11 @@ public class AdministradorServicio implements IAdministradorServicio {
     private AdministradorRepositorio administradorRepositorio;
     @Transactional
     public void crear(String nombre, String apellido, String email, String telefono, String password, String password2, Rol rol) throws Exepcion {
+
+        Optional<Administrador> respuesta = administradorRepositorio.findByEmail(email);
+        if (!respuesta.isPresent()) {
+            throw new Exepcion("el email ya esta registrado");
+        }
 
         validar(nombre,apellido,email,telefono,password);
 

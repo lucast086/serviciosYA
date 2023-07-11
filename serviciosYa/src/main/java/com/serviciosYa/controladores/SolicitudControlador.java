@@ -10,6 +10,7 @@ import com.serviciosYa.servicios.ProveedorServicio;
 import com.serviciosYa.servicios.interfaces.ISolicitudServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,7 @@ public class SolicitudControlador {
         return "solicitud_registro.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
     @PostMapping("/registrosolicitud")
     public String registrarSolicitud(RedirectAttributes redirectAttributes, @RequestParam String idCliente, @RequestParam String idProveedor, @RequestParam String descripcion, @RequestParam Estado estado, @RequestParam float costo, @RequestParam String comentario, @RequestParam Date fechaServicio, ModelMap modelo) {
         try {
@@ -59,6 +61,7 @@ public class SolicitudControlador {
         return "solicitud.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping("/listar")
     public String listarSolicitud(ModelMap model) {
 
@@ -67,12 +70,14 @@ public class SolicitudControlador {
         return "lista_solicitudes.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificarSolicitud(@PathVariable String id, ModelMap model) {
         model.put("solicitud", solicitudServicio.getOne(id));
         return "solicitud_modificar.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificarSolicitud(@PathVariable String id, @RequestParam Cliente cliente, @RequestParam Proveedor proveedor, @RequestParam String descripcion, @RequestParam Estado estado, @RequestParam float costo, @RequestParam String comentario, @RequestParam Date fechaServicio, ModelMap modelo) {
 
@@ -95,12 +100,14 @@ public class SolicitudControlador {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping("/eliminar/{id}")
     public String eliminarSolicitudForm (@PathVariable String id, ModelMap model){
         model.put("solicitud",solicitudServicio.getOne(id));
         return "solicitud_eliminar.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SUPERADMIN')")
     @PostMapping("/eliminar/{id}")
     public String eliminarSolicitud (@PathVariable String id, ModelMap model){
 
