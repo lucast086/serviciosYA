@@ -91,8 +91,8 @@
     <section class="seccion servicios" id="servicios">
         <h2 class="h2" id="destino2">Nuestros Servicios</h2>
 
-        <div class="cajas" th:each="oficio : ${oficiosList}">
-            <div class="caja" th:text="${oficio.nombre}" th:classappend=" (${oficio.colorTarjeta}) ? 'caja1' : 'caja2'">
+        <div class="cajas" >
+            <div th:each="oficio : ${oficiosList}" class="caja" th:text="${oficio.nombre}" th:classappend=" (${oficio.colorTarjeta}) ? 'caja1' : 'caja2'">
                 <div class="contenido"><i th:class="${oficio.codigoIcono}" style="color: #ffffff;"></i></div>
             </div>
         </div>

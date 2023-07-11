@@ -27,11 +27,15 @@
       <hr>
     </div>
     <div class="profile-details">
-      <p><span class="label">Correo Electrónico:</span><span th:text="${cliente.email}"></span></p>
-      <p><span class="label">Teléfono:</span><span th:text="${cliente.telefono}"></span> </p>
-      <p><span class="label">Dirección:</span><span th:text="${cliente.direccion}"></span> </p>
+      <p><span class="label">Correo Electrónico: </span><span th:text="${cliente.email}"></span></p>
+      <p><span class="label">Teléfono: </span><span th:text="${cliente.telefono}"></span> </p>
+      <p><span class="label">Dirección: </span><span th:text="${cliente.direccion}"></span> </p>
     </div>
-    <a th:href="@{/cliente/modificar/__${cliente.id}__}" class="boton">Modificar Perfil</a>
+    <div class="button-container">
+      <form th:action="@{/cliente/modificar/__${cliente.id}__}">
+        <button class="button">Modificar Perfil</button>
+      </form>
+    </div>
   </div>
 </body>
 </html>
