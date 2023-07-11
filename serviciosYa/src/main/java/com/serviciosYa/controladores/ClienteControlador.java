@@ -1,7 +1,11 @@
 package com.serviciosYa.controladores;
 
 import com.serviciosYa.entidades.Cliente;
+
+import com.serviciosYa.entidades.Solicitud;
+
 import com.serviciosYa.entidades.Oficio;
+
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.interfaces.IClienteServicio;
@@ -51,7 +55,7 @@ public class ClienteControlador {
     }
 
     @PostMapping("/modificar/{id}")
-    public String modificarCliente (@PathVariable String id,@RequestParam String nombre,@RequestParam String apellido, @RequestParam String direccion,@RequestParam String email,@RequestParam String telefono, @RequestParam String password, @RequestParam String password2, ModelMap model){
+    public String modificarCliente (@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String direccion, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, ModelMap model){
 
         try {
             clienteServicio.modificarById(id,nombre,apellido,email,telefono,direccion,password,password2);

@@ -3,6 +3,7 @@ package com.serviciosYa.controladores;
 import com.serviciosYa.entidades.Imagen;
 import com.serviciosYa.entidades.Oficio;
 import com.serviciosYa.entidades.Proveedor;
+import com.serviciosYa.entidades.Solicitud;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.interfaces.IOficioServicio;
@@ -38,6 +39,7 @@ public class ProveedorControlador {
     }
 
     @PostMapping("/registro")
+
     public String registro(RedirectAttributes redirectAttributes,@RequestParam List<String> oficiosSeleccionados, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, ModelMap modelo) {
         try {
 
@@ -59,7 +61,7 @@ public class ProveedorControlador {
     }
 
     @PostMapping("/modificar/{id}")
-    public String modificarProveedor (@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, @RequestParam (value = "oficios",required = false)List<Oficio> oficios, ModelMap model){
+    public String modificarProveedor (@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, @RequestParam (value = "oficios",required = false)List<Oficio> oficios,  ModelMap model){
 
         try {
             proveedorServicio.modificarByID(id, nombre, apellido, email, telefono, password, password2, imagen, oficios);
@@ -74,7 +76,7 @@ public class ProveedorControlador {
     }
 
     @GetMapping("/eliminar/{id}")
-    public String eliminrProveedorForm(@PathVariable String id, ModelMap model){
+    public String eliminarProveedorForm(@PathVariable String id, ModelMap model){
         model.put("proveedor",proveedorServicio.getOne(id));
         return "proveedor_eleminar.html";
     }

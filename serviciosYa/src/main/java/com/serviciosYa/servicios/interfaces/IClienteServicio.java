@@ -1,6 +1,7 @@
 package com.serviciosYa.servicios.interfaces;
 
 import com.serviciosYa.entidades.Cliente;
+import com.serviciosYa.entidades.Solicitud;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 
