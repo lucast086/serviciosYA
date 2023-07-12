@@ -13,7 +13,7 @@
         <h1>SOLICITUD</h1>
         <div class="contenedor">
 
-            <input type="hidden" id="estado" name="estado" value="PENDIENTE"/>
+            <input type="hidden" id="estadoSol" name="estado" value="PENDIENTE"/>
 
             <h2 th:text="${status}"></h2>
 
@@ -84,9 +84,9 @@
     </form>
 </section>
 <script>
-    function enviarEstado(status) {
-        var estado = document.getElementById("estado");
-        estado.value = status;
+    function enviarEstado(est) {
+        var estadoS = document.getElementById("estadoSol");
+        estadoS.value = est;
     }
     fuction calificar() {
 
