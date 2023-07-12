@@ -86,7 +86,7 @@ public class ClienteControlador {
 
         }catch (Exepcion ex){
             model.put("error",ex.getMessage());
-            return "cliente_eleminar.htmlgit ";
+            return "cliente_eleminar.html ";
         }
     }
 
@@ -102,10 +102,5 @@ public class ClienteControlador {
         model.addAttribute("clientes",clienteList);
         return "listaCliente.html";
     }
-
-
-
-
-
 
 }
