@@ -133,8 +133,8 @@ public class ProveedorControlador {
     @GetMapping("/perfil/{id}")
     public String getOne (@PathVariable String id, ModelMap model){
         Proveedor proveedor = proveedorServicio.getOne(id);
-        Float promEstrellas = proveedorServicio.calcularEstrellas(proveedor);
-        model.put("estrellas", promEstrellas);
+        //Float promEstrellas = proveedorServicio.calcularEstrellas(proveedor);
+        //model.put("estrellas", promEstrellas);
         model.put("proveedor",proveedor);
         model.addAttribute("oficios", proveedor.getOficios());
         return "vista_perfil_proveedor.html";

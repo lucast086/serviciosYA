@@ -38,6 +38,7 @@ public class ProveedorServicio implements IProveedorServicio {
         proveedor.setNombre(nombre);
         proveedor.setApellido(apellido);
         proveedor.setEmail(email);
+        proveedor.setCalificacion(0f);
         proveedor.setTelefono(telefono);
         proveedor.setPassword(
                 new BCryptPasswordEncoder().encode(password)
@@ -62,7 +63,6 @@ public class ProveedorServicio implements IProveedorServicio {
         validarPasswords(password,password2);
 
         Proveedor proveedor = buscarByID(id);
-
         proveedor.setNombre(nombre);
         proveedor.setApellido(apellido);
         proveedor.setEmail(email);
@@ -140,7 +140,10 @@ public class ProveedorServicio implements IProveedorServicio {
         for (Resenia r: resenias) {
             total += r.getEstrellas().getCantidad();
         }
-        return total / resenias.size();
+        Float promedio = total / resenias.size();
+        proveedor.setCalificacion(promedio);
+        proveedorRepositorio.save(proveedor);
+        return promedio;
     }
 
 

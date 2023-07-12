@@ -6,6 +6,7 @@ import com.serviciosYa.enums.Estrella;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.OficioRepositorio;
+import com.serviciosYa.repositorios.ProveedorRepositorio;
 import com.serviciosYa.repositorios.ReseniaRepositorio;
 import com.serviciosYa.servicios.interfaces.IProveedorServicio;
 import com.serviciosYa.servicios.interfaces.IReseniaServicio;
@@ -24,6 +25,7 @@ public class ReseniaServicio implements IReseniaServicio {
 
     ReseniaRepositorio reseniaRepositorio;
     IProveedorServicio proveedorServicio;
+    ProveedorRepositorio proveedorRepositorio;
     IUsuarioServicio usuarioServicio;
     @Transactional
     public Resenia crear(String comentario, String estrella,String idProveedor) throws Exepcion {
@@ -36,8 +38,12 @@ public class ReseniaServicio implements IReseniaServicio {
         resenia.setComentario(comentario);
         resenia.setEstrellas(estrellaFromString(estrella));
         resenia.setProveedor(proveedor);
+        List<Resenia> resenias = proveedor.getResenias();
+        resenias.add(resenia);
+        proveedor.setResenias(resenias);
+        proveedorServicio.calcularEstrellas(proveedor);
 
-        reseniaRepositorio.save(resenia);
+        //        reseniaRepositorio.save(resenia);
 
         return resenia;
     }
