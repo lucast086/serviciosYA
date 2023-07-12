@@ -37,8 +37,8 @@
 
     </div>
     <div class="button-container">
-      <form sec:authorize="hasRole('USER')" action="/solicitud">
-        <button class="button" onclick="/solicitud">Solicitar</button>
+      <form sec:authorize="hasRole('USER')" th:action="@{/solicitud/registro/__${proveedor.id}__}">
+        <button class="button">Solicitar</button>
       </form>
       <form sec:authorize="hasRole('PROVEEDOR')" th:action="@{/proveedor/modificar/__${proveedor.id}__}">
         <button class="button">Modificar Perfil</button>
