@@ -13,7 +13,7 @@
         <h1>SOLICITUD</h1>
         <div class="contenedor">
 
-            <input type="hidden" id="estado" name="estado" value="PENDIENTE"/>
+            <input type="hidden" id="estadoSol" name="estado"/>
 
             <h2 th:text="${status}"></h2>
 
@@ -44,7 +44,7 @@
             </div>
 
                 <div sec:authorize="hasRole('USER')" class="button-container2">
-                     <input th:if="${status == 'PENDIENTE'}" type="submit" value="Modificar" class="button" />
+                     <input th:if="${status == 'PENDIENTE'}" type="submit" value="Modificar" onclick="enviarEstado('PENDIENTE')" class="button" />
                      <input th:if='${status == "PRESUPUESTADO"}' type="submit" value="Aceptar" onclick="enviarEstado('ACEPTADO')" class="button" />
                      <input th:if="${status == 'PRESUPUESTADO'}" type="submit" value="Rechazar" onclick="enviarEstado('CANCELADO')" class="button" />
                      <input th:if="${status == 'ACEPTADO'}" type="submit" value="Cancelar" onclick="enviarEstado('CANCELADO')" class="button" />
@@ -53,7 +53,7 @@
 
                 <div sec:authorize="hasRole('PROVEEDOR')" class="button-container2">
                     <input th:if="${status == 'PENDIENTE'}" type="submit" value="Presupuestar" onclick="enviarEstado('PRESUPUESTADO')"  class="button"/>
-                    <input th:if="${status == 'PRESUPUESTADO'}" type="submit" value="Modificar" class="button" />
+                    <input th:if="${status == 'PRESUPUESTADO'}" type="submit" value="Modificar" onclick="enviarEstado('PRESUPUESTADO')" class="button" />
                     <input th:if="${status == 'ACEPTADO'}" type="submit" value="Finalizar" onclick="enviarEstado('FINALIZADO')" class="button" />
                     <input th:if="${status == 'ACEPTADO'}" type="submit" value="Cancelar" onclick="enviarEstado('CANCELADO')" class="button" />
                 </div>
@@ -82,12 +82,10 @@
     </form>
 </section>
 <script>
-    function enviarEstado(status) {
-        var estado = document.getElementById("estado");
-        estado.value = status;
-    }
-    fuction calificar() {
+    function enviarEstado(est) {
 
+        var estadoS = document.getElementById("estadoSol");
+        estadoS.value = est;
     }
 </script>
 </body>
