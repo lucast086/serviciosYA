@@ -15,12 +15,12 @@
     <h3 class="h3" sec:authorize="hasRole('USER')" >Perfil de Cliente</h3>
     <h3 class="h3" sec:authorize="hasRole('ADMIN')" >Perfil de Administrador</h3>
     <div sec:authorize="hasRole('PROVEEDOR')" class="cajas">
-        <form action="/cliente/solicitudes" method="get">
+        <form th:action="@{/solicitud/listar/__${session.usuarioSesion.id}__}" method="get">
             <button class="caja" id="caja1">
                 <div class="contenido">Nuevas <br> Solicitudes</div>
             </button>
         </form>
-        <form action="/proveedor/trabajos" method="get">
+        <form th:action="@{/solicitud/listar/__${session.usuarioSesion.id}__}" method="get">
             <button class="caja" id="caja2">
                 <div class="contenido">Trabajos <br> Activos</div>
             </button>

@@ -503,7 +503,14 @@ h1 {
   line-height: 1;
   font-weight: bold;
 }
-
+h2{
+ text-align: center;
+   color: #1a2537;
+   font-size: 20px;
+   margin-bottom: 1em;
+   line-height: 1;
+   font-weight: bold;
+}
 .contenedor {
   margin-bottom: 20px;
   box-sizing: border-box;

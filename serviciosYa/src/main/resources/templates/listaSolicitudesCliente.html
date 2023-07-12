@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="/templates.fragments/head :: head"></head>
 <html lang="en">
 <head>
@@ -18,7 +18,8 @@
     <table class="table table-dark">
         <thead>
             <tr>
-                <th scope="col">Proveedor</th>
+                <th sec:authorize="hasRole('USER')" scope="col">Proveedor</th>
+                <th sec:authorize="hasRole('PROVEEDOR')" scope="col">Cliente</th>
                 <th scope="col">Fecha Del Pedido</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Solicitud</th>
@@ -26,7 +27,8 @@
         </thead>
         <tbody th:each="solicitud : ${solicitudes}">
             <tr>
-                <th  scope="row" th:text="${solicitud.proveedor.nombre}"></th>
+                <th  sec:authorize="hasRole('USER')" scope="row" th:text="${solicitud.proveedor.nombre}"></th>
+                <th  sec:authorize="hasRole('PROVEEDOR')" scope="row" th:text="${solicitud.cliente.nombre}"></th>
                 <td  th:text="${solicitud.fechaServicio}"></td>
                 <td  th:text="${solicitud.estado}"></td>
                 <td>
