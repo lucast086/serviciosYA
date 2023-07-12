@@ -30,7 +30,7 @@ public class ProveedorServicio implements IProveedorServicio {
             throw new Exepcion("el email ya esta registrado");
         }
 
-        validar(nombre,apellido,email,oficios,telefono,password);
+        validar(imagen,nombre,apellido,email,oficios,telefono,password);
         validarPasswords(password,password2);
 
         Proveedor proveedor = new Proveedor();
@@ -58,7 +58,7 @@ public class ProveedorServicio implements IProveedorServicio {
     @Override
     public void modificarByID(String id, String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios) throws Exepcion {
 
-        validar(nombre,apellido,email,oficios,telefono,password);
+        validar(imagen, nombre,apellido,email,oficios,telefono,password);
         validarPasswords(password,password2);
 
         Proveedor proveedor = buscarByID(id);
@@ -86,7 +86,7 @@ public class ProveedorServicio implements IProveedorServicio {
 
         proveedor.setImagen(imagen1);
         proveedor.setActivo(true);
-       // ****SE DEBE CREAR UN ARRAY DE LIST SOLICITUDES BASIO proveedor.setSolicitudes(solicitudes);
+
         proveedorRepositorio.save(proveedor);
     }
 
@@ -144,9 +144,13 @@ public class ProveedorServicio implements IProveedorServicio {
     }
 
 
-    private void validar (String nombre, String apellido, String email,List<Oficio> oficios, String telefono, String password) throws Exepcion{
+    private void validar (MultipartFile imagen, String nombre, String apellido, String email,List<Oficio> oficios, String telefono, String password) throws Exepcion{
 
-        if(oficios == null){
+        if(imagen == null || imagen.isEmpty()){
+            throw new Exepcion("No tiene Imagen");
+        }
+
+        if(oficios == null || oficios.isEmpty()){
             throw new Exepcion("No tiene oficios");
         }
 

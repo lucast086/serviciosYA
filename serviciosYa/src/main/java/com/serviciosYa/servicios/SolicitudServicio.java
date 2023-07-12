@@ -7,6 +7,7 @@ import com.serviciosYa.servicios.interfaces.IClienteServicio;
 import com.serviciosYa.servicios.interfaces.IProveedorServicio;
 import com.serviciosYa.servicios.interfaces.ISolicitudServicio;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 @AllArgsConstructor
 public class SolicitudServicio implements ISolicitudServicio {
 
@@ -49,14 +51,14 @@ public class SolicitudServicio implements ISolicitudServicio {
 
         Solicitud solicitud =buscarByID(id);
 
-       validar2 (descripcion,costo);
-
+        validar2 (descripcion,costo);
         solicitud.setDescripcion(descripcion);
+        log.info("modificarById estado que viene por param" + estado.toString());
         solicitud.setEstado(estado);
         solicitud.setCosto(costo);
         solicitud.setComentario(comentario);
         solicitud.setFechaServicio(new Date());
-
+        log.info("solicitud a guardar"+solicitud.getId().toString() +"  "+ solicitud.getEstado());
         solicitudRepositorio.save(solicitud);
     }
     public Solicitud getOne(String id) {

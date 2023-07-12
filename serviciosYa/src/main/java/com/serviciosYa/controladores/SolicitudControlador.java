@@ -78,8 +78,8 @@ public class SolicitudControlador {
     @GetMapping("/modificar/{id}")
     public String modificarSolicitud(@PathVariable String id, ModelMap model) {
         Solicitud solicitud = solicitudServicio.getOne(id);
-        model.addAttribute("solicitud", solicitud);
-        model.put("status",solicitud.getEstado().toString());
+        model.put("solicitud", solicitud);
+        model.put("status", solicitud.getEstado().toString());
         return "solicitudMod.html";
     }
 

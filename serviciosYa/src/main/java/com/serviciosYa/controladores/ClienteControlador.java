@@ -1,11 +1,7 @@
 package com.serviciosYa.controladores;
 
 import com.serviciosYa.entidades.Cliente;
-
-import com.serviciosYa.entidades.Solicitud;
-
 import com.serviciosYa.entidades.Oficio;
-
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.interfaces.IClienteServicio;
