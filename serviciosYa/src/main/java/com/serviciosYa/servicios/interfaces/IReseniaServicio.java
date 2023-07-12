@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface IReseniaServicio {
 
-    public Resenia crear(String comentario, Estrella estrella, String idProveedor) throws Exepcion;
+    public Resenia crear(String comentario, String estrella, String idProveedor) throws Exepcion;
     public void eliminarById (String id) throws Exepcion;
-    public void modificarById (String id, String comentario, Estrella estrella, Proveedor proveedor) throws Exepcion;
+    public void modificarById (String id, String comentario, String estrella, Proveedor proveedor) throws Exepcion;
     public List<Resenia> lsitarResenia();
     public Resenia buscarById (String id) throws Exepcion;
     public Resenia getOne(String id);

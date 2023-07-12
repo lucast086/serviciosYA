@@ -9,6 +9,11 @@ public enum Estrella {
 
     final int cantidad;
 
+    public int getCantidad() {
+        return cantidad;
+    }
+
+
     Estrella(int cantidad) {
         this.cantidad = cantidad;
     }

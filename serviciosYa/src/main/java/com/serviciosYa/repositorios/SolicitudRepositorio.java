@@ -12,15 +12,11 @@ import java.util.Optional;
 public interface SolicitudRepositorio extends JpaRepository  <Solicitud,String> {
 
     Optional<Solicitud> findById (String id);
-/*
-    @Query("SELECT s FROM Solicitud s WHERE s.Cliente.nombre = :nombre")
-    public List<Solicitud> buscarPorCliente(@Param("nombre")String nombre);
 
-    @Query("SELECT s FROM Solicitud s WHERE s.Proveedor.nombre = :nombre")
-    public List<Solicitud> buscarPorProveedor(@Param("nombre")String nombre);
-*/
+    @Query(nativeQuery = true, name = "Solicitud.findByClienteId")
+    List<Solicitud> buscarPorIdCliente(@Param("userId")String userId);
 
-
-
+    @Query(nativeQuery = true, name = "Solicitud.findByProveedorId")
+    List<Solicitud> buscarPorIdProveedor(@Param("userId")String userId);
 
 }

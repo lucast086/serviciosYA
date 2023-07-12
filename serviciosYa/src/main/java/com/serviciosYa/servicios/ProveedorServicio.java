@@ -132,6 +132,17 @@ public class ProveedorServicio implements IProveedorServicio {
         return new ArrayList<>(proveedorRepositorio.findAllByOficio(oficioId));
     }
 
+    @Override
+    public Float calcularEstrellas(Proveedor proveedor) {
+        List<Resenia> resenias = proveedor.getResenias();
+
+        Float total = 0f;
+        for (Resenia r: resenias) {
+            total += r.getEstrellas().getCantidad();
+        }
+        return total / resenias.size();
+    }
+
 
     private void validar (String nombre, String apellido, String email,List<Oficio> oficios, String telefono, String password) throws Exepcion{
 

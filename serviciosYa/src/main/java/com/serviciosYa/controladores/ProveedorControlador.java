@@ -1,23 +1,27 @@
 package com.serviciosYa.controladores;
 
-import com.serviciosYa.entidades.Imagen;
 import com.serviciosYa.entidades.Oficio;
 import com.serviciosYa.entidades.Proveedor;
-import com.serviciosYa.entidades.Solicitud;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.interfaces.IOficioServicio;
 import com.serviciosYa.servicios.interfaces.IProveedorServicio;
+import com.serviciosYa.servicios.interfaces.IReseniaServicio;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.expression.spel.ast.OpDivide;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @Slf4j
@@ -27,6 +31,7 @@ public class ProveedorControlador {
 
     IProveedorServicio proveedorServicio;
     IOficioServicio oficioServicio;
+    IReseniaServicio reseniaServicio;
 
     @PreAuthorize("hasAnyRole('ROLE_PROVEEDOR')")
     @GetMapping("/dashboard")
@@ -40,11 +45,21 @@ public class ProveedorControlador {
         return "proveedorRegistro.html";
     }
 
-    @PostMapping("/registro")
+    @PostMapping("/calificar/{id}")
+    public String registrarProveedor(RedirectAttributes redirectAttributes, @PathVariable String id, @RequestParam String comentario, @RequestParam String estrellas, ModelMap model){
+        try {
+            reseniaServicio.crear(comentario, estrellas, id);
+            redirectAttributes.addFlashAttribute("exito","El proveedor fue calificado con exito!");
+            return "redirect:/usuarios";
+        } catch (Exepcion e) {
+            redirectAttributes.addFlashAttribute("error","El proveedor NO fue calificado con exito!");
+            return "redirect:/usuarios";
+        }
+    }
 
+    @PostMapping("/registro")
     public String registro(RedirectAttributes redirectAttributes,@RequestParam List<String> oficiosSeleccionados, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam MultipartFile imagen, ModelMap modelo) {
         try {
-
             List<Oficio> oficios = oficioServicio.listarTodos(oficiosSeleccionados);
             proveedorServicio.crear(nombre,apellido,email,telefono,password,password2,imagen,oficios, Rol.PROVEEDOR);
             redirectAttributes.addFlashAttribute("exito", "Proveedor registrado correctamente!");
@@ -112,6 +127,8 @@ public class ProveedorControlador {
     @GetMapping("/listar/{id}")
     public String listarProveedorPorOficio(@PathVariable String id, ModelMap model){
         List<Proveedor> proveedorList = proveedorServicio.listarProveedoresPorOficio(id);
+        List<Float> caliList =  proveedorList.stream().map((p)-> proveedorServicio.calcularEstrellas(p)).collect(Collectors.toList());
+        model.addAttribute("calificaciones",caliList);
         model.addAttribute("proveedores",proveedorList);
         return "tarjetas.html";
     }
@@ -120,9 +137,13 @@ public class ProveedorControlador {
     @GetMapping("/perfil/{id}")
     public String getOne (@PathVariable String id, ModelMap model){
         Proveedor proveedor = proveedorServicio.getOne(id);
+        Float promEstrellas = proveedorServicio.calcularEstrellas(proveedor);
+        model.put("estrellas", promEstrellas);
         model.put("proveedor",proveedor);
         model.addAttribute("oficios", proveedor.getOficios());
         return "vista_perfil_proveedor.html";
     }
+
 }
+
 

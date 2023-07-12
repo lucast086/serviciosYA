@@ -16,7 +16,7 @@
             <div class="card-title">
                 <h2 th:text="${proveedor.nombre} +' '+ ${proveedor.apellido} "></h2>
                 <div class="card-text">
-                    <p>5</p><i class="fa-solid fa-star" style="color: #ffc700;"></i>
+                    <p th:src="@{/proveedor/calificacion/__${proveedor.id}__}"></p><i class="fa-solid fa-star" style="color: #ffc700;"></i>
                 </div>
             </div>
             <div class="button-container">

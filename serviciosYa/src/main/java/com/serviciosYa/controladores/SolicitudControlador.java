@@ -47,13 +47,12 @@ public class SolicitudControlador {
         try {
             solicitudServicio.crearSolicitud(idCliente, idProveedor, descripcion, costo, comentario);
             redirectAttributes.addFlashAttribute("exito", "Solicitud registrada correctamente!");
-            return "redirect:/solicitud/listar";
+            return "redirect:/usuarios";
         } catch (Exepcion ex) {
             redirectAttributes.addFlashAttribute("error", ex.getMessage());
             return "redirect:/usuarios";
         }
     }
-
     @GetMapping("/{id}")
     public String getOne(@PathVariable String id, ModelMap model) {
         model.put("solicitud", solicitudServicio.getOne(id));
@@ -61,6 +60,13 @@ public class SolicitudControlador {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")
+    @GetMapping("/listar/{id}")
+    public String listarSolicitudPorId(@PathVariable String id, ModelMap model) {
+        List<Solicitud> solicitudList = solicitudServicio.listarSolicitudes(id);
+        model.addAttribute("solicitudes", solicitudList);
+        return "listaSolicitudesCliente.html";
+    }
+
     @GetMapping("/listar")
     public String listarSolicitud(ModelMap model) {
         List<Solicitud> solicitudList = solicitudServicio.listarSolicitudes();
@@ -71,29 +77,25 @@ public class SolicitudControlador {
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificarSolicitud(@PathVariable String id, ModelMap model) {
-        model.put("solicitud", solicitudServicio.getOne(id));
-        return "solicitud_modificar.html";
+        Solicitud solicitud = solicitudServicio.getOne(id);
+        model.addAttribute("solicitud", solicitud);
+        model.put("status",solicitud.getEstado().toString());
+        return "solicitudMod.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")
     @PostMapping("/modificar/{id}")
-    public String modificarSolicitud(@PathVariable String id, @RequestParam Cliente cliente, @RequestParam Proveedor proveedor, @RequestParam String descripcion, @RequestParam Estado estado, @RequestParam Float costo, @RequestParam String comentario, ModelMap modelo) {
-
+    public String modificarSolicitud(@PathVariable String id, @RequestParam String descripcion, @RequestParam Estado estado, @RequestParam Float costo, @RequestParam(required = false) String comentario, ModelMap modelo) {
         try {
-            List<Proveedor> proveedores = proveedorServicio.listarProveedores();
-            modelo.addAttribute("proveedores", proveedores);
-
-            solicitudServicio.modificarById(id, cliente, proveedor, descripcion, estado, costo, comentario);
+            solicitudServicio.modificarById(id,descripcion, estado, costo, comentario);
             modelo.put("exito", "La solicitud se modifico con exito!");
 
-            return "redirect:../listar";
+            return "redirect:/usuarios";
 
         } catch (Exepcion e) {
-            List<Proveedor> proveedores = proveedorServicio.listarProveedores();
-            modelo.addAttribute("proveedores", proveedores);
 
             modelo.put("error", e.getMessage());
-            return "solicitud_modificar.html";
+            return "redirect:/usuarios";
 
         }
     }

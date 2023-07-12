@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -43,7 +44,7 @@ public class UsuarioControlador {
 
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN','ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN')")
     @GetMapping("/usuarios")
-    public String usuariosLogueados(HttpSession session){
+    public String usuariosLogueados(RedirectAttributes redirectAttributes, HttpSession session){
         Usuario logueado = (Usuario) session.getAttribute("usuarioSesion");
         String rol = logueado.getRol().toString();
 
