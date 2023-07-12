@@ -495,7 +495,7 @@ body {
   border-radius: 5px;
 }
 
-h1 {
+.seccion .formulario h1 {
   text-align: center;
   color: #1a2537;
   font-size: 40px;
@@ -503,7 +503,7 @@ h1 {
   line-height: 1;
   font-weight: bold;
 }
-h2{
+.seccion .formulario h2{
  text-align: center;
    color: #1a2537;
    font-size: 20px;
