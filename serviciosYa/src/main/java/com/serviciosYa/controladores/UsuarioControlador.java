@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -43,7 +44,7 @@ public class UsuarioControlador {
 
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN','ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN')")
     @GetMapping("/usuarios")
-    public String usuariosLogueados(HttpSession session){
+    public String usuariosLogueados(RedirectAttributes redirectAttributes, HttpSession session){
         Usuario logueado = (Usuario) session.getAttribute("usuarioSesion");
         String rol = logueado.getRol().toString();
 
@@ -53,7 +54,7 @@ public class UsuarioControlador {
             case "ADMIN" :
                  return  "redirect:/admin/dashboard";
             case "SUPERADMIN" :
-                  return  "redirect:/superadmin/dashboard";
+                  return  "redirect:/admin/dashboard";
             case "USER" :
                 return  "redirect:/cliente/dashboard";
         }
@@ -64,7 +65,7 @@ public class UsuarioControlador {
     public String registrarForm(){
         return "intermedia.html";
     }
-
+/*
     @PostMapping("/registro")
     public String registrar(@RequestParam String nombre, @RequestParam String apellido, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, @RequestParam Rol rol , ModelMap model) {
         try {
@@ -128,7 +129,7 @@ public class UsuarioControlador {
         return "index.html";
     }
 
-
+*/
 
 }
 

@@ -9,6 +9,8 @@
         </a>
         <nav href="/usuario" class="nav">
             <ul class="ul">
+                <li sec:authorize="hasRole('PROVEEDOR')" class="li"><a th:href="@{/solicitud/listar/__${session.usuarioSesion.id}__}" title="solicitudes" class="a">Solicitudes</a></li>
+                <li sec:authorize="hasRole('USER')" class="li"><a th:href="@{/solicitud/listar/__${session.usuarioSesion.id}__}" title="solicitudes" class="a">SolicitudesUser</a></li>
                 <li sec:authorize="hasRole('PROVEEDOR')" class="li"><a th:href="@{/proveedor/perfil/__${session.usuarioSesion.id}__}" title="perfil" class="a">Perfil</a></li>
                 <li sec:authorize="hasRole('USER')" class="li"><a th:href="@{/cliente/perfil/__${session.usuarioSesion.id}__}" title="perfil" class="a">Perfil</a></li>
                 <li sec:authorize="hasRole('ADMIN')" class="li"><a th:href="@{/admin/modificar/__${session.usuarioSesion.id}__}" title="perfil" class="a">Perfil</a></li>

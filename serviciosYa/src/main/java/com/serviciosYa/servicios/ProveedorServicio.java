@@ -1,9 +1,6 @@
 package com.serviciosYa.servicios;
 
-import com.serviciosYa.entidades.Imagen;
-import com.serviciosYa.entidades.Oficio;
-import com.serviciosYa.entidades.Proveedor;
-import com.serviciosYa.entidades.Solicitud;
+import com.serviciosYa.entidades.*;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.ProveedorRepositorio;
@@ -27,6 +24,11 @@ public class ProveedorServicio implements IProveedorServicio {
 
     @Override
     public void crear(String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios, Rol rol) throws Exepcion {
+
+        Optional<Proveedor> respuesta = proveedorRepositorio.findByEmail(email);
+        if (respuesta.isPresent()) {
+            throw new Exepcion("el email ya esta registrado");
+        }
 
         validar(nombre,apellido,email,oficios,telefono,password);
         validarPasswords(password,password2);
@@ -128,6 +130,17 @@ public class ProveedorServicio implements IProveedorServicio {
     @Override
     public List<Proveedor> listarProveedoresPorOficio(String oficioId) {
         return new ArrayList<>(proveedorRepositorio.findAllByOficio(oficioId));
+    }
+
+    @Override
+    public Float calcularEstrellas(Proveedor proveedor) {
+        List<Resenia> resenias = proveedor.getResenias();
+
+        Float total = 0f;
+        for (Resenia r: resenias) {
+            total += r.getEstrellas().getCantidad();
+        }
+        return total / resenias.size();
     }
 
 

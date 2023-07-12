@@ -23,4 +23,6 @@ public interface IProveedorServicio {
     List<Proveedor> listarProveedores ();
 
     List<Proveedor> listarProveedoresPorOficio(String oficioId);
+
+    Float calcularEstrellas(Proveedor proveedor);
 }

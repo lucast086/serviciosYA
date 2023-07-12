@@ -6,12 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -29,6 +24,7 @@ public class Resenia {
     private String comentario;
 
     @Column(name = "cant_estrellas")
+    @Enumerated(EnumType.ORDINAL)
     private Estrella estrellas;
 
     @ManyToOne(targetEntity = Proveedor.class)

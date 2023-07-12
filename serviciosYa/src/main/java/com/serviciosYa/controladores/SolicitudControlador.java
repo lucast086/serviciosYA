@@ -7,9 +7,12 @@ import com.serviciosYa.enums.Estado;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.ProveedorServicio;
+import com.serviciosYa.servicios.interfaces.IClienteServicio;
+import com.serviciosYa.servicios.interfaces.IProveedorServicio;
 import com.serviciosYa.servicios.interfaces.ISolicitudServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -26,81 +29,85 @@ public class SolicitudControlador {
 
     ISolicitudServicio solicitudServicio;
 
-    @Autowired
-    private ProveedorServicio proveedorServicio;
+    private IProveedorServicio proveedorServicio;
+    private IClienteServicio clienteServicio;
 
-    @GetMapping("")
-    public String registrarSolicitud(ModelMap modelo) {
+    @GetMapping("/registro/{id}")
+    public String registrarSolicitud(@PathVariable String id, ModelMap modelo) {
 
-        List<Proveedor> proveedores = proveedorServicio.listarProveedores();
-        modelo.addAttribute("proveedores", proveedores);
+        Proveedor proveedor = proveedorServicio.getOne(id);
+        modelo.put("proveedor", proveedor);
 
         return "solicitud.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
     @PostMapping("/registrosolicitud")
-    public String registrarSolicitud(RedirectAttributes redirectAttributes, @RequestParam String idCliente, @RequestParam String idProveedor, @RequestParam String descripcion, @RequestParam Estado estado, @RequestParam float costo, @RequestParam String comentario, @RequestParam Date fechaServicio, ModelMap modelo) {
+    public String registrarSolicitud(RedirectAttributes redirectAttributes, @RequestParam String idCliente, @RequestParam String idProveedor, @RequestParam String descripcion, @RequestParam(required = false) Float costo, @RequestParam(required = false) String comentario, ModelMap modelo) {
         try {
-            solicitudServicio.crearSolicitud(idCliente, idProveedor, descripcion, estado, costo, comentario, fechaServicio);
+            solicitudServicio.crearSolicitud(idCliente, idProveedor, descripcion, costo, comentario);
             redirectAttributes.addFlashAttribute("exito", "Solicitud registrada correctamente!");
-            return "cliente.html";
+            return "redirect:/usuarios";
         } catch (Exepcion ex) {
-            List<Proveedor> proveedores = proveedorServicio.listarProveedores();
-            modelo.addAttribute("proveedores", proveedores);
-
             redirectAttributes.addFlashAttribute("error", ex.getMessage());
-            return "solicitud.html";
+            return "redirect:/usuarios";
         }
     }
-
     @GetMapping("/{id}")
     public String getOne(@PathVariable String id, ModelMap model) {
         model.put("solicitud", solicitudServicio.getOne(id));
         return "solicitud.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")
+    @GetMapping("/listar/{id}")
+    public String listarSolicitudPorId(@PathVariable String id, ModelMap model) {
+        List<Solicitud> solicitudList = solicitudServicio.listarSolicitudes(id);
+        model.addAttribute("solicitudes", solicitudList);
+        return "listaSolicitudesCliente.html";
+    }
+
     @GetMapping("/listar")
     public String listarSolicitud(ModelMap model) {
-
         List<Solicitud> solicitudList = solicitudServicio.listarSolicitudes();
         model.addAttribute("solicitudes", solicitudList);
-        return "lista_solicitudes.html";
+        return "listaSolicitudesCliente.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificarSolicitud(@PathVariable String id, ModelMap model) {
-        model.put("solicitud", solicitudServicio.getOne(id));
-        return "solicitud_modificar.html";
+        Solicitud solicitud = solicitudServicio.getOne(id);
+        model.addAttribute("solicitud", solicitud);
+        model.put("status",solicitud.getEstado().toString());
+        return "solicitudMod.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")
     @PostMapping("/modificar/{id}")
-    public String modificarSolicitud(@PathVariable String id, @RequestParam Cliente cliente, @RequestParam Proveedor proveedor, @RequestParam String descripcion, @RequestParam Estado estado, @RequestParam float costo, @RequestParam String comentario, @RequestParam Date fechaServicio, ModelMap modelo) {
-
+    public String modificarSolicitud(@PathVariable String id, @RequestParam String descripcion, @RequestParam Estado estado, @RequestParam Float costo, @RequestParam(required = false) String comentario, ModelMap modelo) {
         try {
-            List<Proveedor> proveedores = proveedorServicio.listarProveedores();
-            modelo.addAttribute("proveedores", proveedores);
-
-            solicitudServicio.modificarById(id, cliente, proveedor, descripcion, estado, costo, comentario, fechaServicio);
+            solicitudServicio.modificarById(id,descripcion, estado, costo, comentario);
             modelo.put("exito", "La solicitud se modifico con exito!");
 
-            return "redirect:../listar";
+            return "redirect:/usuarios";
 
         } catch (Exepcion e) {
-            List<Proveedor> proveedores = proveedorServicio.listarProveedores();
-            modelo.addAttribute("proveedores", proveedores);
 
             modelo.put("error", e.getMessage());
-            return "solicitud_modificar.html";
+            return "redirect:/usuarios";
 
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping("/eliminar/{id}")
     public String eliminarSolicitudForm (@PathVariable String id, ModelMap model){
         model.put("solicitud",solicitudServicio.getOne(id));
         return "solicitud_eliminar.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SUPERADMIN')")
     @PostMapping("/eliminar/{id}")
     public String eliminarSolicitud (@PathVariable String id, ModelMap model){
 

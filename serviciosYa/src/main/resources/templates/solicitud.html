@@ -8,11 +8,14 @@
 <div th:replace="/templates.fragments/msgExitoError :: div"></div>
 
 <section class="seccion formulario">
-    <form action="/solicitud/registrosolicitud" method="POST" class="formulario">
+    <form action="/solicitud/registrosolicitud/" method="POST" class="formulario">
+        <input th:value=${session.usuarioSesion.id} name="idCliente" type="hidden" >
+        <input th:value=${proveedor.id} name="idProveedor" type="hidden" >
+
         <h1>SOLICITUD</h1>
         <div class="contenedor">
 
-            <div sec:authorize="hasRole('USER')" class="input contenedor">
+            <div class="input contenedor">
                     <textarea
                             type="text"
                             name="descripcion"
@@ -20,27 +23,11 @@
                             rows="15" cols="50"
                     ></textarea>
             </div>
-            <div sec:authorize="hasRole('PROVEEDOR')" class="input contenedor">
-                    <textarea
-                            type="text"
-                            name="descripcion"
-                            rows="15" cols="50"
-                            disabled
-                    ></textarea>
-                            <!--th:text="${solicitud.descripcion}"-->
 
-            </div>
-
-            <div sec:authorize="hasRole('PROVEEDOR')" class="input contenedor">
-                <input type="number" name="costo" placeholder="Costo aproximado del trabajo"/>
-            </div>
-            <div sec:authorize="hasRole('USER')" class="input contenedor">
-                <input type="text" name="costo" placeholder="Costo aproximado del trabajo" disabled/><!--th:value="${solicitud.costo}"-->
-            </div>
+                <input type="hidden" name="costo" value="0"/>
 
             <div class="button-container2">
                 <input type="submit" value="enviar" class="button" />
-                <input type="button" value="cancelar" class="button"/>
             </div>
 
         </div>

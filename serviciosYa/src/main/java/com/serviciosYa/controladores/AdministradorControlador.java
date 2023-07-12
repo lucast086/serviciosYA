@@ -25,6 +25,7 @@ public class AdministradorControlador {
     ClienteServicio clienteServicio;
 
 
+    @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN','ROLE_ADMIN')")
     @GetMapping("/dashboard")
     public String dashboard(ModelMap model) {
         return "usuarios.html";

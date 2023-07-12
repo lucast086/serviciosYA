@@ -24,9 +24,9 @@
                 <th scope="col">Solicitud</th>
             </tr>
         </thead>
-        <tbody th:each="solicitud : ${solicitud}">
+        <tbody th:each="solicitud : ${solicitudes}">
             <tr>
-                <th  scope="row" th:text="${solicitud.proveedor}"></th>
+                <th  scope="row" th:text="${solicitud.proveedor.nombre}"></th>
                 <td  th:text="${solicitud.fechaServicio}"></td>
                 <td  th:text="${solicitud.estado}"></td>
                 <td>

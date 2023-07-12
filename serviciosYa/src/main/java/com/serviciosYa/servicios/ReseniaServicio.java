@@ -26,21 +26,31 @@ public class ReseniaServicio implements IReseniaServicio {
     IProveedorServicio proveedorServicio;
     IUsuarioServicio usuarioServicio;
     @Transactional
-    public Resenia crear(String comentario, Estrella estrella,String idProveedor) throws Exepcion {
+    public Resenia crear(String comentario, String estrella,String idProveedor) throws Exepcion {
 
-        validar(comentario,estrella,idProveedor);
-
+        validar(comentario,idProveedor);
         Resenia resenia = new Resenia();
 
         Proveedor proveedor = proveedorServicio.getOne(idProveedor);
 
         resenia.setComentario(comentario);
-        resenia.setEstrellas(estrella);
+        resenia.setEstrellas(estrellaFromString(estrella));
         resenia.setProveedor(proveedor);
 
         reseniaRepositorio.save(resenia);
 
         return resenia;
+    }
+
+    private Estrella estrellaFromString(String x){
+        switch (x) {
+            case "1" : return Estrella.UNO;
+            case "2" : return Estrella.DOS;
+            case "3" : return Estrella.TRES;
+            case "4" : return Estrella.CUATRO;
+            case "5" : return Estrella.CINCO;
+        }
+        return null;
     }
     @Transactional
     public void eliminarById (String id) throws Exepcion {
@@ -48,11 +58,11 @@ public class ReseniaServicio implements IReseniaServicio {
         reseniaRepositorio.delete(resenia);
     }
     @Transactional
-    public void modificarById (String id, String comentario, Estrella estrella,Proveedor proveedor) throws Exepcion {
+    public void modificarById (String id, String comentario, String estrella,Proveedor proveedor) throws Exepcion {
         Resenia resenia = buscarById(id);
 
         resenia.setComentario(comentario);
-        resenia.setEstrellas(estrella);
+        resenia.setEstrellas(estrellaFromString(estrella));
         resenia.setProveedor(proveedor);
 
         reseniaRepositorio.save(resenia);
@@ -72,12 +82,9 @@ public class ReseniaServicio implements IReseniaServicio {
         return reseniaRepositorio.getReferenceById(id);
     }
 
-    private void validar (String comentario,Estrella estrella, String id) throws Exepcion {
+    private void validar (String comentario,String id) throws Exepcion {
         if (comentario.isEmpty()){
             throw new Exepcion("La celda comentario esta vacia");
-        }
-        if (estrella != Estrella.UNO && estrella != Estrella.DOS && estrella != Estrella.TRES && estrella != Estrella.CUATRO && estrella != Estrella.CINCO ){
-            throw new Exepcion("Estrellas incorrectas");
         }
         if (id.isEmpty()){
             throw new Exepcion("No se encontro el usuario");

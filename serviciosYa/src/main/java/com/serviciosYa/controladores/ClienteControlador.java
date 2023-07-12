@@ -11,6 +11,7 @@ import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.interfaces.IClienteServicio;
 import com.serviciosYa.servicios.interfaces.IOficioServicio;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,8 @@ public class ClienteControlador {
 
     IClienteServicio clienteServicio;
     IOficioServicio oficioServicio;
+
+    @PreAuthorize("hasAnyRole('ROLE_USER')")
     @GetMapping("/dashboard")
     public String dashboard(ModelMap model) {
         List<Oficio>oficioList=oficioServicio.listarTodos();
@@ -48,12 +51,14 @@ public class ClienteControlador {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping("/modificar/{id}")
     public String modificarClienteForm(@PathVariable String id,ModelMap model){
         model.put("cliente",clienteServicio.getOne(id));
         return "modificarCliente.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_ADMIN','ROLE_SUPERADMIN')")
     @PostMapping("/modificar/{id}")
     public String modificarCliente (@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String direccion, @RequestParam String email, @RequestParam String telefono, @RequestParam String password, @RequestParam String password2, ModelMap model){
 
@@ -71,12 +76,15 @@ public class ClienteControlador {
 
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping ("/eliminar/{id}")
     public String eliminarClienteForm(@PathVariable String id, ModelMap model){
         model.put("cliente",clienteServicio.getOne(id));
         return "cliente_eliminar.html";
     }
 
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SUPERADMIN')")
     @PostMapping ("/eliminar/{id}")
     public String eliminarCliente(@PathVariable  String id, ModelMap model){
         try {
@@ -90,12 +98,14 @@ public class ClienteControlador {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping("/perfil/{id}")
     public String getOne(@PathVariable String id, ModelMap model){
         model.put("cliente",clienteServicio.getOne(id));
         return "vista_perfil_cliente.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping("/listar")
     public String listar (ModelMap model){
         List<Cliente> clienteList = clienteServicio.listarClientes();
