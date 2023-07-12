@@ -43,8 +43,7 @@
                 <input th:value="${solicitud.costo}" type="text" name="costo" readonly/>
             </div>
 
-            <div class="button-container2">
-                <div sec:authorize="hasRole('USER')">
+                <div sec:authorize="hasRole('USER')" class="button-container2">
                      <input th:if="${status == 'PENDIENTE'}" type="submit" value="Modificar" class="button" />
                      <input th:if='${status == "PRESUPUESTADO"}' type="submit" value="Aceptar" onclick="enviarEstado('ACEPTADO')" class="button" />
                      <input th:if="${status == 'PRESUPUESTADO'}" type="submit" value="Rechazar" onclick="enviarEstado('CANCELADO')" class="button" />
@@ -52,13 +51,12 @@
 
                 </div>
 
-                <div sec:authorize="hasRole('PROVEEDOR')">
+                <div sec:authorize="hasRole('PROVEEDOR')" class="button-container2">
                     <input th:if="${status == 'PENDIENTE'}" type="submit" value="Presupuestar" onclick="enviarEstado('PRESUPUESTADO')"  class="button"/>
                     <input th:if="${status == 'PRESUPUESTADO'}" type="submit" value="Modificar" class="button" />
                     <input th:if="${status == 'ACEPTADO'}" type="submit" value="Finalizar" onclick="enviarEstado('FINALIZADO')" class="button" />
                     <input th:if="${status == 'ACEPTADO'}" type="submit" value="Cancelar" onclick="enviarEstado('CANCELADO')" class="button" />
                 </div>
-            </div>
         </div>
     </form>
     <form th:action="@{/proveedor/calificar/__${solicitud.proveedor.id}__}" method="POST" class="formulario" th:if="${status == 'FINALIZADO' || status == 'CANCELADO'}" sec:authorize="hasRole('USER')">
