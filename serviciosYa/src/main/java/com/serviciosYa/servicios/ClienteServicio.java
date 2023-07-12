@@ -140,5 +140,13 @@ public class ClienteServicio implements IClienteServicio {
         }
     }
 
+    public void cambiarRol(String idCliente) throws Exepcion{
 
+        Cliente cliente = clienteRepositorio.getOne(idCliente);
+
+            cliente.setRol(Rol.valueOf("PROVEEDOR"));
+
+            clienteRepositorio.save(cliente);
+
+    }
 }
