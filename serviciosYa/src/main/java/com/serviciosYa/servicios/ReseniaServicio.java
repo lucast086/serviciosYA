@@ -93,7 +93,7 @@ public class ReseniaServicio implements IReseniaServicio {
 
     @Override
     public void editarComentario(String id) throws Exepcion {
-        String adminEdit = "COMENTARIO EDITADO POR UN ADMINISTRADOR";
+        String adminEdit = "COMENTARIO ELIMINADO POR UN ADMINISTRADOR";
         Resenia resenia = buscarById(id);
         resenia.setComentario(adminEdit);
         reseniaRepositorio.save(resenia);
