@@ -487,9 +487,46 @@ body {
   }
 
 /* Estilos generales de formulario */
+
+.resenia{
+      width: 100%;
+      min-height: 80vh;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-evenly;
+      align-items: normal;
+}
+.estrellas{
+text-align:center;
+margin: 2em;
+}
+.rating {
+  display: inline-block;
+}
+
+.rating input[type="radio"] {
+  display: none;
+}
+
+.rating label {
+  float: right;
+  color: #ddd;
+  font-size: 50px;
+  cursor: pointer;
+}
+
+.rating label:before {
+  content: '\2605'; /* Código Unicode para la estrella (★) */
+  margin-right: 5px;
+}
+
+.rating input[type="radio"]:checked ~ label {
+  color: #f7d02c; /* Color para las estrellas seleccionadas */
+}
 .seccion .formulario {
   width: 25%;
-  margin-top: 150px;
+  margin-top: 100px;
+  margin-bottom: 100px;
   padding: 15px;
   background: rgba(255, 255, 255, 60%);
   border-radius: 5px;
@@ -507,7 +544,7 @@ body {
  text-align: center;
    color: #1a2537;
    font-size: 20px;
-   margin-bottom: 1em;
+   margin: 1em;
    line-height: 1;
    font-weight: bold;
 }
