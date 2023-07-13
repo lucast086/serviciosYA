@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title>Perfil de Usuario-Cliente</title>
+  <link rel="stylesheet" type="text/css" href="/css/perfiles.css">
+</head>
+<body>
+<header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
+<section class="seccion">
+  <div class="profile">
+    <div class="profile-header">
+      <h1 th:text="${admin.nombre} +' '+ ${admin.apellido}"></h1>
+      <hr>
+    </div>
+    <div class="profile-details">
+      <p><span class="label">Correo Electrónico: </span><span th:text="${admin.email}"></span></p>
+      <p><span class="label">Teléfono: </span><span th:text="${admin.telefono}"></span> </p>
+    </div>
+    <div class="button-container">
+      <form th:action="@{/admin/modificar/__${admin.id}__}">
+        <button class="button">Modificar Perfil</button>
+      </form>
+    </div>
+  </div>
+</section>
+</body>
+</html>

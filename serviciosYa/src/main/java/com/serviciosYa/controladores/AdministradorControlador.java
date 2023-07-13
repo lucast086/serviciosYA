@@ -1,11 +1,14 @@
 package com.serviciosYa.controladores;
 
 import com.serviciosYa.entidades.Administrador;
+import com.serviciosYa.entidades.Resenia;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.ClienteServicio;
 import com.serviciosYa.servicios.interfaces.IAdministradorServicio;
+import com.serviciosYa.servicios.interfaces.IReseniaServicio;
 import lombok.AllArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -23,6 +27,7 @@ public class AdministradorControlador {
 
     IAdministradorServicio administradorServicio;
     ClienteServicio clienteServicio;
+    IReseniaServicio reseniaServicio;
 
 
     @GetMapping("/generar")
@@ -35,6 +40,13 @@ public class AdministradorControlador {
             model.put("error", ex.getMessage());
             return "admin_registro.html";
         }
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SUPERADMIN')")
+    @GetMapping("/perfil/{id}")
+    public String getOne(@PathVariable String id, ModelMap model){
+        model.put("admin",administradorServicio.getOne(id));
+        return "vista_perfil_admin.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN','ROLE_ADMIN')")
@@ -68,20 +80,42 @@ public class AdministradorControlador {
 
         model.put("admin", administradorServicio.getOne(id));
 
-        return "admin_modificar.html";
+        return "modificarAdmin.html";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN','ROLE_ADMIN')")
     @PostMapping("/modificar/{id}")
-    public String modificar (@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido , @RequestParam String email, @RequestParam String telefono,@RequestParam String password, ModelMap model ){
+    public String modificar (@PathVariable String id, @RequestParam String nombre, @RequestParam String apellido , @RequestParam String telefono,@RequestParam String password, @RequestParam String password2, ModelMap model ){
         try {
-            administradorServicio.modificarById(id,nombre,apellido,email,telefono,password);
+            administradorServicio.modificarById(id,nombre,apellido,telefono,password,password2);
 
             return "redirect:../listar";
         }catch (Exepcion ex){
             model.put("admin", administradorServicio.getOne(id));
             model.put("error", ex.getMessage());
-            return "admin_modificar.html";
+            return "modificarAdmin.html";
+        }
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN','ROLE_ADMIN')")
+    @GetMapping ("/comentarios")
+    public String comentarios (ModelMap model){
+
+        List<Resenia> resenias = reseniaServicio.lsitarResenia();
+        model.addAttribute("resenias",resenias);
+
+        return "listaComentarios.html";
+    }
+
+    @GetMapping("/eliminarResenia/{id}")
+    public String eliminarResenia(@PathVariable String id, ModelMap model){
+        try {
+            reseniaServicio.editarComentario(id);
+            model.put("exito","Resenia Editada con exito");
+            return "redirect:/admin/comentarios";
+        } catch (Exepcion e){
+            model.put("error",e.getMessage());
+            return "redirect:/admin/comentarios";
         }
     }
 

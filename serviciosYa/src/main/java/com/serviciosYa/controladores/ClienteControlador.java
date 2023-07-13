@@ -74,24 +74,15 @@ public class ClienteControlador {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping ("/eliminar/{id}")
-    public String eliminarClienteForm(@PathVariable String id, ModelMap model){
-        model.put("cliente",clienteServicio.getOne(id));
-        return "cliente_eliminar.html";
-    }
-
-
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SUPERADMIN')")
-    @PostMapping ("/eliminar/{id}")
     public String eliminarCliente(@PathVariable  String id, ModelMap model){
         try {
             clienteServicio.eliminarById(id);
             model.put("exito","Se elimino con exito!");
-            return "redirect:../listar";
 
         }catch (Exepcion ex){
             model.put("error",ex.getMessage());
-            return "cliente_eleminar.html ";
         }
+        return "redirect:/cliente/listar";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USER','ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPERADMIN')")

@@ -15,4 +15,6 @@ public interface IReseniaServicio {
     public List<Resenia> lsitarResenia();
     public Resenia buscarById (String id) throws Exepcion;
     public Resenia getOne(String id);
+
+    void editarComentario(String id) throws Exepcion;
 }
