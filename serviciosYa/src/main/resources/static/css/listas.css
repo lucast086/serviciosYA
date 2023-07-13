@@ -186,6 +186,7 @@ body {
 
 .tabla{
 min-height: 80vh;
+padding: 3em;
 }
 
 .footer {
@@ -269,8 +270,20 @@ min-height: 80vh;
 }
 .color2 {
   color: red;
+
+.circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
+.verde {
+  background-color: green;
+}
+
+.rojo {
+  background-color: red;
+}
 .secciontabla {
     padding: 2rem;
 }
