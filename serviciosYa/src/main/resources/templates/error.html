@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/templates.fragments/head :: head"></head>
+<link rel="stylesheet" type="text/css" href="/css/index.css" />
+
+<body>
+
+<header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
+
+<section th:if="${session.usuarioSesion != null}" class="seccion bienvenida">
+    <div class="container m-5">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <h1 th:text="'ERROR! '+${codigo}"></h1>
+            <h3 th:text="${mensaje}"> </h3>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="/templates.fragments/footer :: footer" class="footer"></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>

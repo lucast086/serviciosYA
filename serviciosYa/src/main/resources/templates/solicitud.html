@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="/templates.fragments/head :: head"></head>
+<link rel="stylesheet" type="text/css" href="/css/index.css"/>
+<body>
+<header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
+
+<div th:replace="/templates.fragments/msgExitoError :: div"></div>
+
+<section class="seccion formulario">
+    <form action="/solicitud/registrosolicitud/" method="POST" class="formulario">
+        <input th:value=${session.usuarioSesion.id} name="idCliente" type="hidden" >
+        <input th:value=${proveedor.id} name="idProveedor" type="hidden" >
+
+        <h1>SOLICITUD</h1>
+        <div class="contenedor">
+
+            <div class="input contenedor">
+                    <textarea
+                            type="text"
+                            name="descripcion"
+                            placeholder="Descripcion del trabajo solicitado"
+                            rows="15" cols="50"
+                    ></textarea>
+            </div>
+
+                <input type="hidden" name="costo" value="0"/>
+
+            <div class="button-container2">
+                <input type="submit" value="enviar" class="button" />
+            </div>
+
+        </div>
+    </form>
+</section>
+<footer th:replace="/templates.fragments/footer :: footer" class="footer"></footer>
+</body>
+</html>

@@ -17,17 +17,20 @@
             <ul class="ul">
                 <li class="li"><a href="#destino1" title="about" class="a">¿Quienes somos?</a></li>
                 <li class="li"><a href="#destino2" title="servcios" class="a">Servicios</a></li>
-                <li class="li"><a href="/registrar" title="registro" class="a">Registro</a></li>
-                <li class="li"><a href="/login" title="ingreso" class="a">Ingreso</a></li>
+                <li th:if="${session.usuarioSesion == null}" class="li"><a  href="/registrar" title="registro" class="a">Registro</a></li>
+                <li th:if="${session.usuarioSesion == null}" class="li"><a href="/login" title="ingreso" class="a">Ingreso</a></li>
+                <li th:if="${session.usuarioSesion != null}" class="li"><a href="/usuarios" title="logout" class="a">Inicio</a></li>
+                <li th:if="${session.usuarioSesion != null}" class="li"><a href="/logout" title="logout" class="a">Logout</a></li>
             </ul>
         </nav>
     </header>
 </header>
     <div class="seccion" id="destino3">
         <section class="section info">
-            <h2 class="h2">BIENVENIDOS</h2>
+            <h2 th:if="${session.usuarioSesion == null}" class="h2">BIENVENIDOS</h2>
+            <h2 th:if="${session.usuarioSesion != null}" class="h2"  th:text=" 'Bienvenido ' + ${session.usuarioSesion.nombre}" ></h2>
             <h3 class="h3">ServiciosYa</h3>
-            <ul class="ul">
+            <ul th:if="${session.usuarioSesion == null}" class="ul">
                 <li class="li">
                     <a
                             href="/registrar"
@@ -45,8 +48,26 @@
                     >
                 </li>
             </ul>
+            <ul th:if="${session.usuarioSesion != null}" class="ul">
+                <li class="li">
+                    <a
+                            href="/logout"
+                            class="a"
+                            title="logout"
+                    >LOGOUT</a
+                    >
+                </li>
+                <li class="li">
+                    <a
+                            href="/usuarios"
+                            class="a"
+                            title="usuarios"
+                    >INICIO</a
+                    >
+                </li>
+            </ul>
             <p class="p">
-                En <span class="destacado">ServiciosYa</span>, nos enfocamos en facilitar la conexión entre usuarios y proveedores confiables para satisfacer tus necesidades de servicios. <br><a href="/registrar" class="a">¡Únete hoy mismo!</a>
+                En <span class="destacado">ServiciosYa</span>, nos enfocamos en facilitar la conexión entre usuarios y proveedores confiables para satisfacer tus necesidades de servicios. <br><a th:if="${session.usuarioSesion == null}" href="/registrar" class="a">¡Únete hoy mismo!</a>
             </p>
         </section>
     </div>
@@ -69,42 +90,39 @@
 
     <section class="seccion servicios" id="servicios">
         <h2 class="h2" id="destino2">Nuestros Servicios</h2>
-        <div class="cajas">
-            <div class="caja" id="caja1">
-                <div class="contenido"></div><i class="fa-regular fa-lightbulb" style="color: #ffffff;"></i>Electricista
-            </div>
-            <div class="caja" id="caja2">
-                <div class="contenido"></div><i class="fa-solid fa-wrench"></i>Plomero
-            </div>
-            <div class="caja" id="caja3">
-                <div class="contenido"></div><i class="fa-solid fa-fire-burner" style="color: #ffffff;"></i>Gasista
-            </div>
-            <div class="caja" id="caja4">
-                <div class="contenido"></div><i class="fa-sharp fa-solid fa-trowel-bricks"></i>Albañil
-            </div>
-            <div class="caja" id="caja5">
-                <div class="contenido"></div><i class="fa-solid fa-paint-roller" style="color: #ffffff;"></i>Pintor
+
+        <div class="cajas" >
+            <div th:each="oficio : ${oficiosList}" class="caja" th:text="${oficio.nombre}" th:classappend=" (${oficio.colorTarjeta}) ? 'caja1' : 'caja2'">
+                <div class="contenido"><i th:class="${oficio.codigoIcono}" style="color: #ffffff;"></i></div>
             </div>
         </div>
+
         <a
+                th:if="${session.usuarioSesion == null}"
                 href="/registrar"
                 class="a"
                 title="#registro"
         >Registrate Ahora!</a
+        >
+        <a
+                th:if="${session.usuarioSesion != null}"
+                href="/usuarios"
+                class="a"
+                title="usuarios"
+        >INICIO</a
         >
     </section>
     <footer>
         <footer class="footer">
             <a href="/" class="logo">
                 <img
-                        src="Extras/apple-touch-icon.png"
+                        src="/img/apple-touch-icon.png"
                         alt="logo de la compañia"
                         class="logo-img"
                 />
             </a>
             <nav class="nav">
                 <ul class="ul">
-                    <li class="li"><a href="/" title="about" class="a">Inicio</a></li>
                     <li class="li"><a href="#destino1" title="about" class="a">¿Quienes somos?</a></li>
                     <li class="li"><a href="#destino2" title="servcios" class="a">Servicios</a></li>
                 </ul>

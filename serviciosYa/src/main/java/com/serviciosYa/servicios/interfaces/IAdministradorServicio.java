@@ -10,7 +10,7 @@ import java.util.List;
 public interface IAdministradorServicio {
 
     void crear(String nombre, String apellido, String email, String telefono, String password, String password2, Rol rol) throws Exepcion;
-    void modificarById (String id,String nombre, String apellido, String email, String telefono, String password) throws Exepcion;
+    void modificarById (String id,String nombre, String apellido, String telefono, String password, String password2) throws Exepcion;
     void eliminarById (String id) throws Exepcion;
     Administrador buscarByID(String id) throws Exepcion;
     Administrador buscarByEmail(String email)throws Exepcion;

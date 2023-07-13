@@ -1,6 +1,7 @@
 package com.serviciosYa.servicios;
 
 import com.serviciosYa.entidades.Administrador;
+import com.serviciosYa.entidades.Cliente;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.AdministradorRepositorio;
@@ -22,7 +23,13 @@ public class AdministradorServicio implements IAdministradorServicio {
     @Transactional
     public void crear(String nombre, String apellido, String email, String telefono, String password, String password2, Rol rol) throws Exepcion {
 
+        Optional<Administrador> respuesta = administradorRepositorio.findByEmail(email);
+        if (respuesta.isPresent()) {
+            throw new Exepcion("el email ya esta registrado");
+        }
+
         validar(nombre,apellido,email,telefono,password);
+        validarPasswords(password,password2);
 
         Administrador administrador = new Administrador();
 
@@ -40,16 +47,19 @@ public class AdministradorServicio implements IAdministradorServicio {
     }
 
     @Transactional
-    public void modificarById (String id,String nombre, String apellido, String email, String telefono, String password) throws Exepcion {
+    public void modificarById (String id,String nombre, String apellido, String telefono, String password,String password2) throws Exepcion {
 
         Administrador administrador = buscarByID(id);
 
-        validar(nombre,apellido,email,telefono,password);
+        validar(nombre,apellido,"x",telefono,password);
+        validarPasswords(password,password2);
 
         administrador.setNombre(nombre);
         administrador.setApellido(apellido);
-        administrador.setEmail(email);
         administrador.setTelefono(telefono);
+        administrador.setPassword(
+                new BCryptPasswordEncoder().encode(password)
+        );
         administradorRepositorio.save(administrador);
 
     }
@@ -119,4 +129,10 @@ public class AdministradorServicio implements IAdministradorServicio {
         }
 
     }
+    private void validarPasswords(String password1, String password2) throws Exepcion{
+        if (!password1.equals(password2)){
+            throw new Exepcion("Las contraseñas no coinciden");
+        }
+    }
+
 }

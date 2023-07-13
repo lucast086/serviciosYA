@@ -5,7 +5,6 @@ import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.servicios.interfaces.IAdministradorServicio;
 import com.serviciosYa.servicios.interfaces.IClienteServicio;
 import com.serviciosYa.servicios.interfaces.IProveedorServicio;
-import com.serviciosYa.servicios.interfaces.IUsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

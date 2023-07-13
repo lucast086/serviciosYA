@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="/templates.fragments/head :: head"></head>
+<link rel="stylesheet" type="text/css" href="/css/index.css"/>
+<body>
+<header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
+
+<div th:replace="/templates.fragments/msgExitoError :: div"></div>
+
+    <section class="seccion formulario">
+        <div class="resenia">
+        <form th:action="@{/solicitud/modificar/__${solicitud.id}__}" method="POST" class="formulario">
+
+            <h1>SOLICITUD</h1>
+            <div class="contenedor">
+
+                <input type="hidden" id="estadoSol" name="estado"/>
+
+                <h2 th:text="${status}"></h2>
+                <h2>Descripcion del servicio solicitado:</h2>
+                <div sec:authorize="hasRole('USER')" class="input contenedor">
+                    <textarea
+                            type="text"
+                            name="descripcion"
+                            th:text="${solicitud.descripcion}"
+                            rows="15" cols="50"
+                            th:readonly="${status != 'PENDIENTE'}"
+                    ></textarea>
+                </div>
+                <div sec:authorize="hasRole('PROVEEDOR')" class="input contenedor">
+                    <textarea
+                            type="text"
+                            name="descripcion"
+                            th:text="${solicitud.descripcion}"
+                            rows="15" cols="50"
+                            readonly
+                    ></textarea>
+                </div>
+
+                <h2>Costo aproximado del servicio $:</h2>
+                <div sec:authorize="hasRole('PROVEEDOR')" class="input contenedor">
+                    <input th:value="${solicitud.costo}" type="number" name="costo" th:readonly="${status != 'PENDIENTE' && status != 'PRESUPUESTADO'}"/>
+                </div>
+                <div sec:authorize="hasRole('USER')" class="input contenedor">
+                   <input th:value="${solicitud.costo}" type="text" name="costo" readonly/>
+                </div>
+
+                <div sec:authorize="hasRole('USER')" class="button-container2">
+                    <input th:if="${status == 'PENDIENTE'}" type="submit" value="Modificar" onclick="enviarEstado('PENDIENTE')" class="button" />
+                    <input th:if='${status == "PRESUPUESTADO"}' type="submit" value="Aceptar" onclick="enviarEstado('ACEPTADO')" class="button" />
+                    <input th:if="${status == 'PRESUPUESTADO'}" type="submit" value="Rechazar" onclick="enviarEstado('CANCELADO')" class="button" />
+                    <input th:if="${status == 'ACEPTADO'}" type="submit" value="Cancelar" onclick="enviarEstado('CANCELADO')" class="button" />
+
+                </div>
+
+                <div sec:authorize="hasRole('PROVEEDOR')" class="button-container2">
+                    <input th:if="${status == 'PENDIENTE'}" type="submit" value="Presupuestar" onclick="enviarEstado('PRESUPUESTADO')"  class="button"/>
+                    <input th:if="${status == 'PRESUPUESTADO'}" type="submit" value="Modificar" onclick="enviarEstado('PRESUPUESTADO')" class="button" />
+                    <input th:if="${status == 'ACEPTADO'}" type="submit" value="Finalizar" onclick="enviarEstado('FINALIZADO')" class="button" />
+                    <input th:if="${status == 'ACEPTADO'}" type="submit" value="Cancelar" onclick="enviarEstado('CANCELADO')" class="button" />
+                </div>
+            </div>
+        </form>
+
+        <form th:action="@{/proveedor/calificar/__${solicitud.proveedor.id}__}" method="POST" class="formulario" th:if="${(status == 'FINALIZADO' || status == 'CANCELADO') && !solicitud.completo}" sec:authorize="hasRole('USER')">
+            <input type="hidden" name="idSolicitud" th:value="${solicitud.id}"/>
+            <h1> CALIFICA AL PROVEEDOR</h1>
+            <h2>Cantidad de estrellas:</h2>
+            <div class="estrellas">
+                <div class="rating">
+                    <input name="estrellas" type="radio" id="star5" value="5" />
+                    <label for="star5"></label>
+                    <input name="estrellas" type="radio" id="star4" value="4" />
+                    <label for="star4"></label>
+                    <input name="estrellas" type="radio" id="star3" value="3" />
+                    <label for="star3"></label>
+                    <input name="estrellas" type="radio" id="star2" value="2" />
+                    <label for="star2"></label>
+                    <input name="estrellas" type="radio" id="star1" value="1" />
+                    <label for="star1"></label>
+                </div>
+            </div>
+
+            <h2>Comentario:</h2>
+            <div  class="input contenedor">
+                <textarea
+                    type="text"
+                    name="comentario"
+                    placeholder="Recuerda ser amable :)"
+                    rows="15" cols="50"
+            ></textarea>
+            </div>
+            <div class="button-container2">
+                <input th:if="${status == 'FINALIZADO' || status == 'CANCELADO'}" type="submit" value="Calificar" class="button" />
+            </div>
+        </form>
+        </div>
+    </section>
+<footer th:replace="/templates.fragments/footer :: footer" class="footer"></footer>
+<script>
+    function enviarEstado(est) {
+
+        var estadoS = document.getElementById("estadoSol");
+        estadoS.value = est;
+    }
+</script>
+</body>
+</html>

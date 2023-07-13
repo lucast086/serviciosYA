@@ -1,6 +1,7 @@
 package com.serviciosYa.servicios;
 
 import com.serviciosYa.entidades.Cliente;
+import com.serviciosYa.entidades.Solicitud;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.ClienteRepositorio;
@@ -22,6 +23,11 @@ public class ClienteServicio implements IClienteServicio {
     @Transactional
     public void crear(String nombre, String apellido,String direccion, String email, String telefono, String password,String password2,Rol rol) throws Exepcion {
 
+        Optional<Cliente> respuesta = clienteRepositorio.findByEmail(email);
+        if (respuesta.isPresent()) {
+            throw new Exepcion("el email ya esta registrado");
+        }
+
         validar(nombre,apellido,email,direccion,telefono,password);
         validarPasswords(password,password2);
 
@@ -37,6 +43,10 @@ public class ClienteServicio implements IClienteServicio {
         );
         cliente.setRol(rol);
         cliente.setActivo(true);
+
+        List<Solicitud> solicitudes = new ArrayList<>();
+        cliente.setSolicitudes(solicitudes);
+
         clienteRepositorio.save(cliente);
     }
 
@@ -130,5 +140,13 @@ public class ClienteServicio implements IClienteServicio {
         }
     }
 
+    public void cambiarRol(String idCliente) throws Exepcion{
 
+        Cliente cliente = clienteRepositorio.getOne(idCliente);
+
+            cliente.setRol(Rol.valueOf("PROVEEDOR"));
+
+            clienteRepositorio.save(cliente);
+
+    }
 }

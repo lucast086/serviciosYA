@@ -1,8 +1,6 @@
 package com.serviciosYa.servicios;
 
-import com.serviciosYa.entidades.Imagen;
-import com.serviciosYa.entidades.Oficio;
-import com.serviciosYa.entidades.Proveedor;
+import com.serviciosYa.entidades.*;
 import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
 import com.serviciosYa.repositorios.ProveedorRepositorio;
@@ -27,7 +25,12 @@ public class ProveedorServicio implements IProveedorServicio {
     @Override
     public void crear(String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios, Rol rol) throws Exepcion {
 
-        validar(nombre,apellido,email,oficios,telefono,password);
+        Optional<Proveedor> respuesta = proveedorRepositorio.findByEmail(email);
+        if (respuesta.isPresent()) {
+            throw new Exepcion("el email ya esta registrado");
+        }
+
+        validar(imagen,nombre,apellido,email,oficios,telefono,password);
         validarPasswords(password,password2);
 
         Proveedor proveedor = new Proveedor();
@@ -35,6 +38,7 @@ public class ProveedorServicio implements IProveedorServicio {
         proveedor.setNombre(nombre);
         proveedor.setApellido(apellido);
         proveedor.setEmail(email);
+        proveedor.setCalificacion(0f);
         proveedor.setTelefono(telefono);
         proveedor.setPassword(
                 new BCryptPasswordEncoder().encode(password)
@@ -46,16 +50,19 @@ public class ProveedorServicio implements IProveedorServicio {
         proveedor.setImagen(imagen1);
         proveedor.setRol(rol);
         proveedor.setActivo(true);
+
+        List<Solicitud> solicitudes = new ArrayList<>();
+        proveedor.setSolicitudes(solicitudes);
         proveedorRepositorio.save(proveedor);
     }
 
     @Override
     public void modificarByID(String id, String nombre, String apellido, String email, String telefono, String password, String password2, MultipartFile imagen, List<Oficio> oficios) throws Exepcion {
-        validar(nombre,apellido,email,oficios,telefono,password);
+
+        validar(imagen, nombre,apellido,email,oficios,telefono,password);
         validarPasswords(password,password2);
 
         Proveedor proveedor = buscarByID(id);
-
         proveedor.setNombre(nombre);
         proveedor.setApellido(apellido);
         proveedor.setEmail(email);
@@ -79,6 +86,7 @@ public class ProveedorServicio implements IProveedorServicio {
 
         proveedor.setImagen(imagen1);
         proveedor.setActivo(true);
+
         proveedorRepositorio.save(proveedor);
     }
 
@@ -93,7 +101,6 @@ public class ProveedorServicio implements IProveedorServicio {
         return repuesta.orElseThrow(()-> new Exepcion("Proveedor no existe"));
 
     }
-
     @Override
     public void eliminarById(String id) throws Exepcion {
 
@@ -102,7 +109,6 @@ public class ProveedorServicio implements IProveedorServicio {
         proveedorRepositorio.save(proveedor);
 
     }
-
     @Override
     public Proveedor buscarByNombreAndApellido(String nombre, String apellido) throws Exepcion {
 
@@ -121,10 +127,33 @@ public class ProveedorServicio implements IProveedorServicio {
         return new ArrayList<>(proveedorRepositorio.findAll());
     }
 
+    @Override
+    public List<Proveedor> listarProveedoresPorOficio(String oficioId) {
+        return new ArrayList<>(proveedorRepositorio.findAllByOficio(oficioId));
+    }
 
-    private void validar (String nombre, String apellido, String email,List<Oficio> oficios, String telefono, String password) throws Exepcion{
+    @Override
+    public Float calcularEstrellas(Proveedor proveedor) {
+        List<Resenia> resenias = proveedor.getResenias();
 
-        if(oficios == null){
+        Float total = 0f;
+        for (Resenia r: resenias) {
+            total += r.getEstrellas().getCantidad();
+        }
+        Float promedio = total / resenias.size();
+        proveedor.setCalificacion(promedio);
+        proveedorRepositorio.save(proveedor);
+        return promedio;
+    }
+
+
+    private void validar (MultipartFile imagen, String nombre, String apellido, String email,List<Oficio> oficios, String telefono, String password) throws Exepcion{
+
+        if(imagen == null || imagen.isEmpty()){
+            throw new Exepcion("No tiene Imagen");
+        }
+
+        if(oficios == null || oficios.isEmpty()){
             throw new Exepcion("No tiene oficios");
         }
 

@@ -15,39 +15,54 @@
     <h3 class="h3" sec:authorize="hasRole('USER')" >Perfil de Cliente</h3>
     <h3 class="h3" sec:authorize="hasRole('ADMIN')" >Perfil de Administrador</h3>
     <div sec:authorize="hasRole('PROVEEDOR')" class="cajas">
-        <form action="/cliente/solicitudes" method="get">
+        <form th:action="@{/solicitud/listar/__${session.usuarioSesion.id}__}" method="get">
             <button class="caja" id="caja1">
                 <div class="contenido">Nuevas <br> Solicitudes</div>
             </button>
         </form>
-        <form action="/proveedor/trabajos" method="get">
+        <form th:action="@{/solicitud/listar/__${session.usuarioSesion.id}__}" method="get">
             <button class="caja" id="caja2">
                 <div class="contenido">Trabajos <br> Activos</div>
             </button>
         </form>
     </div>
     <div sec:authorize="hasRole('ADMIN')" class="cajas">
-        <form action="/comentario/lista" method="get">
+        <form action="/comentario/listar" method="get">
             <button class="caja" id="caja3">
                 <div class="contenido">Tabla <br> Comentarios</div>
             </button>
         </form>
-        <form action="/cliente/lista" method="get">
+        <form action="/cliente/listar" method="get">
             <button class="caja" id="caja4">
                 <div class="contenido">Tabla <br> Clientes</div>
             </button>
         </form>
-        <form action="/proveedor/lista" method="get">
+        <form action="/proveedor/listar" method="get">
             <button class="caja" id="caja5">
                 <div class="contenido">Tabla <br> Proveedores</div>
             </button>
         </form>
-        <form action="/oficio/crear" method="get">
+        <form action="/oficio/listar" method="get">
             <button class="caja" id="caja6">
+                <div class="contenido">Tabla <br> Oficios</div>
+            </button>
+        </form>
+        <form action="/oficio/registro" method="get">
+            <button class="caja" id="caja7">
                 <div class="contenido">Nuevo <br> Oficio</div>
             </button>
         </form>
     </div>
+
+    <div sec:authorize="hasRole('USER')" class="cajas">
+        <div th:each="oficio : ${oficiosList}">
+            <form th:action="@{/proveedor/listar/__${oficio.id}__}" method="get">
+                <button  th:text="${oficio.nombre}" th:classappend=" (${oficio.colorTarjeta}) ? 'caja1' : 'caja2'" th:value="${oficio.id}" th:onclick="" class="caja"></button>
+            </form>
+        </div>
+
+    </div>
+
 </section>
 
 <footer th:replace="/templates.fragments/footer :: footer" class="footer"></footer>
