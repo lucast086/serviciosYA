@@ -59,7 +59,8 @@
                 </div>
         </div>
     </form>
-    <form th:action="@{/proveedor/calificar/__${solicitud.proveedor.id}__}" method="POST" class="formulario" th:if="${status == 'FINALIZADO' || status == 'CANCELADO'}" sec:authorize="hasRole('USER')">
+    <form th:action="@{/proveedor/calificar/__${solicitud.proveedor.id}__}" method="POST" class="formulario" th:if="${status == 'FINALIZADO' || status == 'CANCELADO' && !solicitud.completo}" sec:authorize="hasRole('USER')">
+        <input type="hidden" name="idSolicitud" th:value="${solicitud.id}"/>
         <h1> CALIFICA AL PROVEEDOR</h1>
         <div  class="input contenedor">
             <select name="estrellas">

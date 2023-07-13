@@ -21,6 +21,7 @@
                 <th sec:authorize="hasRole('USER')" scope="col">Proveedor</th>
                 <th sec:authorize="hasRole('PROVEEDOR')" scope="col">Cliente</th>
                 <th scope="col">Fecha Del Pedido</th>
+                <th scope="col">Descripcion</th>
                 <th scope="col">Estado</th>
                 <th scope="col">Solicitud</th>
             </tr>
@@ -30,6 +31,7 @@
                 <th  sec:authorize="hasRole('USER')" scope="row" th:text="${solicitud.proveedor.nombre}"></th>
                 <th  sec:authorize="hasRole('PROVEEDOR')" scope="row" th:text="${solicitud.cliente.nombre}"></th>
                 <td  th:text="${solicitud.fechaServicio}"></td>
+                <td  th:text="${solicitud.descripcion}"></td>
                 <td  th:text="${solicitud.estado}"></td>
                 <td>
                     <a th:href="@{/solicitud/modificar/__${solicitud.id}__}" class="soli">Abrir</a>

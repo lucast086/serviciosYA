@@ -22,4 +22,5 @@ public interface ISolicitudServicio {
     List<Solicitud> listarSolicitudes(String id);
     List<Solicitud> listarSolicitudes();
 
+    void completarSolicitud(String idSolicitud);
 }

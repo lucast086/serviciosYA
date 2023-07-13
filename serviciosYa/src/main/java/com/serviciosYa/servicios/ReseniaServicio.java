@@ -1,6 +1,7 @@
 package com.serviciosYa.servicios;
 import com.serviciosYa.entidades.Proveedor;
 import com.serviciosYa.entidades.Resenia;
+import com.serviciosYa.entidades.Solicitud;
 import com.serviciosYa.entidades.Usuario;
 import com.serviciosYa.enums.Estrella;
 import com.serviciosYa.enums.Rol;
@@ -10,6 +11,7 @@ import com.serviciosYa.repositorios.ProveedorRepositorio;
 import com.serviciosYa.repositorios.ReseniaRepositorio;
 import com.serviciosYa.servicios.interfaces.IProveedorServicio;
 import com.serviciosYa.servicios.interfaces.IReseniaServicio;
+import com.serviciosYa.servicios.interfaces.ISolicitudServicio;
 import com.serviciosYa.servicios.interfaces.IUsuarioServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,10 +27,11 @@ public class ReseniaServicio implements IReseniaServicio {
 
     ReseniaRepositorio reseniaRepositorio;
     IProveedorServicio proveedorServicio;
-    ProveedorRepositorio proveedorRepositorio;
+    ISolicitudServicio solicitudServicio;
     IUsuarioServicio usuarioServicio;
+
     @Transactional
-    public Resenia crear(String comentario, String estrella,String idProveedor) throws Exepcion {
+    public Resenia crear(String comentario, String estrella,String idProveedor, String idSolicitud) throws Exepcion {
 
         validar(comentario,idProveedor);
         Resenia resenia = new Resenia();
@@ -42,8 +45,8 @@ public class ReseniaServicio implements IReseniaServicio {
         resenias.add(resenia);
         proveedor.setResenias(resenias);
         proveedorServicio.calcularEstrellas(proveedor);
-
-        //        reseniaRepositorio.save(resenia);
+        reseniaRepositorio.save(resenia);
+        solicitudServicio.completarSolicitud(idSolicitud);
 
         return resenia;
     }
