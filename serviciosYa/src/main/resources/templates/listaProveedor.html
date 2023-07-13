@@ -23,7 +23,6 @@
                 <th scope="col">Apellido</th>
                 <th scope="col">Email</th>
                 <th scope="col">Estado</th>
-                <th scope="col">Modificar Usuario</th>
                 <th scope="col">Eliminar Usuario</th>
                 <th scope="col">Cambiar Rol</th>
 
@@ -36,9 +35,6 @@
                 <td  th:text="${Proveedor.email}"></td>
                 <td>
                     <span th:classappend="${Proveedor.activo} ? 'color1' : 'color2'"> <i class="fa-solid fa-circle-user"></i> </span>
-                </td>
-                <td>
-                    <a th:href="@{/proveedor/modificar/__${Proveedor.id}__}" class="modificara">Modificar</a>
                 </td>
                 <td>
                     <a th:href="@{/proveedor/eliminar/__${Proveedor.id}__}" class="eliminara">Eliminar</a>

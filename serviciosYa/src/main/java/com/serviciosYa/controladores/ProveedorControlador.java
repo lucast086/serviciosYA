@@ -90,24 +90,17 @@ public class ProveedorControlador {
         }
     }
 
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SUPERADMIN')")
     @GetMapping("/eliminar/{id}")
-    public String eliminarProveedorForm(@PathVariable String id, ModelMap model){
-        model.put("proveedor",proveedorServicio.getOne(id));
-        return "proveedor_eleminar.html";
-    }
-
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SUPERADMIN')")
-    @PostMapping("/eliminar/{id}")
     public String eliminraProveedor(@PathVariable String id, ModelMap model){
-
         try {
             proveedorServicio.eliminarById(id);
             model.put("exito","El proveedor fue eliminado con exito!");
-            return "redirect:../listar";
+            return "redirect:/proveedor/listar";
         }catch (Exepcion e){
             model.put("error",e.getMessage());
-            return "proveedor_eleminar.html";
+            return "redirect:/proveedor/listar";
         }
     }
 
