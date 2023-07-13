@@ -22,10 +22,10 @@
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
             <th scope="col">Email</th>
+            <th scope="col">Estado</th>
             <th scope="col">Modificar Usuario</th>
             <th scope="col">Eliminar Usuario</th>
             <th scope="col">Cambiar Rol</th>
-            <th scope="col">Actividad</th>           
         </tr>
         </thead>
         <tbody th:each="Cliente : ${clientes}">
@@ -33,6 +33,9 @@
             <th  scope="row" th:text="${Cliente.nombre}"></th>
             <td  th:text="${Cliente.apellido}"></td>
             <td  th:text="${Cliente.email}"></td>
+            <td>
+                <span th:classappend="${Cliente.activo} ? 'color1' : 'color2'"> <i class="fa-solid fa-circle-user"></i> </span>
+            </td>
             <td>
                 <a th:href="@{/cliente/modificar/__${Cliente.id}__}" class="modificara">Modificar</a>
             </td>
