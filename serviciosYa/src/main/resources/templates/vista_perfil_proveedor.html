@@ -25,15 +25,6 @@
       <div class="card-text">
         <p th:text="${proveedor.calificacion}"></p><i class="fa-solid fa-star" style="color: #ffc700;"></i>
       </div>
-      <h2>COMENTARIOS</h2>
-      <br>
-      <div th:if="${proveedor.resenias != null}">
-            <ul th:each="resenia : ${proveedor.resenias}" >
-              <li th:text="'Estrellas: ' + ${resenia.estrellas}"></li>
-              <li th:text="'Comentario: ' + ${resenia.comentario}"></li>
-            </ul>
-      </div>
-      <br>
 
     </div>
     <div class="button-container">
@@ -46,6 +37,20 @@
     </div>
   </div>
 </section>
-
+<section th:if="${proveedor.resenias != null}" class="seccion">
+  <div class="profile">
+    <h2>COMENTARIOS</h2>
+    <div th:each="resenia : ${proveedor.resenias}" >
+      <div class="card">
+        <div class="card-title">
+          <p th:text="${resenia.comentario}"></p>
+          <div class="card-text">
+            <p th:text="${resenia.estrellas}"></p><i class="fa-solid fa-star" style="color: #ffc700;"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 </body>
 </html>

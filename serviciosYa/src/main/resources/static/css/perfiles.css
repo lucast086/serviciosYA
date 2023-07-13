@@ -266,6 +266,61 @@ body {
     box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.6);
     border: 1px solid black;
   }
+  .card {
+    width: 30em;
+    background: rgba(255, 255, 255, 60%);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2em;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+  }
+  .card img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .card-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  .card-text {
+    display: flex;
+    align-items: center;
+  }
+  .card-text .fa-solid fa-star{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  .card h2 {
+    font-family: var(--tipo-principal);
+        font-weight: 600;
+        max-width: 70rem;
+        font-size: 1.5em;
+  }
+  .profile h2{
+      font-family: var(--tipo-principal);
+              font-weight: 600;
+              max-width: 70rem;
+              font-size: 1.5em;
+              margin-bottom:1em;
+  }
+  .card p {
+    margin: 1em;
+  }
    .msgexito {
         display: flex;
         justify-content: center;
