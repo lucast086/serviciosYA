@@ -7,17 +7,18 @@
 
 <div th:replace="/templates.fragments/msgExitoError :: div"></div>
 
-<section class="seccion formulario">
-    <form th:action="@{/solicitud/modificar/__${solicitud.id}__}" method="POST" class="formulario">
+    <section class="seccion formulario">
+        <div class="resenia">
+        <form th:action="@{/solicitud/modificar/__${solicitud.id}__}" method="POST" class="formulario">
 
-        <h1>SOLICITUD</h1>
-        <div class="contenedor">
+            <h1>SOLICITUD</h1>
+            <div class="contenedor">
 
-            <input type="hidden" id="estadoSol" name="estado"/>
+                <input type="hidden" id="estadoSol" name="estado"/>
 
-            <h2 th:text="${status}"></h2>
-
-            <div sec:authorize="hasRole('USER')" class="input contenedor">
+                <h2 th:text="${status}"></h2>
+                <h2>Descripcion del servicio solicitado:</h2>
+                <div sec:authorize="hasRole('USER')" class="input contenedor">
                     <textarea
                             type="text"
                             name="descripcion"
@@ -25,8 +26,8 @@
                             rows="15" cols="50"
                             th:readonly="${status != 'PENDIENTE'}"
                     ></textarea>
-            </div>
-            <div sec:authorize="hasRole('PROVEEDOR')" class="input contenedor">
+                </div>
+                <div sec:authorize="hasRole('PROVEEDOR')" class="input contenedor">
                     <textarea
                             type="text"
                             name="descripcion"
@@ -34,20 +35,21 @@
                             rows="15" cols="50"
                             readonly
                     ></textarea>
-            </div>
+                </div>
 
-            <div sec:authorize="hasRole('PROVEEDOR')" class="input contenedor">
-                <input th:value="${solicitud.costo}" type="number" name="costo" th:readonly="${status != 'PENDIENTE' && status != 'PRESUPUESTADO'}"/>
-            </div>
-            <div sec:authorize="hasRole('USER')" class="input contenedor">
-                <input th:value="${solicitud.costo}" type="text" name="costo" readonly/>
-            </div>
+                <h2>Costo aproximado del servicio $:</h2>
+                <div sec:authorize="hasRole('PROVEEDOR')" class="input contenedor">
+                    <input th:value="${solicitud.costo}" type="number" name="costo" th:readonly="${status != 'PENDIENTE' && status != 'PRESUPUESTADO'}"/>
+                </div>
+                <div sec:authorize="hasRole('USER')" class="input contenedor">
+                   <input th:value="${solicitud.costo}" type="text" name="costo" readonly/>
+                </div>
 
                 <div sec:authorize="hasRole('USER')" class="button-container2">
-                     <input th:if="${status == 'PENDIENTE'}" type="submit" value="Modificar" onclick="enviarEstado('PENDIENTE')" class="button" />
-                     <input th:if='${status == "PRESUPUESTADO"}' type="submit" value="Aceptar" onclick="enviarEstado('ACEPTADO')" class="button" />
-                     <input th:if="${status == 'PRESUPUESTADO'}" type="submit" value="Rechazar" onclick="enviarEstado('CANCELADO')" class="button" />
-                     <input th:if="${status == 'ACEPTADO'}" type="submit" value="Cancelar" onclick="enviarEstado('CANCELADO')" class="button" />
+                    <input th:if="${status == 'PENDIENTE'}" type="submit" value="Modificar" onclick="enviarEstado('PENDIENTE')" class="button" />
+                    <input th:if='${status == "PRESUPUESTADO"}' type="submit" value="Aceptar" onclick="enviarEstado('ACEPTADO')" class="button" />
+                    <input th:if="${status == 'PRESUPUESTADO'}" type="submit" value="Rechazar" onclick="enviarEstado('CANCELADO')" class="button" />
+                    <input th:if="${status == 'ACEPTADO'}" type="submit" value="Cancelar" onclick="enviarEstado('CANCELADO')" class="button" />
 
                 </div>
 
@@ -57,30 +59,43 @@
                     <input th:if="${status == 'ACEPTADO'}" type="submit" value="Finalizar" onclick="enviarEstado('FINALIZADO')" class="button" />
                     <input th:if="${status == 'ACEPTADO'}" type="submit" value="Cancelar" onclick="enviarEstado('CANCELADO')" class="button" />
                 </div>
-        </div>
-    </form>
-    <form th:action="@{/proveedor/calificar/__${solicitud.proveedor.id}__}" method="POST" class="formulario" th:if="${status == 'FINALIZADO' || status == 'CANCELADO'}" sec:authorize="hasRole('USER')">
-        <h1> CALIFICA AL PROVEEDOR</h1>
-        <div  class="input contenedor">
-            <select name="estrellas">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-            <br>
-            <textarea
+            </div>
+        </form>
+        <form th:action="@{/proveedor/calificar/__${solicitud.proveedor.id}__}" method="POST" class="formulario" th:if="${status == 'FINALIZADO' || status == 'CANCELADO'}" sec:authorize="hasRole('USER')">
+            <h1> CALIFICA AL PROVEEDOR</h1>
+            <h2>Cantidad de estrellas:</h2>
+            <div class="estrellas">
+                <div class="rating">
+                    <input name="estrellas" type="radio" id="star5" value="5" />
+                    <label for="star5"></label>
+                    <input name="estrellas" type="radio" id="star4" value="4" />
+                    <label for="star4"></label>
+                    <input name="estrellas" type="radio" id="star3" value="3" />
+                    <label for="star3"></label>
+                    <input name="estrellas" type="radio" id="star2" value="2" />
+                    <label for="star2"></label>
+                    <input name="estrellas" type="radio" id="star1" value="1" />
+                    <label for="star1"></label>
+                </div>
+            </div>
+
+            <h2>Comentario:</h2>
+            <div  class="input contenedor">
+                <textarea
                     type="text"
                     name="comentario"
+                    placeholder="Recuerda ser amable :)"
                     rows="15" cols="50"
             ></textarea>
+            </div>
+            <div class="button-container2">
+                <input th:if="${status == 'FINALIZADO' || status == 'CANCELADO'}" type="submit" value="Calificar" class="button" />
+            </div>
+        </form>
         </div>
-        <div class="button-container2">
-            <input th:if="${status == 'FINALIZADO' || status == 'CANCELADO'}" type="submit" value="Calificar" class="button" />
-        </div>
-    </form>
-</section>
+    </section>
+<footer th:replace="/templates.fragments/footer :: footer" class="footer"></footer>
+
 <script>
     function enviarEstado(est) {
 
