@@ -67,7 +67,6 @@ Mediante Spring security y el acceso por usuario y contraseña, con control de s
 - [Turletti, Lucas](https://github.com/lucast086/)
 - [Martinez, Neuen](https://github.com/NeuenMartinez)
 - [Grey Vivas, Ingrid](https://github.com/IssaGrey)
-- [Ibarra, Esteban](https://github.com/estebannibr88)
 - [Quaglia, Tomas](https://github.com/Quaglita)
 - [Galera, Nahuel](https://github.com/Nahuel-Galera)
 
