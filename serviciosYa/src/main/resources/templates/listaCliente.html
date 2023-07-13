@@ -15,7 +15,7 @@
 <header th:replace="/templates.fragments/NavBar :: header" class="header"></header>
 <div th:replace="/templates.fragments/msgExitoError :: div"></div>
 
-<section class="secciontabla">
+<section class="seccion tabla">
     <table class="table table-dark">
         <thead>
         <tr>
@@ -25,7 +25,7 @@
             <th scope="col">Modificar Usuario</th>
             <th scope="col">Eliminar Usuario</th>
             <th scope="col">Cambiar Rol</th>
-            <th scope="col">Actividad</th>           
+            <th scope="col">Actividad</th>
         </tr>
         </thead>
         <tbody th:each="Cliente : ${clientes}">
