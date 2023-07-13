@@ -16,19 +16,17 @@
     <table class="table table-dark">
         <thead>
             <tr>
-                <th scope="col">Cliente</th>
                 <th scope="col">Comentario</th>
                 <th scope="col">Proveedor</th>
                 <th scope="col">Eliminar Comentario</th>
             </tr>
         </thead>
-        <tbody th:each="Comentarios : ${resenias}">
+        <tbody th:each="resenia : ${resenias}">
             <tr>
-                <th  scope="row" th:text="${resenia.id}"></th>
-                <td  th:text="${resenia.nombre}"></td>
-                <td  th:text="${resenia.descripcion}"></td>
+                <td  th:text="${resenia.comentario}"></td>
+                <td  th:text="${resenia.proveedor.nombre}"></td>
                 <td>
-                    <a th:href="@{/resenia/eliminar/__${Resenia.id}__}" class="eliminara">Eliminar</a>
+                    <a th:href="@{/admin/eliminarResenia/__${resenia.id}__}" class="eliminara">Eliminar</a>
                 </td>
             </tr>
         </tbody>

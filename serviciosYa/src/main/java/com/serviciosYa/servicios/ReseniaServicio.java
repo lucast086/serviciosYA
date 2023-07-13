@@ -91,6 +91,14 @@ public class ReseniaServicio implements IReseniaServicio {
         return reseniaRepositorio.getReferenceById(id);
     }
 
+    @Override
+    public void editarComentario(String id) throws Exepcion {
+        String adminEdit = "COMENTARIO EDITADO POR UN ADMINISTRADOR";
+        Resenia resenia = buscarById(id);
+        resenia.setComentario(adminEdit);
+        reseniaRepositorio.save(resenia);
+    }
+
     private void validar (String comentario,String id) throws Exepcion {
         if (comentario.isEmpty()){
             throw new Exepcion("La celda comentario esta vacia");

@@ -13,8 +13,8 @@
                 <li sec:authorize="hasRole('USER')" class="li"><a th:href="@{/solicitud/listar/__${session.usuarioSesion.id}__}" title="solicitudes" class="a">Solicitudes</a></li>
                 <li sec:authorize="hasRole('PROVEEDOR')" class="li"><a th:href="@{/proveedor/perfil/__${session.usuarioSesion.id}__}" title="perfil" class="a">Perfil</a></li>
                 <li sec:authorize="hasRole('USER')" class="li"><a th:href="@{/cliente/perfil/__${session.usuarioSesion.id}__}" title="perfil" class="a">Perfil</a></li>
-                <li sec:authorize="hasRole('ADMIN')" class="li"><a th:href="@{/admin/modificar/__${session.usuarioSesion.id}__}" title="perfil" class="a">Perfil</a></li>
-                <li sec:authorize="hasRole('ADMIN')" class="li"><a href="/comentario/listar" title="comentarios" class="a">Comentarios</a></li>
+                <li sec:authorize="hasRole('ADMIN')" class="li"><a th:href="@{/admin/perfil/__${session.usuarioSesion.id}__}" title="perfil" class="a">Perfil</a></li>
+                <li sec:authorize="hasRole('ADMIN')" class="li"><a href="/admin/comentarios" title="comentarios" class="a">Comentarios</a></li>
                 <li sec:authorize="hasRole('ADMIN')" class="li"><a href="/cliente/listar" title="clientes" class="a">Clientes</a></li>
                 <li sec:authorize="hasRole('ADMIN')" class="li"><a href="/proveedor/listar" title="proveedores" class="a">Proveedores</a></li>
                 <li sec:authorize="hasRole('ADMIN')" class="li"><a href="/oficio/listar" title="nuevoOficio" class="a">Oficios</a></li>

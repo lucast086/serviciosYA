@@ -15,22 +15,17 @@
   <div class="contenedor">
     <div class="input contenedor">
       <i class="fa-solid fa-user icon"></i>
-      <input type="text" name="nombre" placeholder="nombre"/>
+      <input type="text" name="nombre" th:value="${session.usuarioSesion.nombre}"/>
     </div>
 
     <div class="input contenedor">
       <i class="fa-solid fa-user icon"></i>
-      <input type="text" name="apellido" placeholder="apellido" />
+      <input type="text" name="apellido" th:value="${session.usuarioSesion.apellido}" />
     </div>
     
     <div class="input contenedor">
         <i class="fa-solid fa-phone icon"></i>
-        <input type="text" name="telefono" placeholder="telefono" />
-    </div>
-  
-    <div class="input contenedor">
-        <i class="fa-solid fa-house icon"></i>
-        <input type="text" name="direccion" placeholder="direccion"/>
+        <input type="text" name="telefono" th:value="${session.usuarioSesion.telefono}" />
     </div>
 
     <div class="input contenedor">
@@ -38,7 +33,7 @@
       <input type="password" name="password" placeholder="Contraseña" />
     </div>
 
-    <p class="p">(La contraseña debe tener minimo 8 caracteres)</p>
+    <p class="p">(La contraseña debe tener minimo 7 caracteres)</p>
 
     <div class="input contenedor">
       <i class="fa-solid fa-key icon"></i>
