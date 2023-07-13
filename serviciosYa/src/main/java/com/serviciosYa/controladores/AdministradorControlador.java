@@ -25,6 +25,18 @@ public class AdministradorControlador {
     ClienteServicio clienteServicio;
 
 
+    @GetMapping("/generar")
+    public String generarAdmin(ModelMap model){
+        try {
+            administradorServicio.crear("admin","admin","admin@admin.com","888888","7654321","7654321",Rol.ADMIN);
+            model.put("exito","admin registrado");
+            return "index.html";
+        } catch (Exepcion ex ) {
+            model.put("error", ex.getMessage());
+            return "admin_registro.html";
+        }
+    }
+
     @PreAuthorize("hasAnyRole('ROLE_SUPERADMIN','ROLE_ADMIN')")
     @GetMapping("/dashboard")
     public String dashboard(ModelMap model) {

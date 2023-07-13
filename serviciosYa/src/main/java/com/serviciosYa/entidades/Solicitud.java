@@ -50,4 +50,7 @@ public class Solicitud {
     @Temporal(TemporalType.DATE)
     private Date fechaServicio;
 
+    @Column(name = "completo")
+    private boolean completo;
+
 }

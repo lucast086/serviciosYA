@@ -61,7 +61,9 @@
                 </div>
             </div>
         </form>
-        <form th:action="@{/proveedor/calificar/__${solicitud.proveedor.id}__}" method="POST" class="formulario" th:if="${status == 'FINALIZADO' || status == 'CANCELADO'}" sec:authorize="hasRole('USER')">
+
+        <form th:action="@{/proveedor/calificar/__${solicitud.proveedor.id}__}" method="POST" class="formulario" th:if="${(status == 'FINALIZADO' || status == 'CANCELADO') && !solicitud.completo}" sec:authorize="hasRole('USER')">
+            <input type="hidden" name="idSolicitud" th:value="${solicitud.id}"/>
             <h1> CALIFICA AL PROVEEDOR</h1>
             <h2>Cantidad de estrellas:</h2>
             <div class="estrellas">
@@ -95,7 +97,6 @@
         </div>
     </section>
 <footer th:replace="/templates.fragments/footer :: footer" class="footer"></footer>
-
 <script>
     function enviarEstado(est) {
 

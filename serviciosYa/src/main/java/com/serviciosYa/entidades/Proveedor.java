@@ -24,6 +24,9 @@ public class Proveedor extends Usuario {
     @OneToOne(targetEntity = Imagen.class)
     private Imagen imagen;
 
+    @Column(name = "calificacion")
+    private Float calificacion;
+
     @ManyToMany(targetEntity = Oficio.class, fetch = FetchType.LAZY)
     private List<Oficio> oficios;
 

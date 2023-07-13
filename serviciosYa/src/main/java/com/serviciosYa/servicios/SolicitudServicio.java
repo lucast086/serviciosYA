@@ -8,7 +8,6 @@ import com.serviciosYa.servicios.interfaces.IProveedorServicio;
 import com.serviciosYa.servicios.interfaces.ISolicitudServicio;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,6 +42,7 @@ public class SolicitudServicio implements ISolicitudServicio {
         solicitud.setCosto(costo);
         solicitud.setComentario(comentario);
         solicitud.setFechaServicio(new Date());
+        solicitud.setCompleto(false);
 
         solicitudRepositorio.save(solicitud);
     }
@@ -53,12 +53,12 @@ public class SolicitudServicio implements ISolicitudServicio {
 
         validar2 (descripcion,costo);
         solicitud.setDescripcion(descripcion);
-        log.info("modificarById estado que viene por param" + estado.toString());
+
         solicitud.setEstado(estado);
         solicitud.setCosto(costo);
         solicitud.setComentario(comentario);
         solicitud.setFechaServicio(new Date());
-        log.info("solicitud a guardar"+solicitud.getId().toString() +"  "+ solicitud.getEstado());
+
         solicitudRepositorio.save(solicitud);
     }
     public Solicitud getOne(String id) {
@@ -95,6 +95,13 @@ public class SolicitudServicio implements ISolicitudServicio {
     }
     public List<Solicitud> listarSolicitudes(){
         return new ArrayList<>(solicitudRepositorio.findAll());
+    }
+
+    @Override
+    public void completarSolicitud(String idSolicitud) {
+        Solicitud solicitud = getOne(idSolicitud);
+        solicitud.setCompleto(true);
+        solicitudRepositorio.save(solicitud);
     }
 
     private void validar (Cliente cliente,Proveedor proveedor, String descripcion, Float costo) throws Exepcion{

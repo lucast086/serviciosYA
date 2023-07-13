@@ -1,25 +1,18 @@
 package com.serviciosYa.controladores;
-import com.serviciosYa.entidades.Cliente;
-import com.serviciosYa.entidades.Oficio;
+
 import com.serviciosYa.entidades.Proveedor;
 import com.serviciosYa.entidades.Solicitud;
 import com.serviciosYa.enums.Estado;
-import com.serviciosYa.enums.Rol;
 import com.serviciosYa.exepcion.Exepcion;
-import com.serviciosYa.servicios.ProveedorServicio;
-import com.serviciosYa.servicios.interfaces.IClienteServicio;
 import com.serviciosYa.servicios.interfaces.IProveedorServicio;
 import com.serviciosYa.servicios.interfaces.ISolicitudServicio;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -30,7 +23,6 @@ public class SolicitudControlador {
     ISolicitudServicio solicitudServicio;
 
     private IProveedorServicio proveedorServicio;
-    private IClienteServicio clienteServicio;
 
     @GetMapping("/registro/{id}")
     public String registrarSolicitud(@PathVariable String id, ModelMap modelo) {

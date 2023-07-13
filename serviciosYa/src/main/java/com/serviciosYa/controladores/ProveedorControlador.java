@@ -42,9 +42,9 @@ public class ProveedorControlador {
     }
 
     @PostMapping("/calificar/{id}")
-    public String registrarProveedor(RedirectAttributes redirectAttributes, @PathVariable String id, @RequestParam String comentario, @RequestParam String estrellas, ModelMap model){
+    public String registrarProveedor(RedirectAttributes redirectAttributes, @PathVariable String id,@RequestParam String idSolicitud, @RequestParam String comentario, @RequestParam String estrellas, ModelMap model){
         try {
-            reseniaServicio.crear(comentario, estrellas, id);
+            reseniaServicio.crear(comentario, estrellas, id, idSolicitud);
             redirectAttributes.addFlashAttribute("exito","El proveedor fue calificado con exito!");
             return "redirect:/usuarios";
         } catch (Exepcion e) {
@@ -123,8 +123,6 @@ public class ProveedorControlador {
     @GetMapping("/listar/{id}")
     public String listarProveedorPorOficio(@PathVariable String id, ModelMap model){
         List<Proveedor> proveedorList = proveedorServicio.listarProveedoresPorOficio(id);
-        List<Float> caliList =  proveedorList.stream().map((p)-> proveedorServicio.calcularEstrellas(p)).collect(Collectors.toList());
-        model.addAttribute("calificaciones",caliList);
         model.addAttribute("proveedores",proveedorList);
         return "tarjetas.html";
     }
@@ -133,8 +131,8 @@ public class ProveedorControlador {
     @GetMapping("/perfil/{id}")
     public String getOne (@PathVariable String id, ModelMap model){
         Proveedor proveedor = proveedorServicio.getOne(id);
-        Float promEstrellas = proveedorServicio.calcularEstrellas(proveedor);
-        model.put("estrellas", promEstrellas);
+        //Float promEstrellas = proveedorServicio.calcularEstrellas(proveedor);
+        //model.put("estrellas", promEstrellas);
         model.put("proveedor",proveedor);
         model.addAttribute("oficios", proveedor.getOficios());
         return "vista_perfil_proveedor.html";
